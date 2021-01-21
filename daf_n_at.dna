@@ -1,0 +1,89 @@
+COMPONENTS:
+header => LOGO, logout(), "contact us", hello gest/user
+welcome =>  handle_user =>  Login
+                            Register_1
+                            Register_2
+                            welcome_user_msg => continue / start / welcome 
+
+            about
+            site_data
+active_user => my_cart => loop on cart_item, total price, submit, delete all items
+               products => search products
+                           navbar => by categories
+                           products_list => loop on product_item  
+        or --------------> after submit cart <---------------------------------------------
+               my_order (read only status) =>   search products
+                                                loop on cart_item, total price
+               order_form
+        or --------------> after submit order <--------------------------------------------
+               popup success complete order => link to pdf receipt + finish -> go to welcome comp          
+active_admin => edit product addBTN /add product form
+               products => search products 
+                           navbar => by categories
+                           products_list => loop on product_item 
+
+
+SERVICES:   
+
+user_service => 
+                state => user
+                server =>loginUser() 
+                         client only => checkUserData(),registerUser(), 
+                functions => logout(), checkToken(), checkRefreshT()
+products_service => 
+                    state => productsItemsArr[]
+                    getCountProducts(), getCategories(), getProducts() {search in query by name %like% or       
+                    category}, 
+                    admin only =>addProduct(), editProduct()
+cart_service => 
+                state => cartItemsArr[]
+                client only => addToCart(), , deleteItemFromCart(), deleteAllFromCart(), totalPrice(), getCartItems {search by....}, getOpenCartByUser()
+
+                editAmount() --> extra 
+
+order_service => client only => addOrder(), getCountOrders(), lastOrderByUser(), getReceipt()
+
+INTERFACE:
+    response
+    user
+    product Item
+    cart --> ????
+    cart Item
+
+ROUTES:
+        welcome page - lending page
+        main page ==> cart - client
+                      products handle - admin    
+        order - client
+        success msg - client
+---------------TODO---------------
+STEPS:
+1. ng n proj-name
+2. ng generate(g) component(c) ||service(s) folder/name --skipTests 
+    - generate all the components and services
+3. router configuration in the app-routing.module.ts
+    - for empty url - pathMatch:"full" (eq. to exact in React.js)
+    - for every other url (404) - ** (eq. to Rote w/o 'path' prop in React.js)
+5. ng add @angular/material - add angular material to your project
+5a. import the the built-in modules into the app.module.ts file
+    - for two way binding (template driven forms) - [(ngModel)] - FormsModule
+    - for reactive forms - ReactiveFormsModule
+    - for server communications - HttpClientModule
+---------------DONE---------------
+4. layout
+    - clear the demo in app.component.html
+    - place the rest of the components that doesn't depends on the router
+6. basic css
+7. build the models and interfaces
+8. build the services
+9. build the components
+10. ensure to role based auth - router guards
+______________________________________________________________________________________________________
+
+list todo:
+server side:
+
+1. getReceipt() --> didn't do yet
+2. api documentation:
+        https://www.npmjs.com/package/swagger-ui
+        https://www.npmjs.com/package/express-swagger-generator
