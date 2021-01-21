@@ -7,7 +7,8 @@
     align-items: center;
 }
 
-app-login,
+
+.welcomeContainer,app-login,
 app-register1,
 app-register2,
 app-msg-welcome,

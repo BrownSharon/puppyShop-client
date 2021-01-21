@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="login">
+    <h2>Registered?</h2>
+    <p>Don't have an account yet? <button mat-button color="warn" (click)="goToRegistration()">Register now</button></p>
+    <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Enter your email" formControlName="email" required/>
+            <mat-hint>For Login, enter your email from registration</mat-hint>
+            <mat-error *ngIf="loginForm.controls.email.errors?.email">Not a valid email</mat-error>
+            <mat-error *ngIf="loginForm.controls.email.errors?.required">Email must be provided</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Enter your password" formControlName="password" required />
+            <mat-hint>For Login, enter your password from registration</mat-hint>
+            <mat-error *ngIf="loginForm.controls.password.errors?.required">Password must be provided</mat-error>
+            <mat-error *ngIf="loginForm.controls.password.errors?.minlength" >Password must at least 4 characters</mat-error>
+        </mat-form-field>
+
+        <button mat-stroked-button color="warn" type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+
+</div>

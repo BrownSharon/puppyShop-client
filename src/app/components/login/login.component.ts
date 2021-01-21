@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import ResponseInterface from 'src/app/interfaces/response.interface';
+import UserInterface from 'src/app/interfaces/user.interface';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +12,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  public loginForm: FormGroup
+
+
+  constructor(
+    public _user: UserService,
+    public _fb: FormBuilder,
+    public _route: ActivatedRoute,
+    public _r: Router
+  ) { }
 
   ngOnInit(): void {
+    this.loginForm = this._fb.group({
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(4)]],
+    })
   }
 
+  public handleSubmit() {
+
+    this._user.login(this.loginForm.value).subscribe(
+      (res: ResponseInterface) => {
+
+        // set the token in the local storage
+        localStorage.token = res.token 
+        localStorage.refreshToken = res.refreshToken
+        
+        // set the loggedUser object in the user service
+        this._user.user = this._user.decodeToken(res.token as string)
+        
+        // move to welcome component
+        this._user.activeComponent="welcome"
+      },
+      (err: ResponseInterface) => {
+        console.log(err);
+
+      }
+    )
+  }
+
+  public goToRegistration(){
+    this._user.activeComponent="register1"
+  }
 }

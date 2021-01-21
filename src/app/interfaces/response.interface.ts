@@ -4,6 +4,7 @@ import CartItemInterface from "./cartItem.interface";
 import CategoryInterface from "./category.interface";
 import OrderInterface from "./order.interface";
 import ProductInterface from "./product.interface";
+import TokenInterface from "./token.interface";
 import UserInterface from "./user.interface";
 
 export default interface ResponseInterface{
@@ -12,7 +13,8 @@ export default interface ResponseInterface{
     msg?: string
     exists?: boolean
     user?: UserInterface 
-    tokenData?: object
+    token?: TokenInterface
+    refreshToken?: TokenInterface
     categories?: CategoryInterface[]
     products?: ProductInterface[]
     productsCount?: number

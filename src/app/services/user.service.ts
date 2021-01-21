@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import ResponseInterface from '../interfaces/response.interface';
+import TokenInterface from '../interfaces/token.interface';
 import UserInterface from '../interfaces/user.interface';
 
 @Injectable({
@@ -12,7 +13,8 @@ export class UserService {
 
   // state
   public user: UserInterface = { isLogin: false }
-
+  public activeComponent: string = "login";
+  
   constructor(
     private http: HttpClient,
     public _r: Router

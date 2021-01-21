@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, Directive, Input } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-welcome',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+
+  @Input() public ngSwitch: any
+
+  constructor(
+    public _user: UserService
+  ) { }
 
   ngOnInit(): void {
   }
+
+  
 
 }
