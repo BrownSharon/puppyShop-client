@@ -22,6 +22,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MainComponent } from './components/main/main.component';
 import { OrderComponent } from './components/order/order.component';
 import { SuccessComponent } from './components/success/success.component';
+import { FormOrderComponent } from './components/form-order/form-order.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SuccessComponent } from './components/success/success.component';
     MainComponent,
     OrderComponent,
     SuccessComponent,
+    FormOrderComponent,
     
   ],
   imports: [

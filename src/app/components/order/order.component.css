@@ -1,0 +1,25 @@
+.order{
+    width: 100vw;
+    height: 85vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+app-cart{
+    width: 30vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+app-form-order{
+    width: 70vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

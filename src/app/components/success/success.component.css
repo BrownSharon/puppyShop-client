@@ -1,0 +1,12 @@
+.success{
+    width: 100vw;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.successMSG{
+    width: 60vw;
+    height: 50vh;
+}

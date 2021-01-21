@@ -1,0 +1,22 @@
+
+.welcome{
+    width: 100vw;
+    height: 85vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+app-login,
+app-register1,
+app-register2,
+app-msg-welcome,
+app-about,
+app-site-data{
+    width: 33vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

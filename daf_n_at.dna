@@ -27,9 +27,9 @@ SERVICES:
 
 user_service => 
                 state => user
-                server =>loginUser() 
+                server =>loginUser(), checkTokens()
                          client only => checkUserData(),registerUser(), 
-                functions => logout(), checkToken(), checkRefreshT()
+                functions => logout()
 products_service => 
                     state => productsItemsArr[]
                     getCountProducts(), getCategories(), getProducts() {search in query by name %like% or       
@@ -69,12 +69,12 @@ STEPS:
     - for two way binding (template driven forms) - [(ngModel)] - FormsModule
     - for reactive forms - ReactiveFormsModule
     - for server communications - HttpClientModule
----------------DONE---------------
 4. layout
     - clear the demo in app.component.html
     - place the rest of the components that doesn't depends on the router
 6. basic css
 7. build the models and interfaces
+---------------DONE---------------
 8. build the services
 9. build the components
 10. ensure to role based auth - router guards
