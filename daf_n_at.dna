@@ -37,9 +37,7 @@ products_service =>
                     admin only =>addProduct(), editProduct()
 cart_service => 
                 state => cartItemsArr[]
-                client only => addToCart(), , deleteItemFromCart(), deleteAllFromCart(), totalPrice(), getCartItems {search by....}, getOpenCartByUser()
-
-                editAmount() --> extra 
+                client only => addToCart(), , deleteItemFromCart(), deleteAllFromCart(), totalPrice(), getCartItems {search by....}, getOpenCartByUser()                
 
 order_service => client only => addOrder(), getCountOrders(), lastOrderByUser(), getReceipt()
 
@@ -74,8 +72,8 @@ STEPS:
     - place the rest of the components that doesn't depends on the router
 6. basic css
 7. build the models and interfaces
----------------DONE---------------
 8. build the services
+---------------DONE---------------
 9. build the components
 10. ensure to role based auth - router guards
 ______________________________________________________________________________________________________
@@ -87,3 +85,4 @@ server side:
 2. api documentation:
         https://www.npmjs.com/package/swagger-ui
         https://www.npmjs.com/package/express-swagger-generator
+3. editAmount() --> extra 

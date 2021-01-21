@@ -2,6 +2,9 @@ app-header{
     width: 100vw;
     height: 15vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    margin: 0%;
+    padding: 0%;
+    background-color: rgba(245, 190, 118, 0.774);
 }
