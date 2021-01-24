@@ -25,5 +25,5 @@ export default interface ResponseInterface{
     numberOfOrders?: number
     lastOrder?: OrderInterface
     newOrder?: OrderInterface
-
+    error?: string
 }

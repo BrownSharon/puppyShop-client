@@ -3,17 +3,20 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import ResponseInterface from '../interfaces/response.interface';
-import TokenInterface from '../interfaces/token.interface';
 import UserInterface from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
 
   // state
   public user: UserInterface = { isLogin: false }
   public activeComponent: string = "login";
+  public register1Data: any = {}
+  public idValue:string =""
+  public emailValue:string =""
   
   constructor(
     private http: HttpClient,
@@ -33,8 +36,8 @@ export class UserService {
     })
   }
 
-  public dataUserCheckUp() {
-    return this.http.get('http://localhost:10778/users')
+  public emailCheckUp(value:any) {
+    return this.http.get(`http://localhost:10778/users/email/${value}`)
   }
 
   public checkTokens() {
@@ -75,6 +78,10 @@ export class UserService {
     catch (err) {
       return null;
     }
+  }
+
+  public idCheckUp(value:any) {
+    return this.http.get(`http://localhost:10778/users/${value}`)
   }
 
 }

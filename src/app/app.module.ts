@@ -24,6 +24,7 @@ import { OrderComponent } from './components/order/order.component';
 import { SuccessComponent } from './components/success/success.component';
 import { FormOrderComponent } from './components/form-order/form-order.component';
 
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button';
@@ -58,7 +59,8 @@ import {MatButtonModule} from '@angular/material/button';
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
