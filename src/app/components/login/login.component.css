@@ -5,13 +5,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
 form{
-    width: 100%;
-    height: 40%;
+    width: 30vw;
+    height: 60%;
     display:flex;
     flex-direction: column;
     align-items:center;
     justify-content: space-evenly;
+    border: 4px solid rgba(248, 240, 166, 0.609);
+    border-radius: 5%;
+    margin: 5%;
+    margin-left: 15%;
+    background-color: rgba(248, 240, 166, 0.609);
+    padding: 5%;
 }
+

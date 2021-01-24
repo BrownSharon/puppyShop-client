@@ -1,7 +1,7 @@
 <div class="register1">
-    <h2>Register - Step 1</h2>
+    
     <form [formGroup]="register1Form" (ngSubmit)="handleSubmit()">
-
+        <h2>Sign-in - Step 1</h2>
         <mat-form-field appearance="outline">
             <mat-label>ID</mat-label>
             <input matInput placeholder="Enter your ID" formControlName="israeliID" required />
@@ -43,7 +43,7 @@
 
         </mat-form-field>
 
-        <button mat-stroked-button color="warn" type="submit" [disabled]="!register1Form.valid">Login</button>
+        <button mat-stroked-button color="warn" type="submit" [disabled]="!register1Form.valid">Next</button>
     </form>
     <div class="errors">
         <p>{{idError}}</p>

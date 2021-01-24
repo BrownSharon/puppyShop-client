@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { UserService } from 'src/app/services/user.service';
 import israeliIdValidator from 'src/app/validators/israeliid.validator';
@@ -26,8 +25,8 @@ export class Register1Component implements OnInit {
 
   ngOnInit(): void {
     this.register1Form = this._fb.group({
-      israeliID: [this._user.idValue, [Validators.required, Validators.minLength(9), Validators.maxLength(9), israeliIdValidator]],
-      email: [this._user.emailValue, [Validators.required, Validators.email]],
+      israeliID: ["", [Validators.required, Validators.minLength(9), Validators.maxLength(9), israeliIdValidator]],
+      email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(4)]],
       passwordConfirm: ["", [Validators.required]],
     },{
@@ -79,7 +78,6 @@ export class Register1Component implements OnInit {
 
     if (this.statusSubmit) {
       this._user.register1Data = { israeliID, email, password }
-      console.log(this._user.register1Data);
       // move to step 2 component
       this._user.activeComponent = "register2"
     }

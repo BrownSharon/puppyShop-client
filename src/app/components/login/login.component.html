@@ -1,7 +1,8 @@
 <div class="login">
-    <h2>Registered?</h2>
-    <p>Don't have an account yet? <button mat-button color="warn" (click)="goToRegistration()">Register now</button></p>
+   
     <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+        <h2>Registered?</h2>
+        <p>Don't have an account yet? <button mat-button color="warn" (click)="goToRegistration()">Sign-in</button></p>
         <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput placeholder="Enter your email" formControlName="email" required/>

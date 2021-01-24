@@ -2,6 +2,7 @@ import { CartItemComponent } from "../components/cart-item/cart-item.component";
 import CartInterface from "./cart.interface";
 import CartItemInterface from "./cartItem.interface";
 import CategoryInterface from "./category.interface";
+import CityInterface from "./city.interface";
 import OrderInterface from "./order.interface";
 import ProductInterface from "./product.interface";
 import TokenInterface from "./token.interface";
@@ -25,5 +26,6 @@ export default interface ResponseInterface{
     numberOfOrders?: number
     lastOrder?: OrderInterface
     newOrder?: OrderInterface
+    cities?: CityInterface[]
     error?: string
 }

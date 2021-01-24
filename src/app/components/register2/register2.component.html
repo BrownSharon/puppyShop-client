@@ -1,1 +1,40 @@
-<p>register2 works!</p>
+<div class="register2">
+    <form [formGroup]="register2Form" (ngSubmit)="handleSubmit()">
+        <h2>Sign-in - Step 2</h2>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Select City</mat-label>
+            <mat-select formControlName="city">
+                <mat-option selected disabled>--Select city--</mat-option>
+                <mat-option *ngFor="let city of _user.citiesArr" [value]='city.name'>{{city.name}}</mat-option>
+            </mat-select>
+            <mat-hint>Enter your city address</mat-hint>
+            <mat-error *ngIf="register2Form.controls.city.invalid">City must be selected before submit</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Street</mat-label>
+            <input matInput placeholder="Enter your street address" formControlName="street" required />
+            <mat-hint>Enter your street address</mat-hint>
+            <mat-error *ngIf="register2Form.controls.street.errors?.required">Street must be provided</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="Enter your first name" formControlName="first_name" required />
+            <mat-hint>Enter your first name</mat-hint>
+            <mat-error *ngIf="register2Form.controls.first_name.errors?.required">First name must be provided</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Enter your last name" formControlName="last_name" required />
+            <mat-hint>Enter your last name</mat-hint>
+            <mat-error *ngIf="register2Form.controls.last_name.errors?.required">Last name must be provided</mat-error>
+        </mat-form-field>
+
+        <button mat-stroked-button color="warn" type="submit" [disabled]="!register2Form.valid">Finish</button>
+    </form>
+
+</div>

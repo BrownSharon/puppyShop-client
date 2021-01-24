@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
+import CityInterface from '../interfaces/city.interface';
 import ResponseInterface from '../interfaces/response.interface';
 import UserInterface from '../interfaces/user.interface';
 
@@ -15,8 +16,7 @@ export class UserService {
   public user: UserInterface = { isLogin: false }
   public activeComponent: string = "login";
   public register1Data: any = {}
-  public idValue:string =""
-  public emailValue:string =""
+  public citiesArr: CityInterface[] = []
   
   constructor(
     private http: HttpClient,
@@ -82,6 +82,10 @@ export class UserService {
 
   public idCheckUp(value:any) {
     return this.http.get(`http://localhost:10778/users/${value}`)
+  }
+
+  public getCities(){
+    return this.http.get(`http://localhost:10778/users`)
   }
 
 }
