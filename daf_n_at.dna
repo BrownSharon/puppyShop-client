@@ -86,3 +86,6 @@ server side:
         https://www.npmjs.com/package/swagger-ui
         https://www.npmjs.com/package/express-swagger-generator
 3. editAmount() --> extra 
+4. double click in first step registration
+5. got total -> to head
+6. check the welcome msg for not open cart with old orders

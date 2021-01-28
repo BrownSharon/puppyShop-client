@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import CategoryInterface from '../interfaces/category.interface';
 import ProductInterface from '../interfaces/product.interface';
 
 @Injectable({
@@ -9,13 +10,14 @@ import ProductInterface from '../interfaces/product.interface';
 export class ProductsService {
 
   public productsItemsArr: ProductInterface[] = []
-
+  public productsCounter: number = 0
+  public productsCategoriesArr: CategoryInterface[] = []
   constructor(
     private http: HttpClient
   ) { }
 
-  public getCountProducts(){
-    return this.http.head('http://localhost:10778/products/category')
+  public totalProductsCount(){
+    return this.http.get('http://localhost:10778/products/number')
   } 
 
   public getCategories(){
@@ -28,16 +30,35 @@ export class ProductsService {
     })
   } 
   
-  // with search
-  public getProducts(){
-    return this.http.get('http://localhost:10778/products', {
-      headers: {
+  public getAllProducts(){
+    return this.http.get('http://localhost:10778/products/', {
+    headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
         'refreshToken': localStorage.refreshToken
       }
     })
   } 
+
+  public getProductsById(id:number){
+    return this.http.get(`http://localhost:10778/products/?category_id=${id}`, {
+    headers: {
+        'Content-Type': 'application/json',
+        'token': localStorage.token,
+        'refreshToken': localStorage.refreshToken
+      }
+    })
+  }
+
+  public getProductsByName(name:string){
+    return this.http.get(`http://localhost:10778/products/?name=${name}`, {
+    headers: {
+        'Content-Type': 'application/json',
+        'token': localStorage.token,
+        'refreshToken': localStorage.refreshToken
+      }
+    })
+  }
   
   // admin only 
   public addProduct(body:any){

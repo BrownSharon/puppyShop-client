@@ -12,6 +12,7 @@ export default interface ResponseInterface{
 
     err: boolean
     msg?: string
+    status?: number
     exists?: boolean
     user?: UserInterface 
     token?: TokenInterface
@@ -22,7 +23,9 @@ export default interface ResponseInterface{
     productItem?: ProductInterface
     openCart?: CartInterface
     cartItems?: CartItemInterface[]
-    totalCartPrice?: number
+    totalCartPrice?: any
+    newCart?: CartInterface
+    cart?: CartInterface
     numberOfOrders?: number
     lastOrder?: OrderInterface
     newOrder?: OrderInterface

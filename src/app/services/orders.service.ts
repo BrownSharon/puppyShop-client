@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import OrderInterface from '../interfaces/order.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
 
+  public lastOrder: OrderInterface
   constructor(
     private http: HttpClient
   ) { }

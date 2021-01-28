@@ -1,0 +1,23 @@
+.about{
+    width: 100%;
+    height: 60%;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-evenly;
+    padding: 5%;
+}
+
+.banner{
+    background-image: url('../../../public/blondie-girl-and-dog-website-header.jpg');
+    height: 50%;
+    width: 95%;
+    background-size:100% 100%;
+    
+}
+
+.aboutUs{
+    height: 60%;
+    width: 95%;
+}
+

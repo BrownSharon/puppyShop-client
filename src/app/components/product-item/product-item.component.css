@@ -1,0 +1,20 @@
+mat-card{
+    height: 300px;
+    width: 100%;
+    max-width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img.mat-card-image{
+    height: 50%;
+    width: 75%;
+  
+}
+mat-card-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
