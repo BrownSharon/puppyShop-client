@@ -1,8 +1,24 @@
+<div class="cart">
+<mat-form-field appearance="outline" *ngIf="_carts.cartStatus">
+    <mat-label>Search</mat-label>
+    <input
+        matInput
+        type="search"
+        [(ngModel)]="searchINP"
+        placeholder="Enter product name"  
+        (ngModelChange)="searchForItem($event)" 
+        [ngModelOptions]="{standalone: true}"
+    />
+    <span class="material-icons" matSuffix>
+        search
+        </span>
+</mat-form-field>
 <div class="cartItems">
     <app-cart-item *ngFor="let item of _carts.cartItemsArr" [item]="item"></app-cart-item>
 </div>
 <div class="action">
     <p>Total Cart Price: {{_carts.totalCartPrice || 0}} $</p>
-    <button (click)="goToCheckout()">Checkout</button>
-    <button (click)="deleteAllItems()">Delete All Cart Items</button>
+    <button *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0"  (click)="goToCheckout()">Checkout</button>
+    <button *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0" (click)="deleteAllItems()">Delete All Cart Items</button>
+</div>
 </div>

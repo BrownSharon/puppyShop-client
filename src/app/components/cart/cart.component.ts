@@ -13,6 +13,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class CartComponent implements OnInit {
 
+  public searchINP:string = ""
   constructor(
     public _carts: CartsService,
     public _products: ProductsService,
@@ -33,17 +34,6 @@ export class CartComponent implements OnInit {
   }
 
   public goToCheckout() {
-    // change status cart to true (close)
-    const body = { id: this._carts.openCart.id }
-    this._carts.changeStatusCart(body).subscribe(
-      (res: ResponseInterface) => {
-        this._carts.openCart = res.openCart
-      },
-      (err: ResponseInterface) => {
-        console.log(err);
-        this._r.navigateByUrl('/welcome')
-      }
-    )
     // redirect to order page
     this._r.navigateByUrl('/order')
   }
@@ -70,4 +60,16 @@ export class CartComponent implements OnInit {
     )
   }
 
+  public searchForItem(name:string){
+    this._carts.searchCartItems(name).subscribe(
+      (res: ResponseInterface) => {
+        this._carts.cartItemsArr = res.cartItems
+      },
+      (err: ResponseInterface) => {
+        console.log(err);
+        this._r.navigateByUrl('/welcome')
+      }
+    )
+
+  }
 }

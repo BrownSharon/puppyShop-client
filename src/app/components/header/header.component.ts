@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
+import { CartsService } from 'src/app/services/carts.service';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -29,7 +30,6 @@ export class HeaderComponent implements OnInit {
       (res: ResponseInterface) => {
         localStorage.token = ""
         localStorage.refreshToken = ""
-        
         this._user.user = { isLogin: false }
         this._user.activeComponent = "login"
         this._r.navigateByUrl('/welcome')

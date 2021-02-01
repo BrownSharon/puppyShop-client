@@ -14,6 +14,7 @@ export class CartsService {
   public openCart: CartInterface
   public totalCartPrice: number 
   public cartsCounter: number = 0
+  public cartStatus: boolean = false
 
   constructor(
     private http: HttpClient,
@@ -60,10 +61,23 @@ export class CartsService {
     })
   }
 
-  //with search
   public getCartItems() {
     if (this.openCart?.id) {
       return this.http.get(`http://localhost:10778/itemsCart?cart_id=${this.openCart.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'token': localStorage.token,
+          'refreshToken': localStorage.refreshToken
+        }
+      })
+    }else{
+      this._r.navigateByUrl('/welcome')
+    }
+  }
+
+  public searchCartItems(name: string) {
+    if (this.openCart?.id) {
+      return this.http.get(`http://localhost:10778/itemsCart?cart_id=${this.openCart.id}&name=${name}`, {
         headers: {
           'Content-Type': 'application/json',
           'token': localStorage.token,

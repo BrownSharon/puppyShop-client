@@ -21,7 +21,6 @@ export class WelcomeComponent implements OnInit {
     if (localStorage.token){
       this._user.checkTokens().subscribe(
         (res:ResponseInterface)=>{
-          console.log(res);
           if(!res.err && this._user.user.isLogin){
             this._user.activeComponent = "welcome"
           }  
