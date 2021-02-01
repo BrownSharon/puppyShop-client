@@ -109,4 +109,14 @@ export class CartsService {
     })
   }
 
+  public editCartItem(body:object){
+    return this.http.put(`http://localhost:10778/itemsCart/`, body, {
+      headers: {
+        'Content-Type': 'application/json',
+        'token': localStorage.token,
+        'refreshToken': localStorage.refreshToken
+      }
+    })
+  }
+
 }

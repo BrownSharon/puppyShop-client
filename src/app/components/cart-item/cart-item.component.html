@@ -1,13 +1,23 @@
 <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{item.name}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Quantity: {{item.product_amount}}</p>
-      <p>Price: {{item.product_total_price}}$</p>
-    </mat-card-content>
-    <img mat-card-image src="{{item.image}}" alt="{{item.name}}">
+  <mat-card-header>
+    <mat-card-title>{{item.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
     <mat-card-actions>
-      <button mat-button (click)="deleteItem()">X</button>
+      <p>Quantity:</p>
+      <div class="action">
+        <button mat-button (click)="increase()">+</button>
+        <p>{{item.product_amount}}</p>
+        <button mat-button (click)="decrease()">-</button>
+      </div>
+      <button (click)="editItemAmount()">Save Changes</button>
     </mat-card-actions>
-  </mat-card>
+
+    <p>Price: {{item.product_total_price}}$</p>
+  </mat-card-content>
+  <img mat-card-image src="{{item.image}}" alt="{{item.name}}">
+  <mat-card-actions>
+    <button mat-button (click)="deleteItem()">X</button>
+  </mat-card-actions>
+</mat-card>

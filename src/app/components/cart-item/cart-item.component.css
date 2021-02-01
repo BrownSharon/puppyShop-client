@@ -23,6 +23,19 @@ mat-card-content{
     margin: 0%;
 }
 
+mat-card-actions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 img{
     width: 20%;
     height: 20%;
