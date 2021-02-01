@@ -2,6 +2,7 @@
 
     <mat-toolbar>
         <mat-toolbar-row>
+            <a mat-flat-button (click)="allProducts()">All</a>
             <a mat-flat-button *ngFor="let category of _products.productsCategoriesArr"
                 (click)="getCategoryItems(category.id)">{{category.name}}</a>
         </mat-toolbar-row>

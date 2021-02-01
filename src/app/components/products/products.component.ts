@@ -37,6 +37,18 @@ export class ProductsComponent implements OnInit {
       })
   }
 
+  public allProducts(){
+    this._products.getAllProducts().subscribe(
+      (res:ResponseInterface)=>{
+        this._products.productsItemsArr = res.products
+      },
+      (err:ResponseInterface)=>{
+        console.log(err); 
+        this._r.navigateByUrl('/welcome')
+      }
+    )
+  }
+
   public getCategoryItems(id:number){
     this._products.getProductsById(id).subscribe(
       (res:ResponseInterface)=>{
