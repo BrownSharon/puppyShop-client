@@ -20,6 +20,7 @@ export class SiteDataComponent implements OnInit {
   ngOnInit(): void {
     this._orders.getCountOrders().subscribe(
       (res:ResponseInterface)=>{
+        console.log(res);
         this._orders.ordersCounter = res.numberOfOrders[0].numberOfOrders
       },
       (err:ResponseInterface)=>{

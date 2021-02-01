@@ -2,7 +2,7 @@
     <div class="logoIMG"></div>
     <div class="title">
         <p class="shopName">Puppy Shop</p>
-        <p class="welcome">Hello {{this.username}}</p>
+        <p class="welcome">Hello {{_user.user.first_name || "Guest"}}</p>
     </div>
 </div>
 <button *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</button>

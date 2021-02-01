@@ -24,7 +24,7 @@ export class OrdersService {
   }
   
   public getCountOrders(){
-    return this.http.get('http://localhost:10778/products/orders/all', {
+    return this.http.get('http://localhost:10778/orders/all', {
       headers: {
         'Content-Type': 'application/json'
       }

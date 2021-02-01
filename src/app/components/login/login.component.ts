@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         
         // set the loggedUser object in the user service
         this._user.user = this._user.decodeToken(res.token as string)
-        console.log(this._user.user);
+        this._user.username = this._user.user.first_name
         
         // move to welcome component
         this._user.activeComponent="welcome"

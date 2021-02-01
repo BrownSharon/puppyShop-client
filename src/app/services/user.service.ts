@@ -15,6 +15,7 @@ export class UserService {
 
   // state
   public user: UserInterface = { isLogin: false }
+  public username: string = "Guest"
   public activeComponent: string = "login";
   public register1Data: any = {}
   public citiesArr: CityInterface[] = []

@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class HeaderComponent implements OnInit {
 
   public username: string = "Guest"
+  
   constructor(
     public _user: UserService,
     public _r: Router
@@ -30,7 +31,6 @@ export class HeaderComponent implements OnInit {
         localStorage.refreshToken = ""
         
         this._user.user = { isLogin: false }
-
         this._user.activeComponent = "login"
         this._r.navigateByUrl('/welcome')
       },
