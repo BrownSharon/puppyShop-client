@@ -5,6 +5,7 @@
         <p class="welcome">Hello {{this.username}}</p>
     </div>
 </div>
+<button *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</button>
 <div class="contactUS">
     <h4>Contact Us:</h4>
     <p>Phone: *1234</p>

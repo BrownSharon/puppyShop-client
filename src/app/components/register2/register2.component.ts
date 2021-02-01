@@ -55,13 +55,10 @@ export class Register2Component implements OnInit {
         
         // move to welcome component
         this._user.activeComponent="welcome"
-
       },
       (err: ResponseInterface) => {
-
       }
     )
-
   }
 
 

@@ -23,12 +23,8 @@ export class ProductsComponent implements OnInit {
         this._products.productsCategoriesArr = res.categories
       },
       (err:ResponseInterface)=>{
-        if (err.status === 401){
-          this._r.navigateByUrl('/welcome')
-        }
-        console.log(err);
-        
-        
+        console.log(err); 
+        this._r.navigateByUrl('/welcome')
       }
     )
     this._products.getAllProducts().subscribe(
@@ -36,27 +32,19 @@ export class ProductsComponent implements OnInit {
         this._products.productsItemsArr = res.products
       },
       (err:ResponseInterface)=>{
-        if (err.status === 401){
-          this._r.navigateByUrl('/welcome')
-        }
-        console.log(err);
-        
+        console.log(err); 
+        this._r.navigateByUrl('/welcome')
       })
   }
 
   public getCategoryItems(id:number){
     this._products.getProductsById(id).subscribe(
       (res:ResponseInterface)=>{
-        console.log(res);
         this._products.productsItemsArr = res.products
-        console.log(this._products.productsItemsArr);
-
       },
       (err:ResponseInterface)=>{
-        if (err.status === 401){
-          this._r.navigateByUrl('/welcome')
-        }
         console.log(err); 
+        this._r.navigateByUrl('/welcome')
       }
     )
   }
@@ -64,16 +52,11 @@ export class ProductsComponent implements OnInit {
   public searchForProduct(name:string){
     this._products.getProductsByName(name).subscribe(
       (res:ResponseInterface)=>{
-        console.log(res);
         this._products.productsItemsArr = res.products
-        console.log(this._products.productsItemsArr);
-
       },
       (err:ResponseInterface)=>{
-        if (err.status === 401){
-          this._r.navigateByUrl('/welcome')
-        }
-        console.log(err);  
+        console.log(err); 
+        this._r.navigateByUrl('/welcome')
       }
     )
   }

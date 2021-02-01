@@ -51,7 +51,6 @@ export class Register1Component implements OnInit {
     this.idError = ""
     this.emailError = ""
     const { israeliID, email, password } = this.register1Form.value
-
     this._user.idCheckUp(israeliID).subscribe(
       (res: ResponseInterface) => {
         if (!res?.exists) {
@@ -63,7 +62,6 @@ export class Register1Component implements OnInit {
         this.statusSubmit = false
       }
     )
-
     this._user.emailCheckUp(email).subscribe(
       (res: ResponseInterface) => {
         if (!res?.exists) {
@@ -75,15 +73,10 @@ export class Register1Component implements OnInit {
         this.statusSubmit = false
       }
     )
-
     if (this.statusSubmit) {
       this._user.register1Data = { israeliID, email, password }
       // move to step 2 component
       this._user.activeComponent = "register2"
     }
-
-
   }
-
-
 }

@@ -5,4 +5,5 @@ export default interface ProductInterface{
     category_id: number
     price: number
     image: string
+    product_amount: number
 }

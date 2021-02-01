@@ -1,1 +1,8 @@
-<p>cart works!</p>
+<div class="cartItems">
+    <app-cart-item *ngFor="let item of _carts.cartItemsArr" [item]="item"></app-cart-item>
+</div>
+<div class="action">
+    <p>Total Cart Price: {{_carts.totalCartPrice || 0}} $</p>
+    <button (click)="goToCheckout()">Checkout</button>
+    <button (click)="deleteAllItems()">Delete All Cart Items</button>
+</div>

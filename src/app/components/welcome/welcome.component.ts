@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewContainerRef, Directive, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import ResponseInterface from 'src/app/interfaces/response.interface';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,10 +13,26 @@ export class WelcomeComponent implements OnInit {
   @Input() public ngSwitch: any
 
   constructor(
-    public _user: UserService
+    public _user: UserService,
+
   ) { }
 
   ngOnInit(): void {
+    if (localStorage.token){
+      this._user.checkTokens().subscribe(
+        (res:ResponseInterface)=>{
+          console.log(res);
+          if(!res.err && this._user.user.isLogin){
+            this._user.activeComponent = "welcome"
+          }  
+        },
+        (err:ResponseInterface)=>{
+          this._user.activeComponent = "login"
+        }
+      )
+    }else{
+      this._user.activeComponent = "login"
+    }
   }
 
   

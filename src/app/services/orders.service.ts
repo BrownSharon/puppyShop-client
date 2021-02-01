@@ -8,6 +8,7 @@ import OrderInterface from '../interfaces/order.interface';
 export class OrdersService {
 
   public lastOrder: OrderInterface
+  public ordersCounter: number = 0
   constructor(
     private http: HttpClient
   ) { }
@@ -23,7 +24,7 @@ export class OrdersService {
   }
   
   public getCountOrders(){
-    return this.http.head('http://localhost:10778/products/orders', {
+    return this.http.get('http://localhost:10778/products/orders/all', {
       headers: {
         'Content-Type': 'application/json'
       }
