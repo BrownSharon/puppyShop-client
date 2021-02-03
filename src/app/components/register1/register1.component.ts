@@ -12,12 +12,10 @@ import passwordMatchValidator from 'src/app/validators/matchPassword.validator';
   styleUrls: ['./register1.component.css']
 })
 export class Register1Component implements OnInit {
-  
+
   public register1Form: FormGroup
-  public idError: string = ""
-  public emailError: string = ""
-  public statusSubmit: boolean
-  
+  public serverError: string = ""
+
   constructor(
     public _user: UserService,
     public _fb: FormBuilder
@@ -29,7 +27,7 @@ export class Register1Component implements OnInit {
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(4)]],
       passwordConfirm: ["", [Validators.required]],
-    },{
+    }, {
       validator: passwordMatchValidator
     })
   }
@@ -41,42 +39,27 @@ export class Register1Component implements OnInit {
   /* Called on each input in either password field */
   onPasswordInput() {
     if (this.register1Form.hasError('passwordMismatch'))
-      this.passwordConfirm.setErrors([{'passwordMismatch': true}]);
+      this.passwordConfirm.setErrors([{ 'passwordMismatch': true }]);
     else
       this.passwordConfirm.setErrors(null);
   }
 
 
   public handleSubmit() {
-    this.idError = ""
-    this.emailError = ""
+    this.serverError = ""
     const { israeliID, email, password } = this.register1Form.value
-    this._user.idCheckUp(israeliID).subscribe(
+
+    this._user.CheckUpIdAndEmail(israeliID, email).subscribe(
       (res: ResponseInterface) => {
         if (!res?.exists) {
-          this.statusSubmit = true
+          this._user.register1Data = { israeliID, email, password }
+          // move to step 2 component
+          this._user.activeComponent = "register2"
         }
       },
       (err: ResponseInterface) => {
-        this.idError = err.error
-        this.statusSubmit = false
+        this.serverError = err.error
       }
     )
-    this._user.emailCheckUp(email).subscribe(
-      (res: ResponseInterface) => {
-        if (!res?.exists) {
-          this.statusSubmit = true
-        }
-      },
-      (err: ResponseInterface) => {
-        this.emailError = err.error
-        this.statusSubmit = false
-      }
-    )
-    if (this.statusSubmit) {
-      this._user.register1Data = { israeliID, email, password }
-      // move to step 2 component
-      this._user.activeComponent = "register2"
-    }
   }
 }

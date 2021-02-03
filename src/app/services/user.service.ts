@@ -38,8 +38,8 @@ export class UserService {
     })
   }
 
-  public emailCheckUp(value:any) {
-    return this.http.get(`http://localhost:10778/users/email/${value}`)
+  public CheckUpIdAndEmail(id:number, email:string) {
+    return this.http.get(`http://localhost:10778/users/${id}/${email}`)
   }
 
   public checkTokens() {
@@ -69,10 +69,6 @@ export class UserService {
     catch (err) {
       return null;
     }
-  }
-
-  public idCheckUp(id:number) {
-    return this.http.get(`http://localhost:10778/users/id/${id}`)
   }
 
   public getCities(){
