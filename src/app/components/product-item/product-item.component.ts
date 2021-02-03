@@ -40,7 +40,9 @@ export class ProductItemComponent implements OnInit {
     }
   }
 
-  public async addProductToCart() {    
+  public async addProductToCart() {   
+    console.log(this._carts.openCart);
+     
     const body = {
       product_id: this.product.id,
       product_amount: this.product.product_amount,
