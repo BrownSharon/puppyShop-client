@@ -3,8 +3,8 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Select City</mat-label>
-        <mat-select formControlName="city" (dblclick)="fillCityValue()">
-            <mat-option selected disabled>--Select city--</mat-option>
+        <mat-select formControlName="city" >
+            <mat-option selected disabled (dblclick)="fillCityValue()">--Select city--</mat-option>
             <mat-option *ngFor="let city of _user.citiesArr" [value]='city.name'>{{city.name}}</mat-option>
         </mat-select>
         <mat-hint>Enter your city address</mat-hint>

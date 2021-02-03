@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import CityInterface from 'src/app/interfaces/city.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -14,8 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 export class FormOrderComponent implements OnInit {
 
   public orderForm: FormGroup
-  public cityINP: string = ""
-  public streetINP: string = ""
+
   constructor(
     public _user: UserService,
     public _carts: CartsService,
@@ -26,8 +26,8 @@ export class FormOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderForm = this._fb.group({
-      city: [this.cityINP, [Validators.required]],
-      street: [this.streetINP, [Validators.required]],
+      city: ["", [Validators.required]],
+      street: ["", [Validators.required]],
       shipping_date: ["", [Validators.required]],
       credit_card: ["", [Validators.required]],
     })
@@ -89,10 +89,11 @@ export class FormOrderComponent implements OnInit {
   }
 
   public fillCityValue(){
-    this.cityINP = this._user.user.city
+    console.log(this._user.user.city);
+    this.orderForm.patchValue({city: this._user.user.city })
   }
 
   public fillStreetValue() {
-    this.streetINP = this._user.user.street
+    this.orderForm.patchValue({street: this._user.user.street })
   }
 }
