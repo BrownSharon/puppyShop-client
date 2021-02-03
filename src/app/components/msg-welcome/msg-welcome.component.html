@@ -5,7 +5,7 @@
             <p>Total price: {{_carts.totalCartPrice || 0}} $</p>
             <button (click)="continueShopping()">Continue shopping</button>
         </div>
-        <div *ngIf="_orders.lastOrder?.id">
+        <div *ngIf="_orders.lastOrder?.id  && !_carts.openCart?.id">
             <p>Your last order:</p>
             <p>From: {{_orders.lastOrder.closing_date}}</p>
             <p>Total price: {{_orders.lastOrder.order_total_price || 0}} $</p>
