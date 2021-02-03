@@ -23,7 +23,15 @@
             </mat-form-field>
         </mat-toolbar-row>
     </mat-toolbar>
-    <div class="productList">
-        <app-product-item *ngFor="let product of _products.productsItemsArr" [product]="product"></app-product-item>
+    <div class="productList" *ngIf="!emptySearch">
+        <app-product-item *ngFor="let product of _products.productsItemsFilteredArr" [product]="product"></app-product-item>
+    </div>
+    <div class="emptyProduct" *ngIf="emptySearch">
+        <h3>
+            We haven't got product that matching your search
+        </h3>
+        <h4>
+            Try something else
+        </h4>
     </div>
 </div>

@@ -12,6 +12,8 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductsComponent implements OnInit {
 
   public searchINP:string = ""
+  public emptySearch: boolean = false
+
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
@@ -39,43 +41,34 @@ export class ProductsComponent implements OnInit {
         console.log(err); 
         this._r.navigateByUrl('/welcome')
       })
+      this._products.productsItemsFilteredArr = this._products.productsItemsArr
+      if (this._products.productsItemsFilteredArr.length === 0){
+        this.emptySearch = true
+      }
   }
 
   public allProducts(){
-    this._products.getAllProducts(this._carts.openCart.id).subscribe(
-      (res:ResponseInterface)=>{
-        this._products.productsItemsArr = res.products
-      },
-      (err:ResponseInterface)=>{
-        console.log(err); 
-        this._r.navigateByUrl('/welcome')
-      }
-    )
+    this.emptySearch = false
+    this._products.productsItemsFilteredArr = this._products.productsItemsArr
+    if (this._products.productsItemsFilteredArr.length === 0){
+      this.emptySearch = true
+    }
   }
 
   public getCategoryItems(id:number){
-    this._products.getProductsById(this._carts.openCart.id,id).subscribe(
-      (res:ResponseInterface)=>{
-        this._products.productsItemsArr = res.products
-      },
-      (err:ResponseInterface)=>{
-        console.log(err); 
-        this._r.navigateByUrl('/welcome')
-      }
-    )
+    this.emptySearch = false
+    this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p=> p.category_id === id)
+    if (this._products.productsItemsFilteredArr.length === 0){
+      this.emptySearch = true
+    }
   }
 
   public searchForProduct(name:string){
-    this._products.getProductsByName(this._carts.openCart.id, name).subscribe(
-      (res:ResponseInterface)=>{
-        this._products.productsItemsArr = res.products
-      },
-      (err:ResponseInterface)=>{
-        console.log(err); 
-        this._r.navigateByUrl('/welcome')
-      }
-    )
+    this.emptySearch = false
+    this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p=> p.name.toLowerCase().includes(name))
+    if (this._products.productsItemsFilteredArr.length === 0){
+      this.emptySearch = true
+    }
   }
   
-
 }

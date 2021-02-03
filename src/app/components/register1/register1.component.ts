@@ -49,11 +49,10 @@ export class Register1Component implements OnInit {
     this.serverError = ""
     const { israeliID, email, password } = this.register1Form.value
 
-    this._user.CheckUpIdAndEmail(israeliID, email).subscribe(
+    this._user.registerStep1(israeliID, email).subscribe(
       (res: ResponseInterface) => {
         if (!res?.exists) {
           this._user.register1Data = { israeliID, email, password }
-          // move to step 2 component
           this._user.activeComponent = "register2"
         }
       },

@@ -10,6 +10,8 @@ import ProductInterface from '../interfaces/product.interface';
 export class ProductsService {
 
   public productsItemsArr: ProductInterface[] = []
+  public productsItemsFilteredArr: ProductInterface[] = []
+  
   public productsCounter: number = 0
   public productsCategoriesArr: CategoryInterface[] = []
   public productAmount: number = 0
@@ -41,26 +43,6 @@ export class ProductsService {
       }
     })
   } 
-
-  public getProductsById(cart_id:number,id:number){
-    return this.http.get(`http://localhost:10778/products/${cart_id}?category_id=${id}`, {
-    headers: {
-        'Content-Type': 'application/json',
-        'token': localStorage.token,
-        'refreshToken': localStorage.refreshToken
-      }
-    })
-  }
-
-  public getProductsByName(cart_id:number, name:string){
-    return this.http.get(`http://localhost:10778/products/${cart_id}?name=${name}`, {
-    headers: {
-        'Content-Type': 'application/json',
-        'token': localStorage.token,
-        'refreshToken': localStorage.refreshToken
-      }
-    })
-  }
   
   // admin only 
   public addProduct(body:any){

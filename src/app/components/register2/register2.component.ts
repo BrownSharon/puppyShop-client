@@ -43,7 +43,7 @@ export class Register2Component implements OnInit {
     const { israeliID, email, password } = this._user.register1Data
     const body = { israeliID, email, password, city, street, first_name, last_name }
 
-    this._user.register(body).subscribe(
+    this._user.registerStep2(body).subscribe(
       (res: ResponseInterface) => {
 
         // set the token in the local storage

@@ -25,8 +25,11 @@ export class UserService {
     public _r: Router
   ) { }
 
-  // server
-  public register(body: object) {
+  public registerStep1(id:number, email:string) {
+    return this.http.get(`http://localhost:10778/users/${id}/${email}`)
+  }
+
+  public registerStep2(body: object) {
     return this.http.post('http://localhost:10778/users', body, {
       headers: { 'Content-Type': 'application/json' }
     })
@@ -36,10 +39,6 @@ export class UserService {
     return this.http.post('http://localhost:10778/users/login', body, {
       headers: { 'Content-Type': 'application/json' }
     })
-  }
-
-  public CheckUpIdAndEmail(id:number, email:string) {
-    return this.http.get(`http://localhost:10778/users/${id}/${email}`)
   }
 
   public checkTokens() {

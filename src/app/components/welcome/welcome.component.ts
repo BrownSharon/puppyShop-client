@@ -12,6 +12,8 @@ export class WelcomeComponent implements OnInit {
 
   @Input() public ngSwitch: any
 
+  public decodedToken: any
+
   constructor(
     public _user: UserService,
 
