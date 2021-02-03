@@ -11,8 +11,8 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsComponent implements OnInit {
 
-  public searchINP:string = ""
-  public emptySearch: boolean = false
+  public searchINP: string = ""
+  public emptySearchError: boolean = false
 
   constructor(
     public _products: ProductsService,
@@ -23,52 +23,49 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this._products.getCategories().subscribe(
-      (res:ResponseInterface)=>{
+      (res: ResponseInterface) => {
+
         this._products.productsCategoriesArr = res.categories
+
+        this._products.getAllProducts(this._carts.openCart.id).subscribe(
+          (res: ResponseInterface) => {
+            this._products.productsItemsArr = res.products
+            this._products.productsItemsFilteredArr = res.products
+          },
+          (err: ResponseInterface) => {
+            console.log(err);
+            this._r.navigateByUrl('/welcome')
+          })
       },
-      (err:ResponseInterface)=>{
-        console.log(err); 
+      (err: ResponseInterface) => {
+        console.log(err);
         this._r.navigateByUrl('/welcome')
       }
     )
-    this._products.getAllProducts(this._carts.openCart.id).subscribe(
-      (res:ResponseInterface)=>{
-        console.log(res.products);
-        
-        this._products.productsItemsArr = res.products
-      },
-      (err:ResponseInterface)=>{
-        console.log(err); 
-        this._r.navigateByUrl('/welcome')
-      })
-      this._products.productsItemsFilteredArr = this._products.productsItemsArr
-      if (this._products.productsItemsFilteredArr.length === 0){
-        this.emptySearch = true
-      }
   }
 
-  public allProducts(){
-    this.emptySearch = false
+  public allProducts() {
+    this.emptySearchError = false
     this._products.productsItemsFilteredArr = this._products.productsItemsArr
-    if (this._products.productsItemsFilteredArr.length === 0){
-      this.emptySearch = true
+    if (this._products.productsItemsFilteredArr.length === 0) {
+      this.emptySearchError = true
     }
   }
 
-  public getCategoryItems(id:number){
-    this.emptySearch = false
-    this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p=> p.category_id === id)
-    if (this._products.productsItemsFilteredArr.length === 0){
-      this.emptySearch = true
+  public getCategoryItems(id: number) {
+    this.emptySearchError = false
+    this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p => p.category_id === id)
+    if (this._products.productsItemsFilteredArr.length === 0) {
+      this.emptySearchError = true
     }
   }
 
-  public searchForProduct(name:string){
-    this.emptySearch = false
-    this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p=> p.name.toLowerCase().includes(name))
-    if (this._products.productsItemsFilteredArr.length === 0){
-      this.emptySearch = true
+  public searchForProduct(name: string) {
+    this.emptySearchError = false
+    this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p => p.name.toLowerCase().includes(name))
+    if (this._products.productsItemsFilteredArr.length === 0) {
+      this.emptySearchError = true
     }
   }
-  
+
 }

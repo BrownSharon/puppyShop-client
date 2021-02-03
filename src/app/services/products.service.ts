@@ -14,7 +14,6 @@ export class ProductsService {
   
   public productsCounter: number = 0
   public productsCategoriesArr: CategoryInterface[] = []
-  public productAmount: number = 0
   
   constructor(
     private http: HttpClient

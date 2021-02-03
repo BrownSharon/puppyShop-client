@@ -23,7 +23,6 @@ export class MsgWelcomeComponent implements OnInit {
   ngOnInit(): void {
     this._carts.getOpenCartByUser().subscribe(
       (res: ResponseInterface) => {
-        console.log(res.openCart);
         if (res.openCart.length > 0) {
           this._carts.openCart = res.openCart[0]
           this._carts.totalPrice(this._carts.openCart.id).subscribe(
@@ -37,10 +36,8 @@ export class MsgWelcomeComponent implements OnInit {
         } else {
           this._orders.lastOrderByUser().subscribe(
             (res: ResponseInterface) => {
-              console.log(res);
               if (res.lastOrder) {
                 this._orders.lastOrder = res.lastOrder[0]
-                console.log(this._orders.lastOrder);
               }
             },
             (err: ResponseInterface) => {
@@ -58,7 +55,6 @@ export class MsgWelcomeComponent implements OnInit {
   public startShopping() {
     this._carts.getNewCart().subscribe(
       (res: ResponseInterface) => {
-        console.log(res);
         this._carts.openCart = res.cart[0]
         this._r.navigateByUrl('/main')
       },

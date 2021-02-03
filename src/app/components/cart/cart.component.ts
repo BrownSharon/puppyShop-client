@@ -12,6 +12,8 @@ import { ProductsService } from 'src/app/services/products.service';
 export class CartComponent implements OnInit {
 
   public searchINP:string = ""
+  public emptySearchError: boolean = false
+
   constructor(
     public _carts: CartsService,
     public _products: ProductsService,
@@ -23,6 +25,7 @@ export class CartComponent implements OnInit {
     this._carts.getCartItems().subscribe(
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
+        this._carts.cartItemsFilteredArr = res.cartItems
       },
       (err: ResponseInterface) => {
         console.log(err);
@@ -48,6 +51,8 @@ export class CartComponent implements OnInit {
     this._carts.deleteAllFromCart(this._carts.openCart.id).subscribe(
       (res: ResponseInterface) => { 
         this._carts.cartItemsArr = res.cartItems
+
+        // zero the total cart price
         this._carts.totalCartPrice = 0
         this._r.navigateByUrl('/main')
       },
@@ -59,15 +64,11 @@ export class CartComponent implements OnInit {
   }
 
   public searchForItem(name:string){
-    this._carts.searchCartItems(name).subscribe(
-      (res: ResponseInterface) => {
-        this._carts.cartItemsArr = res.cartItems
-      },
-      (err: ResponseInterface) => {
-        console.log(err);
-        this._r.navigateByUrl('/welcome')
-      }
-    )
+    this.emptySearchError = false
+    this._carts.cartItemsArr = this._carts.cartItemsFilteredArr.filter(item => item.name.toLowerCase().includes(name))
+    if (this._carts.cartItemsFilteredArr.length === 0) {
+      this.emptySearchError = true
+    }
   }
 
   public backToShop(){

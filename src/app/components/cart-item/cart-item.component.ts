@@ -23,8 +23,16 @@ export class CartItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.productItem = this._products.productsItemsArr.find(p =>
-      p.id === this.item.product_id)
+
+  }
+
+  public async findProductItem() {
+    try {
+
+    } catch (err) {
+      console.log(err);
+
+    }
   }
 
   public increase() {
@@ -49,19 +57,14 @@ export class CartItemComponent implements OnInit {
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
 
-        // update the total cart price
-        this._carts.totalPrice(this._carts.openCart.id).subscribe(
-          (res: ResponseInterface) => {
-            this._carts.totalCartPrice = res.totalCartPrice
-          },
-          (err: ResponseInterface) => {
-            console.log(err);
-            this._r.navigateByUrl('/welcome')
-          },
-        )
-
         // update the product_amount in products comp
+        this.productItem = this._products.productsItemsArr.find(p =>
+          p.id === this.item.product_id)
         this.productItem.product_amount = this.item.product_amount
+        
+        // update the total cart price
+        this._carts.totalCartPrice = res.totalCartPrice
+       
       },
       (err: ResponseInterface) => {
         console.log(err);
@@ -73,8 +76,10 @@ export class CartItemComponent implements OnInit {
 
   public deleteItem() {
     // zero the amount in products comp
+    this.productItem = this._products.productsItemsArr.find(p =>
+      p.id === this.item.product_id)
     this.productItem.product_amount = 0
-    
+
     // delete the item from cart
     const id = this.item.cartItem_id
     const cart_id = this.item.cart_id
@@ -83,7 +88,6 @@ export class CartItemComponent implements OnInit {
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
         this._carts.totalCartPrice -= this.item.product_total_price
-        
       },
       (err: ResponseInterface) => {
         console.log(err);

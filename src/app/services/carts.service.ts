@@ -11,6 +11,8 @@ import CartItemInterface from '../interfaces/cartItem.interface';
 export class CartsService {
 
   public cartItemsArr: CartItemInterface[] = []
+  public cartItemsFilteredArr: CartItemInterface[] = []
+  
   public openCart: CartInterface
   public totalCartPrice: number 
   public cartsCounter: number = 0
@@ -42,7 +44,7 @@ export class CartsService {
   }
 
   public deleteAllFromCart(id: number) {
-    return this.http.delete(`http://localhost:10778/carts/all/${id}`, {
+    return this.http.delete(`http://localhost:10778/carts/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -52,7 +54,7 @@ export class CartsService {
   }
 
   public totalPrice(id: number) {
-    return this.http.get(`http://localhost:10778/carts/total/${id}`, {
+    return this.http.get(`http://localhost:10778/carts/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -64,20 +66,6 @@ export class CartsService {
   public getCartItems() {
     if (this.openCart?.id) {
       return this.http.get(`http://localhost:10778/itemsCart?cart_id=${this.openCart.id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'token': localStorage.token,
-          'refreshToken': localStorage.refreshToken
-        }
-      })
-    }else{
-      this._r.navigateByUrl('/welcome')
-    }
-  }
-
-  public searchCartItems(name: string) {
-    if (this.openCart?.id) {
-      return this.http.get(`http://localhost:10778/itemsCart?cart_id=${this.openCart.id}&name=${name}`, {
         headers: {
           'Content-Type': 'application/json',
           'token': localStorage.token,
@@ -108,10 +96,6 @@ export class CartsService {
         'refreshToken': localStorage.refreshToken
       }
     })
-  }
-
-  public totalCartCount() {
-    return this.http.get(`http://localhost:10778/carts/number`)
   }
 
   public changeStatusCart(body: any) {

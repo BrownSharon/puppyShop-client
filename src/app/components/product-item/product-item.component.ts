@@ -15,8 +15,8 @@ export class ProductItemComponent implements OnInit {
 
   @Input() public product: ProductInterface
 
-  public product_amount: number = 0
   public productItemInCart: CartItemInterface
+  
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
@@ -26,7 +26,7 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {
     this.productItemInCart = this._carts.cartItemsArr.find(item => item.product_id === this.product.id)
     if (this.productItemInCart){
-    this.product_amount = this.productItemInCart.product_amount
+    this.product.product_amount = this.productItemInCart.product_amount
     }  
   }
 
@@ -35,13 +35,12 @@ export class ProductItemComponent implements OnInit {
   }
 
   public decrease() {
-    if (this.product_amount > 1) {
+    if (this.product.product_amount > 1) {
       this.product.product_amount--
     }
   }
 
   public async addProductToCart() {   
-    console.log(this._carts.openCart);
      
     const body = {
       product_id: this.product.id,
@@ -54,18 +53,9 @@ export class ProductItemComponent implements OnInit {
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
         if (this.productItemInCart?.cart_id > 0) {
-          this.product_amount = this.productItemInCart.product_amount
+          this.product.product_amount = this.productItemInCart.product_amount
         }
-
-        this._carts.totalPrice(this._carts.openCart.id).subscribe(
-          (res: ResponseInterface) => {
-            this._carts.totalCartPrice = res.totalCartPrice
-          },
-          (err: ResponseInterface) => {
-            console.log(err);
-            this._r.navigateByUrl('/welcome')
-          },
-        )
+        this._carts.totalCartPrice = res.totalCartPrice
       },
       (err: ResponseInterface) => {
         console.log(err);
