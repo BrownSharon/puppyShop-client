@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import CartInterface from '../interfaces/cart.interface';
 import CartItemInterface from '../interfaces/cartItem.interface';
+import ProductInterface from '../interfaces/product.interface';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,7 @@ export class CartsService {
   public totalCartPrice: number 
   public cartsCounter: number = 0
   public cartStatus: boolean = false
+  public deletedItemFromCart: ProductInterface
 
   constructor(
     private http: HttpClient,

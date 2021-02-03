@@ -10,9 +10,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="increase()">+</button>
-      <!-- <input type="text" name="product_amount" [(ngModel)]="product_amount"> -->
       <p>{{product.product_amount || 0}}</p>
       <button mat-button (click)="decrease()">-</button>
-      <button [disabled]="product.product_amount< 1" (click)="addProductToCart()">Add</button>
+      <button [disabled]="!btnStatus" (click)="addProductToCart()">{{(_carts.cartItemsArr.length === 0 || _carts.deletedItemFromCart?.id === product.id) ? "Add": btnName}}</button>
     </mat-card-actions>
   </mat-card>

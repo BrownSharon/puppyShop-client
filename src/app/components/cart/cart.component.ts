@@ -28,7 +28,6 @@ export class CartComponent implements OnInit {
         this._carts.cartItemsFilteredArr = res.cartItems
       },
       (err: ResponseInterface) => {
-        console.log(err);
         this._r.navigateByUrl('/welcome')
       }
     )
@@ -54,7 +53,6 @@ export class CartComponent implements OnInit {
 
         // zero the total cart price
         this._carts.totalCartPrice = 0
-        this._r.navigateByUrl('/main')
       },
       (err: ResponseInterface) => {
         console.log(err);

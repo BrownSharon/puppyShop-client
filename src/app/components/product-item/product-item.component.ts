@@ -16,6 +16,8 @@ export class ProductItemComponent implements OnInit {
   @Input() public product: ProductInterface
 
   public productItemInCart: CartItemInterface
+  public btnStatus: boolean = false
+  public btnName: string = "Add"
   
   constructor(
     public _products: ProductsService,
@@ -25,23 +27,26 @@ export class ProductItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.productItemInCart = this._carts.cartItemsArr.find(item => item.product_id === this.product.id)
-    if (this.productItemInCart){
-    this.product.product_amount = this.productItemInCart.product_amount
-    }  
+    if (this.productItemInCart) {
+      this.product.product_amount = this.productItemInCart.product_amount
+      this.btnName = "Update"
+    }
   }
 
   public increase() {
     this.product.product_amount++
+    this.btnStatus = true
   }
 
   public decrease() {
     if (this.product.product_amount > 1) {
       this.product.product_amount--
+      this.btnStatus = true
     }
   }
 
-  public async addProductToCart() {   
-     
+  public async addProductToCart() {
+
     const body = {
       product_id: this.product.id,
       product_amount: this.product.product_amount,
@@ -52,10 +57,14 @@ export class ProductItemComponent implements OnInit {
     this._carts.addToCart(body).subscribe(
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
-        if (this.productItemInCart?.cart_id > 0) {
-          this.product.product_amount = this.productItemInCart.product_amount
+        this.productItemInCart = this._carts.cartItemsArr.find(item => item.product_id === this.product.id)
+        if (this.productItemInCart) {
+          this.productItemInCart.product_amount = this.product.product_amount
         }
         this._carts.totalCartPrice = res.totalCartPrice
+        this.btnName = "Update"
+        this.btnStatus = false
+        this._carts.deletedItemFromCart = {} as ProductInterface
       },
       (err: ResponseInterface) => {
         console.log(err);

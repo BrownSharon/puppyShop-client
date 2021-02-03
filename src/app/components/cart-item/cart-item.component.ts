@@ -15,6 +15,7 @@ export class CartItemComponent implements OnInit {
 
   @Input() public item: CartItemInterface
   public productItem: ProductInterface
+  public updateBTN: boolean = false
 
   constructor(
     public _products: ProductsService,
@@ -37,11 +38,13 @@ export class CartItemComponent implements OnInit {
 
   public increase() {
     this.item.product_amount++
+    this.updateBTN = true
   }
 
   public decrease() {
     if (this.item.product_amount > 1) {
       this.item.product_amount--
+      this.updateBTN = true
     }
   }
 
@@ -65,6 +68,8 @@ export class CartItemComponent implements OnInit {
         // update the total cart price
         this._carts.totalCartPrice = res.totalCartPrice
        
+        //set to disable updateBTN
+        this.updateBTN = false
       },
       (err: ResponseInterface) => {
         console.log(err);
@@ -79,6 +84,7 @@ export class CartItemComponent implements OnInit {
     this.productItem = this._products.productsItemsArr.find(p =>
       p.id === this.item.product_id)
     this.productItem.product_amount = 0
+    this._carts.deletedItemFromCart = this.productItem
 
     // delete the item from cart
     const id = this.item.cartItem_id
