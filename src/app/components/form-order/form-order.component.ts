@@ -48,10 +48,8 @@ export class FormOrderComponent implements OnInit {
     
     // open new order
     const closing_date = new Date().toISOString().slice(0, 19).replace('T', ' ')
-    console.log(closing_date);
     
     const delivery_date = new Date(this.orderForm.value.shipping_date).toISOString().slice(0, -14)
-    console.log(delivery_date);
 
     const orderBody = {user_id: this._user.user.id, 
                   cart_id: this._carts.openCart.id, 
@@ -62,11 +60,9 @@ export class FormOrderComponent implements OnInit {
                   closing_date: closing_date, 
                   credit_card: this.orderForm.value.credit_card
                 }
-    console.log(orderBody);
     
     this._orders.addOrder(orderBody).subscribe(
       (res: ResponseInterface) => {
-        console.log(res);
         this._orders.currentOrder = res.newOrder
         this._r.navigateByUrl('/success')
       },
@@ -81,7 +77,6 @@ export class FormOrderComponent implements OnInit {
     const cartBody = {id: this._carts.openCart.id}
     this._carts.changeStatusCart(cartBody).subscribe(
       (res: ResponseInterface) => {
-        console.log(res);
       },
       (err: ResponseInterface) => {
         console.log(err);
@@ -89,7 +84,7 @@ export class FormOrderComponent implements OnInit {
         
       }
     )
-    this._carts.openCart = {id:0, user_id:this._user.user.id, create_date:"1920-01-01", status:true}
+    this._carts.openCart = {id:0}
 
   }
 
@@ -98,8 +93,6 @@ export class FormOrderComponent implements OnInit {
   }
 
   public fillStreetValue() {
-    console.log("test");
-    
     this.streetINP = this._user.user.street
   }
 }
