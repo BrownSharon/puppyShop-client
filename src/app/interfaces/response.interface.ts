@@ -21,7 +21,7 @@ export default interface ResponseInterface{
     products?: ProductInterface[]
     productsCount?: number
     productItem?: ProductInterface
-    openCart?: CartInterface
+    openCart?: CartInterface[]
     cartItems?: CartItemInterface[]
     totalCartPrice?: any
     newCart?: CartInterface

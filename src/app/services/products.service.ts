@@ -13,12 +13,13 @@ export class ProductsService {
   public productsCounter: number = 0
   public productsCategoriesArr: CategoryInterface[] = []
   public productAmount: number = 0
+  
   constructor(
     private http: HttpClient
   ) { }
 
   public totalProductsCount(){
-    return this.http.get('http://localhost:10778/products/number')
+    return this.http.get('http://localhost:10778/products')
   } 
 
   public getCategories(){
@@ -31,8 +32,8 @@ export class ProductsService {
     })
   } 
   
-  public getAllProducts(){
-    return this.http.get('http://localhost:10778/products/', {
+  public getAllProducts(cart_id:number){
+    return this.http.get(`http://localhost:10778/products/${cart_id}`, {
     headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -41,8 +42,8 @@ export class ProductsService {
     })
   } 
 
-  public getProductsById(id:number){
-    return this.http.get(`http://localhost:10778/products/?category_id=${id}`, {
+  public getProductsById(cart_id:number,id:number){
+    return this.http.get(`http://localhost:10778/products/${cart_id}?category_id=${id}`, {
     headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -51,8 +52,8 @@ export class ProductsService {
     })
   }
 
-  public getProductsByName(name:string){
-    return this.http.get(`http://localhost:10778/products/?name=${name}`, {
+  public getProductsByName(cart_id:number, name:string){
+    return this.http.get(`http://localhost:10778/products/${cart_id}?name=${name}`, {
     headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,

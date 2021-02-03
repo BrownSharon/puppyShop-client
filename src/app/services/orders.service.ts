@@ -8,6 +8,7 @@ import OrderInterface from '../interfaces/order.interface';
 export class OrdersService {
 
   public lastOrder: OrderInterface
+  public currentOrder: OrderInterface
   public ordersCounter: number = 0
   constructor(
     private http: HttpClient

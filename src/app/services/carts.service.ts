@@ -100,7 +100,8 @@ export class CartsService {
   }
 
   public getNewCart() {
-    return this.http.get(`http://localhost:10778/carts/new`, {
+    const body = {}
+    return this.http.post(`http://localhost:10778/carts`, body,{
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,

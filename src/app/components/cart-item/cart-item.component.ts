@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import CartItemInterface from 'src/app/interfaces/cartItem.interface';
+import ProductInterface from 'src/app/interfaces/product.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -13,6 +14,8 @@ import { ProductsService } from 'src/app/services/products.service';
 export class CartItemComponent implements OnInit {
 
   @Input() public item: CartItemInterface
+  public productItem: ProductInterface
+
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
@@ -20,6 +23,8 @@ export class CartItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.productItem = this._products.productsItemsArr.find(p =>
+      p.id === this.item.product_id)
   }
 
   public increase() {
@@ -33,7 +38,7 @@ export class CartItemComponent implements OnInit {
   }
 
   public editItemAmount() {
-    
+
     const body = {
       product_amount: this.item.product_amount,
       id: this.item.cartItem_id,
@@ -43,38 +48,33 @@ export class CartItemComponent implements OnInit {
     this._carts.editCartItem(body).subscribe(
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
+
+        // update the total cart price
+        this._carts.totalPrice(this._carts.openCart.id).subscribe(
+          (res: ResponseInterface) => {
+            this._carts.totalCartPrice = res.totalCartPrice
+          },
+          (err: ResponseInterface) => {
+            console.log(err);
+            this._r.navigateByUrl('/welcome')
+          },
+        )
+
+        // update the product_amount in products comp
+        this.productItem.product_amount = this.item.product_amount
       },
       (err: ResponseInterface) => {
         console.log(err);
         this._r.navigateByUrl('/welcome')
       }
     )
-
-    // update the total cart price
-    this._carts.totalPrice(this._carts.openCart.id).subscribe(
-      (res: ResponseInterface) => {
-        this._carts.totalCartPrice = res.totalCartPrice
-      },
-      (err: ResponseInterface) => {
-        console.log(err);
-        this._r.navigateByUrl('/welcome')
-      },
-    )
-
-    // update the product_amount in products comp
-    // zero the amount in products comp
-    const productItem = this._products.productsItemsArr.find(p =>
-      p.id === this.item.product_id)
-    productItem.product_amount = this.item.product_amount
   }
 
 
   public deleteItem() {
     // zero the amount in products comp
-    const productItem = this._products.productsItemsArr.find(p =>
-      p.id === this.item.product_id)
-    productItem.product_amount = 0
-
+    this.productItem.product_amount = 0
+    
     // delete the item from cart
     const id = this.item.cartItem_id
     const cart_id = this.item.cart_id
@@ -83,6 +83,7 @@ export class CartItemComponent implements OnInit {
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
         this._carts.totalCartPrice -= this.item.product_total_price
+        
       },
       (err: ResponseInterface) => {
         console.log(err);

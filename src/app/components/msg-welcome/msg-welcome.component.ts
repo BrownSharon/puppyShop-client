@@ -23,18 +23,21 @@ export class MsgWelcomeComponent implements OnInit {
   ngOnInit(): void {
     this._carts.getOpenCartByUser().subscribe(
       (res: ResponseInterface) => {
-        this._carts.openCart = res.openCart[0]
-        if (this._carts.openCart?.status == false) {
+        console.log(res.openCart);
+        if (res.openCart.length > 0) {
+          this._carts.openCart = res.openCart[0]
           this._carts.totalPrice(this._carts.openCart.id).subscribe(
             (res: ResponseInterface) => {
               this._carts.totalCartPrice = res.totalCartPrice
             },
             (err: ResponseInterface) => {
               console.log(err);
+              this._r.navigateByUrl('/welcome')
             })
         } else {
           this._orders.lastOrderByUser().subscribe(
             (res: ResponseInterface) => {
+              console.log(res);
               if (res.lastOrder) {
                 this._orders.lastOrder = res.lastOrder[0]
                 console.log(this._orders.lastOrder);
@@ -42,11 +45,13 @@ export class MsgWelcomeComponent implements OnInit {
             },
             (err: ResponseInterface) => {
               console.log(err);
+              this._r.navigateByUrl('/welcome')
             })
         }
       },
       (err: ResponseInterface) => {
-        console.log(err)
+        console.log(err);
+        this._r.navigateByUrl('/welcome')
       })
   }
 
@@ -59,12 +64,13 @@ export class MsgWelcomeComponent implements OnInit {
       },
       (err: ResponseInterface) => {
         console.log(err);
-        
+        this._r.navigateByUrl('/welcome')
+
       }
     )
   }
 
-  public continueShopping(){
+  public continueShopping() {
     this._r.navigateByUrl('/main')
   }
 

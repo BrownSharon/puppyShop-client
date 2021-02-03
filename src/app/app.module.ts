@@ -31,6 +31,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -51,7 +53,7 @@ import {MatCardModule} from '@angular/material/card';
     OrderComponent,
     SuccessComponent,
     FormOrderComponent,
-   
+    
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,9 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     MatToolbarModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

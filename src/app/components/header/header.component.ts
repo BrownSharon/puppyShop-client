@@ -35,6 +35,8 @@ export class HeaderComponent implements OnInit {
         this._r.navigateByUrl('/welcome')
       },
       (err: ResponseInterface) => {
+        console.log(err);
+        this._r.navigateByUrl('/welcome')
       }
     )
   }

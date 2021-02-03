@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import ProductInterface from 'src/app/interfaces/product.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
-import { OrdersService } from 'src/app/services/orders.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -70,6 +68,9 @@ export class CartComponent implements OnInit {
         this._r.navigateByUrl('/welcome')
       }
     )
+  }
 
+  public backToShop(){
+    this._r.navigateByUrl('/main')
   }
 }

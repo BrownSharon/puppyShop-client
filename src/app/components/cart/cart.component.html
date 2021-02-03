@@ -20,5 +20,7 @@
     <p>Total Cart Price: {{_carts.totalCartPrice || 0}} $</p>
     <button *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0"  (click)="goToCheckout()">Checkout</button>
     <button *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0" (click)="deleteAllItems()">Delete All Cart Items</button>
+    
+    <button *ngIf="_carts.cartStatus" (click)="backToShop()">Back to shop</button>
 </div>
 </div>
