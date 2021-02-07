@@ -18,18 +18,22 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Shipping Date</mat-label>
-        <input matInput [matDatepicker]="dp3" [matDatepickerFilter]="occupiedDates" formControlName="shipping_date" />
+        <input matInput 
+        [min]="minDate"
+        [matDatepicker]="dp3" [matDatepickerFilter]="occupiedDates" formControlName="shipping_date" />
         <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
         <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-        <!-- <mat-datepicker #dp3 disabled="false" [dateClass]="dateClass"></mat-datepicker> -->
     </mat-form-field>
 
     <h2>Payments</h2>
     <mat-form-field appearance="outline">
         <mat-label>Credit Card</mat-label>
-        <input matInput placeholder="Enter your last name" formControlName="credit_card" required />
-        <mat-hint>Enter credit card number</mat-hint>
+        <input matInput type="text" placeholder="Enter your last name" formControlName="credit_card" required />
+        <mat-hint>Enter last 4 digits of credit card number</mat-hint>
+        <mat-error *ngIf="orderForm.controls.credit_card.errors?.minlength">Too short...</mat-error>
+        <mat-error *ngIf="orderForm.controls.credit_card.errors?.maxlength">Too longe...</mat-error>
         <mat-error *ngIf="orderForm.controls.credit_card.errors?.required">Credit card must be provided</mat-error>
+        <mat-error *ngIf="orderForm.controls.credit_card.errors?.pattern">Only digits please</mat-error>
     </mat-form-field>
 
     <button mat-stroked-button color="warn" type="submit" [disabled]="!orderForm.valid">Finish</button>
