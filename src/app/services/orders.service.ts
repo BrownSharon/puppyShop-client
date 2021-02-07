@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import OrderInterface from '../interfaces/order.interface';
+import ResponseInterface from '../interfaces/response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,14 @@ export class OrdersService {
   public lastOrder: OrderInterface
   public currentOrder: OrderInterface
   public ordersCounter: number = 0
+ 
+  public condition: any
+  public date: Date 
+  public DatesToDisable: any
+
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    public _r: Router
   ) { }
 
   public addOrder(body:any){
@@ -25,7 +33,7 @@ export class OrdersService {
   }
   
   public getCountOrders(){
-    return this.http.get('http://localhost:10778/orders/all', {
+    return this.http.get('http://localhost:10778/orders/number', {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -33,7 +41,7 @@ export class OrdersService {
   }
   
   public lastOrderByUser(){
-    return this.http.get('http://localhost:10778/orders', {
+    return this.http.get('http://localhost:10778/orders/last', {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -43,7 +51,17 @@ export class OrdersService {
   }
   
   public getReceipt(id:number){
-    return this.http.get(`http://localhost:10778/receipt/${id}`, {
+    return this.http.get(`http://localhost:10778/orders/receipt/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'token': localStorage.token,
+        'refreshToken': localStorage.refreshToken
+      }
+    })
+  }
+
+  public getDatesToDisable(){
+    return this.http.get(`http://localhost:10778/orders/dates`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,

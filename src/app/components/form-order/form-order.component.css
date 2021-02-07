@@ -5,3 +5,8 @@ form{
     align-items: center;
 
 }
+
+.occupied {
+    background: orange;
+    border-radius: 100%;
+  }

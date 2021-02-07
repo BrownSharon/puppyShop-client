@@ -31,4 +31,5 @@ export default interface ResponseInterface{
     newOrder?: OrderInterface
     cities?: CityInterface[]
     error?: string
+    filteredDates?: any
 }

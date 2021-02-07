@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
+import { OrdersService } from 'src/app/services/orders.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class CartComponent implements OnInit {
   constructor(
     public _carts: CartsService,
     public _products: ProductsService,
+    public _orders: OrdersService,
     public _r: Router
 
   ) { }
@@ -34,6 +36,7 @@ export class CartComponent implements OnInit {
   }
 
   public goToCheckout() {
+    
     // redirect to order page
     this._r.navigateByUrl('/order')
   }

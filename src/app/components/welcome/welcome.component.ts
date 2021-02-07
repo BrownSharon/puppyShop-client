@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import ResponseInterface from 'src/app/interfaces/response.interface';
+import { OrdersService } from 'src/app/services/orders.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class WelcomeComponent implements OnInit {
   public decodedToken: any
 
   constructor(
-    public _user: UserService,
+    public _user: UserService
 
   ) { }
 

@@ -8,11 +8,9 @@
             <mat-option *ngFor="let city of _user.citiesArr" [value]='city.name'>{{city.name}}</mat-option>
         </mat-select>
         <mat-hint>Enter your city address</mat-hint>
-        <mat-error *ngIf="orderForm.controls.city.invalid">City must be selected before submit</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Street</mat-label>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Street</mat-label>
         <input matInput placeholder="Enter your street address" formControlName="street" required (dblclick)="fillStreetValue()" />
         <mat-hint>Enter your street address</mat-hint>
         <mat-error *ngIf="orderForm.controls.street.errors?.required">Street must be provided</mat-error>
@@ -20,9 +18,10 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Shipping Date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="shipping_date" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput [matDatepicker]="dp3" [matDatepickerFilter]="occupiedDates" formControlName="shipping_date" />
+        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        <!-- <mat-datepicker #dp3 disabled="false" [dateClass]="dateClass"></mat-datepicker> -->
     </mat-form-field>
 
     <h2>Payments</h2>
