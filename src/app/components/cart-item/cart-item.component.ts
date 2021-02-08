@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import * as EventEmitter from 'events';
 import CartItemInterface from 'src/app/interfaces/cartItem.interface';
 import ProductInterface from 'src/app/interfaces/product.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
+
 
 @Component({
   selector: 'app-cart-item',
@@ -13,9 +15,11 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class CartItemComponent implements OnInit {
 
+  
   @Input() public item: CartItemInterface
   public productItem: ProductInterface
   public updateBTN: boolean = false
+  
 
   constructor(
     public _products: ProductsService,
@@ -25,15 +29,6 @@ export class CartItemComponent implements OnInit {
 
   ngOnInit(): void {
 
-  }
-
-  public async findProductItem() {
-    try {
-
-    } catch (err) {
-      console.log(err);
-
-    }
   }
 
   public increase() {
@@ -101,5 +96,5 @@ export class CartItemComponent implements OnInit {
       }
     )
   }
-
+  
 }

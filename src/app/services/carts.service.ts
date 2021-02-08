@@ -13,13 +13,13 @@ import { ProductsService } from './products.service';
 export class CartsService {
 
   public cartItemsArr: CartItemInterface[] = []
-  public cartItemsFilteredArr: CartItemInterface[] = []
   
   public openCart: CartInterface
   public totalCartPrice: number 
   public cartsCounter: number = 0
   public cartStatus: boolean = false
   public deletedItemFromCart: ProductInterface
+  public Search: string = null;
 
   constructor(
     private http: HttpClient,

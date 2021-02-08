@@ -41,3 +41,8 @@ img{
     height: 20%;
     margin: 0%;
 }
+
+mark {
+    background-color: #ecee82;
+    font-weight: bold;
+  }

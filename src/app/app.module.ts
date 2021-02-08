@@ -23,7 +23,7 @@ import { MainComponent } from './components/main/main.component';
 import { OrderComponent } from './components/order/order.component';
 import { SuccessComponent } from './components/success/success.component';
 import { FormOrderComponent } from './components/form-order/form-order.component';
-
+import { SearchPipe } from './searchPipe.pipe';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
@@ -34,8 +34,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
-
-
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +55,8 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_F
     OrderComponent,
     SuccessComponent,
     FormOrderComponent,
+    SearchPipe,
+    SearchComponent,
     
   ],
   imports: [

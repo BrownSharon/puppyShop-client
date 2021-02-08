@@ -1,6 +1,7 @@
-<mat-card>
+
+<mat-card >
   <mat-card-header>
-    <mat-card-title>{{item.name}}</mat-card-title>
+    <mat-card-title [innerHTML]="item.name | highlightSearch: _carts.Search"></mat-card-title>
   </mat-card-header>
   <mat-card-content>
 

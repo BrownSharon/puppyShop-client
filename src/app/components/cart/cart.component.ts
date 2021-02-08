@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
@@ -13,7 +13,9 @@ import { ProductsService } from 'src/app/services/products.service';
 export class CartComponent implements OnInit {
 
   public searchINP:string = ""
-  public emptySearchError: boolean = false
+  public color: string = "null"
+  @Output() searched = new EventEmitter<string>();
+  
 
   constructor(
     public _carts: CartsService,
@@ -27,7 +29,6 @@ export class CartComponent implements OnInit {
     this._carts.getCartItems().subscribe(
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
-        this._carts.cartItemsFilteredArr = res.cartItems
       },
       (err: ResponseInterface) => {
         this._r.navigateByUrl('/welcome')
@@ -64,12 +65,8 @@ export class CartComponent implements OnInit {
     )
   }
 
-  public searchForItem(name:string){
-    this.emptySearchError = false
-    this._carts.cartItemsArr = this._carts.cartItemsFilteredArr.filter(item => item.name.toLowerCase().includes(name))
-    if (this._carts.cartItemsFilteredArr.length === 0) {
-      this.emptySearchError = true
-    }
+  public OnSearched(searchTerm: string) {
+    this._carts.Search = searchTerm;
   }
 
   public backToShop(){
