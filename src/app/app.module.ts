@@ -23,7 +23,7 @@ import { MainComponent } from './components/main/main.component';
 import { OrderComponent } from './components/order/order.component';
 import { SuccessComponent } from './components/success/success.component';
 import { FormOrderComponent } from './components/form-order/form-order.component';
-import { SearchPipe } from './searchPipe.pipe';
+import { SearchPipe } from './pipes/searchPipe.pipe';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
