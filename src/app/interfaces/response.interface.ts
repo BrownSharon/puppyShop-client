@@ -32,4 +32,6 @@ export default interface ResponseInterface{
     cities?: CityInterface[]
     error?: string
     filteredDates?: any
+    filename?: string
+    data?: any
 }

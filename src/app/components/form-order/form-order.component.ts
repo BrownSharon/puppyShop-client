@@ -62,7 +62,6 @@ export class FormOrderComponent implements OnInit {
   public handleSubmit() {
     
     // open new order
-    // const closing_date = new Date().toISOString().slice(0, 19).replace('T', ' ')
     const d = new Date()
     const closing_date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
     const dd = new Date(this.orderForm.value.shipping_date)
@@ -81,7 +80,7 @@ export class FormOrderComponent implements OnInit {
 
     this._orders.addOrder(orderBody).subscribe(
       (res: ResponseInterface) => {
-        this._orders.lastOrder = res.newOrder
+        this._orders.currentOrder = res.newOrder[0]
         this._r.navigateByUrl('/success')
       },
       (err: ResponseInterface) => {
