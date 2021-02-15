@@ -18,7 +18,7 @@ export class ProductItemComponent implements OnInit {
   public productItemInCart: CartItemInterface
   public btnStatus: boolean = false
   public btnName: string = "Add"
-  
+
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
@@ -26,10 +26,14 @@ export class ProductItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.productItemInCart = this._carts.cartItemsArr.find(item => item.product_id === this.product.id)
-    if (this.productItemInCart) {
-      this.product.product_amount = this.productItemInCart.product_amount
-      this.btnName = "Update"
+    if (this._carts.totalCartPrice === 0) {
+      this.product.product_amount = 0
+    }else{
+      this.productItemInCart = this._carts.cartItemsArr.find(item => item.product_id === this.product.id)
+      if (this.productItemInCart) {
+        this.product.product_amount = this.productItemInCart.product_amount
+        this.btnName = "Update"
+      }
     }
   }
 

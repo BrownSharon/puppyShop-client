@@ -1,11 +1,9 @@
-import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import CartInterface from '../interfaces/cart.interface';
 import CartItemInterface from '../interfaces/cartItem.interface';
 import ProductInterface from '../interfaces/product.interface';
-import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root'

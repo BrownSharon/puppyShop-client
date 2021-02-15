@@ -46,9 +46,7 @@ export class SuccessComponent implements OnInit {
   }
   
   public goToWelcome(){
-    this._carts.openCart = {} as CartInterface
-    this._carts.totalCartPrice = 0
-    this._carts.cartItemsArr = []
+
     this._r.navigateByUrl('/welcome')
   }
 

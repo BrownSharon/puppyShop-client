@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import CartInterface from 'src/app/interfaces/cart.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { OrdersService } from 'src/app/services/orders.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -22,6 +24,7 @@ export class FormOrderComponent implements OnInit {
     public _user: UserService,
     public _carts: CartsService,
     public _orders: OrdersService,
+    public _products: ProductsService,
     public _r: Router,
     public _fb: FormBuilder, 
   ) {}
@@ -81,6 +84,11 @@ export class FormOrderComponent implements OnInit {
     this._orders.addOrder(orderBody).subscribe(
       (res: ResponseInterface) => {
         this._orders.currentOrder = res.newOrder[0]
+        this._carts.totalCartPrice = 0
+        this._carts.cartItemsArr = []
+        this._carts.Search = ""
+        this._products.productsItemsFilteredArr = []
+        this._products.productsItemsArr = []
         this._r.navigateByUrl('/success')
       },
       (err: ResponseInterface) => {
@@ -94,6 +102,8 @@ export class FormOrderComponent implements OnInit {
     const cartBody = { id: this._carts.openCart.id }
     this._carts.changeStatusCart(cartBody).subscribe(
       (res: ResponseInterface) => {
+        this._carts.openCart = {} as CartInterface
+
       },
       (err: ResponseInterface) => {
         console.log(err);
