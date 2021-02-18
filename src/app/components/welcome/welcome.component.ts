@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UserService } from 'src/app/services/user.service';
@@ -16,27 +17,35 @@ export class WelcomeComponent implements OnInit {
   public decodedToken: any
 
   constructor(
-    public _user: UserService
+    public _user: UserService,
+    public _r: Router
 
   ) { }
 
   ngOnInit(): void {
-    if (localStorage.token){
+    if (localStorage.token) {
       this._user.checkTokens().subscribe(
-        (res:ResponseInterface)=>{
-          if(!res.err && this._user.user.isLogin){
-            this._user.activeComponent = "welcome"
-          }  
+        (res: ResponseInterface) => {
+          if (!res.err && this._user.user.isLogin) {
+            // move to welcome component for regular user
+            if (this._user.user.role === 2) {
+              this._user.activeComponent = "welcome"
+            } else {
+              // move to main page with admin product form component
+              this._user.activeComponent = "admin"
+              this._r.navigateByUrl('/main')
+            }
+          }
         },
-        (err:ResponseInterface)=>{
+        (err: ResponseInterface) => {
           this._user.activeComponent = "login"
         }
       )
-    }else{
+    } else {
       this._user.activeComponent = "login"
     }
   }
 
-  
+
 
 }

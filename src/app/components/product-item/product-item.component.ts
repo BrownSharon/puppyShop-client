@@ -5,6 +5,8 @@ import ProductInterface from 'src/app/interfaces/product.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { UserService } from 'src/app/services/user.service';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-product-item',
@@ -22,6 +24,7 @@ export class ProductItemComponent implements OnInit {
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
+    public _user: UserService,
     public _r: Router
   ) { }
 
@@ -75,6 +78,15 @@ export class ProductItemComponent implements OnInit {
         this._r.navigateByUrl('/welcome')
       },
     )
+  }
+
+  public goToEditProduct(){
+    this._products.productForm.patchValue({ productName: this.product.name })
+    this._products.productForm.patchValue({ category: this.product.category_id })
+    this._products.productForm.patchValue({ price: this.product.price })
+    this._products.productForm.patchValue({ image: this.product.image })
+    this._products.productIdToEdit = this.product.id
+    this._products.formStatus = "edit"
   }
 
 

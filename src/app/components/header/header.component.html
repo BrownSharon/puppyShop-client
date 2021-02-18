@@ -3,11 +3,12 @@
     <div class="title">
         <p class="shopName">Puppy Shop</p>
         <p class="welcome">Hello {{_user.user.first_name || "Guest"}}</p>
+        <a href="" *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</a>
     </div>
 </div>
-<button *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</button>
+
 <div class="contactUS">
-    <h4>Contact Us:</h4>
-    <p>Phone: *1234</p>
-    <p>email: puppyShop@gmail.com</p>
+    <h4><span>Contact Us:</span></h4>
+    <p><span>Phone:</span> *1234</p>
+    <p><span>email:</span> puppyShop@gmail.com</p>
 </div>

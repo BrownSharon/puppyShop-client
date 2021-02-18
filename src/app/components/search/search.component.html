@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline" *ngIf="_carts.cartStatus">
+<mat-form-field appearance="outline" *ngIf="_carts.cartStatus" class="search">
     <mat-label>Search</mat-label>
     <input matInput type="search" placeholder="Enter product name"
     (input)="onSearch($event.target.value)" />

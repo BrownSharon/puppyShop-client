@@ -8,10 +8,13 @@
        Price: {{product.price}}$
       </p>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions *ngIf="_user.user.role===2">
       <button mat-button (click)="increase()">+</button>
       <p>{{product.product_amount || 0}}</p>
       <button mat-button (click)="decrease()">-</button>
-      <button [disabled]="!btnStatus" (click)="addProductToCart()">{{(_carts.cartItemsArr.length === 0 || _carts.deletedItemFromCart?.id === product.id) ? "Add": btnName}}</button>
+      <button mat-stroked-button color="warn" [disabled]="!btnStatus" (click)="addProductToCart()">{{(_carts.cartItemsArr.length === 0 || _carts.deletedItemFromCart?.id === product.id) ? "Add": btnName}}</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="_user.user.role===1">
+      <button mat-stroked-button color="primary" (click)="goToEditProduct()">Edit</button>
     </mat-card-actions>
   </mat-card>

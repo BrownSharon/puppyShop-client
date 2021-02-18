@@ -1,14 +1,21 @@
 <div class="cart">
-    <app-search (searched)="OnSearched($event)"></app-search>
+    <div class="searchContainer">
+        <h3 *ngIf="!_carts.cartStatus">My Cart</h3>
+        <app-search (searched)="OnSearched($event)"></app-search>
+    </div>
     <div class="cartItems">
         <app-cart-item *ngFor="let item of _carts.cartItemsArr" [item]="item"></app-cart-item>
     </div>
     <div class="action">
         <p>Total Cart Price: {{_carts.totalCartPrice || 0}} $</p>
-        <button *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0" (click)="goToCheckout()">Checkout</button>
-        <button *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0" (click)="deleteAllItems()">Delete All Cart
-            Items</button>
+        <div class="buttons">
+            <button mat-stroked-button color="primary" *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0"
+                (click)="goToCheckout()">Checkout</button>
+            <button mat-stroked-button color="warn" *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0"
+                (click)="deleteAllItems()">Delete All Items</button>
 
-        <button *ngIf="_carts.cartStatus" (click)="backToShop()">Back to shop</button>
+            <button mat-stroked-button color="primary" *ngIf="_carts.cartStatus" (click)="backToShop()">Back to
+                shop</button>
+        </div>
     </div>
 </div>

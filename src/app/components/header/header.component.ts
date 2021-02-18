@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import CartInterface from 'src/app/interfaces/cart.interface';
+import OrderInterface from 'src/app/interfaces/order.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -34,8 +36,8 @@ export class HeaderComponent implements OnInit {
         localStorage.token = ""
         localStorage.refreshToken = ""
         this._user.user = { isLogin: false }
-        this._carts.openCart = {id:0}
-        this._order.lastOrder= {id: 0}
+        this._carts.openCart = {} as CartInterface
+        this._order.lastOrder= {} as OrderInterface
 
         this._user.activeComponent = "login"
         this._r.navigateByUrl('/welcome')

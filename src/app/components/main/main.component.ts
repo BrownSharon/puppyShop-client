@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartsService } from 'src/app/services/carts.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-main',
@@ -9,7 +10,8 @@ import { CartsService } from 'src/app/services/carts.service';
 export class MainComponent implements OnInit {
 
   constructor(
-    public _carts: CartsService
+    public _carts: CartsService,
+    public _user: UserService,
   ) { }
 
   ngOnInit(): void {

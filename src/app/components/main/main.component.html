@@ -1,4 +1,7 @@
-<div class="main">
-    <app-cart></app-cart>
+<div class="mainContainer">
+    <div class="main" [ngSwitch]="_user.activeComponent" >
+        <app-product-form *ngSwitchCase="'admin'"></app-product-form>
+        <app-cart *ngSwitchDefault></app-cart>
+    </div>
     <app-products></app-products>
 </div>

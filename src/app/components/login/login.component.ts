@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public _user: UserService,
-    public _fb: FormBuilder
+    public _fb: FormBuilder,
+    public _r: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,8 +40,15 @@ export class LoginComponent implements OnInit {
         this._user.user = this._user.decodeToken(res.token as string)
         this._user.username = this._user.user.first_name
         
-        // move to welcome component
-        this._user.activeComponent="welcome"
+        // move to welcome component for regular user
+        if (this._user.user.role === 2){
+          this._user.activeComponent="welcome"
+        }else{
+          // move to main page with admin product form component
+          this._user.activeComponent = "admin"
+          this._r.navigateByUrl('/main')
+        }
+
       },
       (err: ResponseInterface) => {
         console.log(err);

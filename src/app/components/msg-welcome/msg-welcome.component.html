@@ -1,19 +1,19 @@
 <div class="welcome">
         <div *ngIf="_carts.openCart?.id">
-            <p>You have open cart</p>
-            <p>From date: {{_carts.openCart.create_date | date: 'dd/MM/yyyy'}}</p>
-            <p>Total price: {{_carts.totalCartPrice || 0}} $</p>
-            <button (click)="continueShopping()">Continue shopping</button>
+            <p><span>You have open cart</span></p>
+            <p><span>From date:</span> {{_carts.openCart.create_date | date: 'dd/MM/yyyy'}}</p>
+            <p><span>Total price:</span> {{_carts.totalCartPrice || 0}} $</p>
+            <button mat-button color="primary" (click)="continueShopping()">Continue shopping</button>
         </div>
         <div *ngIf="_orders.lastOrder?.id  && !_carts.openCart?.id">
-            <p>Your last order:</p>
-            <p>From: {{_orders.lastOrder.closing_date | date: 'dd/MM/yyyy HH:mm'}}</p>
-            <p>Total price: {{_orders.lastOrder.order_total_price || 0}} $</p>
-            <button (click)="startShopping()">Start shopping</button>
+            <p><span>Your last order:</span></p>
+            <p><span>From:</span> {{_orders.lastOrder.closing_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+            <p><span>Total price:</span> {{_orders.lastOrder.order_total_price || 0}} $</p>
+            <button mat-button color="primary" (click)="startShopping()">Start shopping</button>
         </div>
         <div *ngIf="!_carts.openCart?.id && !_orders.lastOrder?.id">
-            <p>Welcome to Puppy Shop</p>
-            <button (click)="startShopping()">Start shopping</button>
+            <p><span>Welcome to Puppy Shop</span></p>
+            <button mat-button color="primary" (click)="startShopping()">Start shopping</button>
         </div>
 
 </div>

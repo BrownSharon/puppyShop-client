@@ -1,10 +1,20 @@
 app-header{
     width: 100vw;
     height: 15vh;
+    min-height: 90px;
+    max-height: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0%;
     padding: 0%;
     background-color: rgba(245, 190, 118, 0.774);
+}
+
+p, a{
+    font-size: large;
+}
+
+span{
+    font-weight: 600;
 }

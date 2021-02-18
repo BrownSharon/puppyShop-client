@@ -80,15 +80,14 @@ ________________________________________________________________________________
 
 list todo:
 
-1. getReceipt() --> didn't do yet
-2. api documentation:
+1. api documentation:
         https://www.npmjs.com/package/swagger-ui
         https://www.npmjs.com/package/express-swagger-generator
 
-5. got total -> to head ???
 
-1. gourdes -> by user role
-2. cart view min-max with slider
-3. receipt
+2. gourdes -> by user role
+3. cart view min-max with slider
 4. admin site
 5. css!!!!!!!!
+
+6. got total -> to head ???

@@ -11,3 +11,9 @@ form{
     padding: 5%;
 }
 
+p, button{
+    font-size: large;
+    text-align: center;
+
+}
+

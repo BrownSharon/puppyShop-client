@@ -12,7 +12,7 @@
         <p>{{item.product_amount}}</p>
         <button mat-button (click)="decrease()">-</button>
       </div>
-      <button (click)="editItemAmount()" [disabled]="!updateBTN">Update</button>
+      <button mat-stroked-button color="warn" (click)="editItemAmount()" [disabled]="!updateBTN">Update</button>
     </mat-card-actions>
     <p *ngIf="_carts.cartStatus">Quantity: {{item.product_amount}}</p>
 

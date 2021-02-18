@@ -30,11 +30,13 @@ import { MatInputModule } from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { SearchComponent } from './components/search/search.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { SearchComponent } from './components/search/search.component';
     FormOrderComponent,
     SearchPipe,
     SearchComponent,
+    ProductFormComponent,
     
   ],
   imports: [
@@ -75,6 +78,7 @@ import { SearchComponent } from './components/search/search.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
+    MatTabsModule,
     
     
   ],

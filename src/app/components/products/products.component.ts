@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-products',
@@ -17,6 +18,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
+    public _user: UserService,
     public _r: Router
 
   ) { }
@@ -26,8 +28,9 @@ export class ProductsComponent implements OnInit {
       (res: ResponseInterface) => {
 
         this._products.productsCategoriesArr = res.categories
-
-        this._products.getAllProducts(this._carts.openCart.id).subscribe(
+      
+        if (this._user.user.role === 2){
+          this._products.getAllProducts(this._carts.openCart.id).subscribe(
           (res: ResponseInterface) => {
             this._products.productsItemsArr = res.products
             this._products.productsItemsFilteredArr = res.products
@@ -36,6 +39,17 @@ export class ProductsComponent implements OnInit {
             console.log(err);
             this._r.navigateByUrl('/welcome')
           })
+        }else{
+          this._products.getAllProductsForAdmin().subscribe(
+            (res: ResponseInterface) => {
+              this._products.productsItemsArr = res.products
+              this._products.productsItemsFilteredArr = res.products
+            },
+            (err: ResponseInterface) => {
+              console.log(err);
+              this._r.navigateByUrl('/welcome')
+            })
+        } 
       },
       (err: ResponseInterface) => {
         console.log(err);

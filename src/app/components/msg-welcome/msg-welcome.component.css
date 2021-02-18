@@ -10,3 +10,11 @@
         background-color: rgba(248, 240, 166, 0.609);
         padding: 5%;
     }
+
+    button, p{
+    font-size: large;
+}
+
+span{
+    font-weight: 500;
+}

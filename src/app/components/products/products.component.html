@@ -1,37 +1,27 @@
 <div class="products">
+    <nav>
+        <mat-form-field appearance="outline" class="search">
+            <mat-label>Search</mat-label>
+            <input matInput type="search" placeholder="Enter product name"
+                (input)="searchForProduct($event.target.value)" />
+            <span class="material-icons" matSuffix>
+                search
+            </span>
+        </mat-form-field>
+        <button mat-button *ngFor="let category of _products.productsCategoriesArr"
+            (click)="getCategoryItems(category.id)">{{category.name}}</button>
+    </nav>
 
-    <mat-toolbar>
-        <mat-toolbar-row>
-            <a mat-flat-button (click)="allProducts()">All</a>
-            <a mat-flat-button *ngFor="let category of _products.productsCategoriesArr"
-                (click)="getCategoryItems(category.id)">{{category.name}}</a>
-        </mat-toolbar-row>
-        <mat-toolbar-row>
-            <mat-form-field appearance="outline">
-                <mat-label>Search</mat-label>
-                <input
-                    matInput
-                    type="search"
-                    [(ngModel)]="searchINP"
-                    placeholder="Enter product name"  
-                    (ngModelChange)="searchForProduct($event)" 
-                    [ngModelOptions]="{standalone: true}"
-                />
-                <span class="material-icons" matSuffix>
-                    search
-                    </span>
-            </mat-form-field>
-        </mat-toolbar-row>
-    </mat-toolbar>
     <div class="productList" *ngIf="!emptySearchError">
-        <app-product-item *ngFor="let product of _products.productsItemsFilteredArr" [product]="product"></app-product-item>
+        <app-product-item *ngFor="let product of _products.productsItemsFilteredArr" [product]="product">
+        </app-product-item>
     </div>
     <div class="emptyProduct" *ngIf="emptySearchError">
-        <h3>
-            We haven't got product that matching your search
-        </h3>
-        <h4>
-            Try something else
-        </h4>
+            <h3>
+                We haven't got product that matching your search
+            </h3>
+            <h4>
+                Try something else
+            </h4>
     </div>
 </div>
