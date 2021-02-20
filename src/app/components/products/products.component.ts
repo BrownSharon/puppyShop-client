@@ -24,23 +24,72 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._products.getCategories().subscribe(
-      (res: ResponseInterface) => {
-
-        this._products.productsCategoriesArr = res.categories
+    if (!this._user.user?.id){
+      this._user.checkTokens().subscribe(
+        (res:ResponseInterface)=>{
+          this._user.user = res.user
+          this._carts.getOpenCartByUser().subscribe(
+            (res:ResponseInterface)=>{
+              this._carts.openCart = res.openCart[0]
+              this._carts.getCartItems().subscribe(
+                (res: ResponseInterface) => {
+                  this._carts.cartItemsArr = res.cartItems
+                },
+                (err: ResponseInterface) => {
+                  this._r.navigateByUrl('/welcome')
+                }
+              )
+            },
+            (err: ResponseInterface)=>{
+              this._r.navigateByUrl('welcome')
+            }
+          )
+          this._products.getCategories().subscribe(
+            (res: ResponseInterface) => {
       
-        if (this._user.user.role === 2){
-          this._products.getAllProducts(this._carts.openCart.id).subscribe(
-          (res: ResponseInterface) => {
-            this._products.productsItemsArr = res.products
-            this._products.productsItemsFilteredArr = res.products
-          },
-          (err: ResponseInterface) => {
-            console.log(err);
-            this._r.navigateByUrl('/welcome')
-          })
-        }else{
-          this._products.getAllProductsForAdmin().subscribe(
+              this._products.productsCategoriesArr = res.categories
+            
+              if (this._user.user.role === 2){
+                this._products.getAllProducts(this._carts.openCart.id).subscribe(
+                (res: ResponseInterface) => {
+                  this._products.productsItemsArr = res.products
+                  this._products.productsItemsFilteredArr = res.products
+                },
+                (err: ResponseInterface) => {
+                  console.log(err);
+                  this._r.navigateByUrl('/welcome')
+                })
+              }else{
+                this._products.getAllProductsForAdmin().subscribe(
+                  (res: ResponseInterface) => {
+                    this._products.productsItemsArr = res.products
+                    this._products.productsItemsFilteredArr = res.products
+                  },
+                  (err: ResponseInterface) => {
+                    console.log(err);
+                    this._r.navigateByUrl('/welcome')
+                  })
+              } 
+            },
+            (err: ResponseInterface) => {
+              console.log(err);
+              this._r.navigateByUrl('/welcome')
+            }
+          )
+          
+        },
+        (err: ResponseInterface)=>{
+          this._r.navigateByUrl('welcome')
+        }
+      )
+    }else{
+      this._products.getCategories().subscribe(
+        (res: ResponseInterface) => {
+  
+          this._products.productsCategoriesArr = res.categories
+        
+          if (this._user.user.role === 2){
+            this._products.getAllProducts(this._carts.openCart.id).subscribe(
             (res: ResponseInterface) => {
               this._products.productsItemsArr = res.products
               this._products.productsItemsFilteredArr = res.products
@@ -49,13 +98,25 @@ export class ProductsComponent implements OnInit {
               console.log(err);
               this._r.navigateByUrl('/welcome')
             })
-        } 
-      },
-      (err: ResponseInterface) => {
-        console.log(err);
-        this._r.navigateByUrl('/welcome')
-      }
-    )
+          }else{
+            this._products.getAllProductsForAdmin().subscribe(
+              (res: ResponseInterface) => {
+                this._products.productsItemsArr = res.products
+                this._products.productsItemsFilteredArr = res.products
+              },
+              (err: ResponseInterface) => {
+                console.log(err);
+                this._r.navigateByUrl('/welcome')
+              })
+          } 
+        },
+        (err: ResponseInterface) => {
+          console.log(err);
+          this._r.navigateByUrl('/welcome')
+        }
+      )
+    }
+    
   }
 
   public allProducts() {

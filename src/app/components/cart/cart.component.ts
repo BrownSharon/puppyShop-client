@@ -4,6 +4,7 @@ import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,19 +22,48 @@ export class CartComponent implements OnInit {
     public _carts: CartsService,
     public _products: ProductsService,
     public _orders: OrdersService,
+    public _user: UserService,
     public _r: Router
 
   ) { }
 
   ngOnInit(): void {
-    this._carts.getCartItems().subscribe(
-      (res: ResponseInterface) => {
-        this._carts.cartItemsArr = res.cartItems
-      },
-      (err: ResponseInterface) => {
-        this._r.navigateByUrl('/welcome')
-      }
-    )
+    if (!this._user.user?.id){
+      this._user.checkTokens().subscribe(
+        (res:ResponseInterface)=>{
+          this._user.user = res.user
+          this._carts.getOpenCartByUser().subscribe(
+            (res:ResponseInterface)=>{
+              this._carts.openCart = res.openCart[0]
+              this._carts.getCartItems().subscribe(
+                (res: ResponseInterface) => {
+                  this._carts.cartItemsArr = res.cartItems
+                },
+                (err: ResponseInterface) => {
+                  this._r.navigateByUrl('/welcome')
+                }
+              )
+            },
+            (err: ResponseInterface)=>{
+              this._r.navigateByUrl('welcome')
+            }
+          )
+          
+        },
+        (err: ResponseInterface)=>{
+          this._r.navigateByUrl('welcome')
+        }
+      )
+    }else{
+      this._carts.getCartItems().subscribe(
+        (res: ResponseInterface) => {
+          this._carts.cartItemsArr = res.cartItems
+        },
+        (err: ResponseInterface) => {
+          this._r.navigateByUrl('/welcome')
+        }
+      )
+    }
   }
 
   public goToCheckout() {

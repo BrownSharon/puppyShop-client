@@ -24,13 +24,25 @@ export class SuccessComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    if (!this._user.user?.id){
+      this._user.checkTokens().subscribe(
+        (res:ResponseInterface)=>{
+          this._user.user = res.user
+          this._orders.lastOrderByUser().subscribe(
+            (res:ResponseInterface)=>{
+              this._orders.currentOrder = res.lastOrder[0]
+            },
+            (err: ResponseInterface)=>{
+              this._r.navigateByUrl('welcome')
+            }
+          )
+        },
+        (err: ResponseInterface)=>{
+          this._r.navigateByUrl('welcome')
+        }
+      )
+    }
   }
-
-  // returnBlob(res): Blob{
-  //   console.log('downloaded file');
-  //   return 
-  // }
 
   downloadFile() {
 

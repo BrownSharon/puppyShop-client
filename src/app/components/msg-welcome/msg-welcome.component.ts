@@ -21,6 +21,7 @@ export class MsgWelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this._carts.getOpenCartByUser().subscribe(
       (res: ResponseInterface) => {
         if (res.openCart.length > 0) {

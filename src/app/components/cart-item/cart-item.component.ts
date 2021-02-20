@@ -6,6 +6,7 @@ import ProductInterface from 'src/app/interfaces/product.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class CartItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    
   }
 
   public increase() {
