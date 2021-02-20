@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import CartInterface from 'src/app/interfaces/cart.interface';
+import UserInterface from 'src/app/interfaces/user.interface';
 import OrderInterface from 'src/app/interfaces/order.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
@@ -33,9 +34,9 @@ export class HeaderComponent implements OnInit {
     const body = {}
     this._user.logout(body).subscribe(
       (res: ResponseInterface) => {
-        localStorage.token = ""
-        localStorage.refreshToken = ""
-        this._user.user = { isLogin: false }
+        localStorage.removeItem("token")
+        localStorage.removeItem("refreshToken")
+        this._user.user = {} as UserInterface
         this._carts.openCart = {} as CartInterface
         this._order.lastOrder= {} as OrderInterface
 

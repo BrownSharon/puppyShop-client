@@ -53,6 +53,8 @@ export class Register1Component implements OnInit {
       (res: ResponseInterface) => {
         if (!res?.exists) {
           this._user.register1Data = { israeliID, email, password }
+          sessionStorage.register1Data = JSON.stringify(this._user.register1Data)
+          sessionStorage.activeComponent = "register2"
           this._user.activeComponent = "register2"
         }
       },

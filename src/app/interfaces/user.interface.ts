@@ -8,5 +8,5 @@ export default interface UserInterface {
     role?: number
     city?: string
     street?: string
-    isLogin: boolean
+    isLogin?: boolean
 }

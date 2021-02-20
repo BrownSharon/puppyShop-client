@@ -23,10 +23,11 @@ export class WelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (localStorage.token) {
+    if (!this._user.user?.id) {
       this._user.checkTokens().subscribe(
         (res: ResponseInterface) => {
-          if (!res.err && this._user.user.isLogin) {
+          this._user.user = res.user
+          if (this._user.user.isLogin === true) {
             // move to welcome component for regular user
             if (this._user.user.role === 2) {
               this._user.activeComponent = "welcome"
@@ -35,17 +36,27 @@ export class WelcomeComponent implements OnInit {
               this._user.activeComponent = "admin"
               this._r.navigateByUrl('/main')
             }
+          }else{
+            sessionStorage.activeComponent? this._user.activeComponent = sessionStorage.activeComponent : this._user.activeComponent = "login"
           }
         },
         (err: ResponseInterface) => {
-          this._user.activeComponent = "login"
+          sessionStorage.activeComponent? this._user.activeComponent = sessionStorage.activeComponent : this._user.activeComponent = "login"
         }
       )
     } else {
-      this._user.activeComponent = "login"
+      if (this._user.user.isLogin === true) {
+        // move to welcome component for regular user
+        if (this._user.user.role === 2) {
+          this._user.activeComponent = "welcome"
+        } else {
+          // move to main page with admin product form component
+          this._user.activeComponent = "admin"
+          this._r.navigateByUrl('/main')
+        }
+      }else{
+        sessionStorage.activeComponent? this._user.activeComponent = sessionStorage.activeComponent : this._user.activeComponent = "login"
+      }
     }
   }
-
-
-
 }

@@ -18,6 +18,9 @@ export class Register2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (!this._user.register1Data){
+      this._user.register1Data = JSON.parse(sessionStorage.register1Data)
+    }
     this.register2Form = this._fb.group({
       city: ["", [Validators.required]],
       street: ["", [Validators.required]],
@@ -54,6 +57,8 @@ export class Register2Component implements OnInit {
         this._user.user = this._user.decodeToken(res.token as string)
         
         // move to welcome component
+        sessionStorage.removeItem("activeComponent")
+        sessionStorage.removeItem("register1Data")
         this._user.activeComponent="welcome"
       },
       (err: ResponseInterface) => {

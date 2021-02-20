@@ -3,7 +3,7 @@
     <div class="title">
         <p class="shopName">Puppy Shop</p>
         <p class="welcome">Hello {{_user.user.first_name || "Guest"}}</p>
-        <a href="" *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</a>
+        <button mat-button color="primary" *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</button>
     </div>
 </div>
 

@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
   }
 
   public goToRegistration(){
+    sessionStorage.activeComponent = "register1"
     this._user.activeComponent="register1"
   }
 }
