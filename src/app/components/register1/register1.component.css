@@ -11,9 +11,16 @@ form{
     padding: 5%;
 }
 
-p, button{
+button{
     font-size: large;
     text-align: center;
 
 }
+
+p{
+    font-size: medium;
+    text-align: center;
+}
+
+
 

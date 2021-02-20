@@ -17,15 +17,15 @@ export class UserService {
   public user: UserInterface = { isLogin: false }
   public username: string = "Guest"
   public activeComponent: string = "login";
-  public register1Data: any = {}
+  public register1Data: any
   public citiesArr: CityInterface[] = []
-  
+
   constructor(
     private http: HttpClient,
     public _r: Router
   ) { }
 
-  public registerStep1(id:number, email:string) {
+  public registerStep1(id: number, email: string) {
     return this.http.get(`http://localhost:10778/users/${id}/${email}`)
   }
 
@@ -51,7 +51,7 @@ export class UserService {
     })
   }
 
-  public logout(body:object){
+  public logout(body: object) {
     return this.http.put('http://localhost:10778/users/logout', body, {
       headers: {
         'Content-Type': 'application/json',
@@ -70,8 +70,51 @@ export class UserService {
     }
   }
 
-  public getCities(){
+  public getCities() {
     return this.http.get(`http://localhost:10778/users`)
   }
 
+  public goToLogin(){
+    this.activeComponent = "login"
+  }
+
+  public checkUser() {
+    if (localStorage.token) {
+      this.checkTokens().subscribe(
+        (res: ResponseInterface) => {
+          if (!res.err) {
+            this.user = res.user
+            if (this.user.isLogin)
+            // move to welcome component for regular user
+            if (this.user.role === 2) {
+              this.activeComponent = "welcome"
+              localStorage.activeComponent = "welcome"
+            } else {
+              // move to main page with admin product form component
+              this.activeComponent = "admin"
+              localStorage.activeComponent = "admin"
+              this._r.navigateByUrl('/main')
+            }
+          }
+        },
+        (err: ResponseInterface) => {
+          if (localStorage.activeComponent && localStorage.activeComponent !== "welcome" || "admin") {
+            this.activeComponent = localStorage.activeComponent
+          } else {
+            this.activeComponent = "login"
+            localStorage.activeComponent = "login"
+          }
+        }
+      )
+    } else {
+      if (localStorage.activeComponent && localStorage.activeComponent !== "welcome" || "admin") {
+        this.activeComponent = localStorage.activeComponent
+      } else {
+        this.activeComponent = "login"
+        localStorage.activeComponent = "login"
+      }
+    }
+  }
 }
+
+

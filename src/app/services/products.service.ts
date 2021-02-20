@@ -31,7 +31,7 @@ export class ProductsService {
   ) { }
 
   public totalProductsCount() {
-    return this.http.get('http://localhost:10778/products')
+    return this.http.get('http://localhost:10778/products/count')
   }
 
   public getCategories() {

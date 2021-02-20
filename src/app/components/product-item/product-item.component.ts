@@ -6,7 +6,6 @@ import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { UserService } from 'src/app/services/user.service';
-import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-product-item',
