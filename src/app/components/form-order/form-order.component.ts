@@ -17,7 +17,7 @@ export class FormOrderComponent implements OnInit {
 
   public orderForm: FormGroup
 
-  public DatesToDisable: any[]
+  public DatesToDisable: any[] = []
   public minDate: Date = new Date
 
   constructor(
