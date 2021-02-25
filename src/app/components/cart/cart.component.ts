@@ -28,6 +28,8 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._r.url === '/order'? this._carts.cartStatus = true : this._carts.cartStatus= false
+    
       this._carts.getOpenCartByUser().subscribe(
         (res:ResponseInterface)=>{
           if (res.openCart.length >0){
@@ -51,8 +53,6 @@ export class CartComponent implements OnInit {
   }
 
   public goToCheckout() {
-    this._carts.cartStatus = true
-    // sessionStorage.orderStatus = "order"
     // redirect to order page
     this._r.navigateByUrl('order')
   }
@@ -85,8 +85,6 @@ export class CartComponent implements OnInit {
   }
 
   public backToShop(){
-    // sessionStorage.orderStatus = "shopping"
-    this._carts.cartStatus = false
     this._r.navigateByUrl('main/user')
   }
 }

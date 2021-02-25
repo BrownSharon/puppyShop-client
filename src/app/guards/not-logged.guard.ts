@@ -19,12 +19,12 @@ export class NotLoggedGuard implements CanActivateChild {
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this._user.user?.id) {
-      console.log("test");
+
       this._user.checkTokens().subscribe(
         (res: ResponseInterface) => {
           this._user.user = res.user
           if (this._user.user.isLogin === false) {
-                        return true
+            return true
           } else {
             this._user.activeComponent = "welcome"
             this._r.navigateByUrl('welcome/welcome-msg')
