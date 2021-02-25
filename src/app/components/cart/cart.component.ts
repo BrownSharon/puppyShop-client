@@ -28,48 +28,33 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (!this._user.user?.id){
-      this._user.checkTokens().subscribe(
+      this._carts.getOpenCartByUser().subscribe(
         (res:ResponseInterface)=>{
-          this._user.user = res.user
-          this._carts.getOpenCartByUser().subscribe(
-            (res:ResponseInterface)=>{
-              this._carts.openCart = res.openCart[0]
-              this._carts.getCartItems().subscribe(
-                (res: ResponseInterface) => {
-                  this._carts.cartItemsArr = res.cartItems
-                },
-                (err: ResponseInterface) => {
-                  this._r.navigateByUrl('/welcome')
-                }
-              )
-            },
-            (err: ResponseInterface)=>{
-              this._r.navigateByUrl('welcome')
-            }
-          )
-          
+          if (res.openCart.length >0){
+            this._carts.openCart = res.openCart[0]
+            this._carts.getCartItems().subscribe(
+              (res: ResponseInterface) => {
+                this._carts.cartItemsArr = res.cartItems
+              },
+              (err: ResponseInterface) => {
+                this._r.navigateByUrl('welcome/login')
+              }
+            )
+          }else{
+            this._r.navigateByUrl('welcome/login')
+          }
         },
         (err: ResponseInterface)=>{
-          this._r.navigateByUrl('welcome')
+          this._r.navigateByUrl('welcome/login')
         }
       )
-    }else{
-      this._carts.getCartItems().subscribe(
-        (res: ResponseInterface) => {
-          this._carts.cartItemsArr = res.cartItems
-        },
-        (err: ResponseInterface) => {
-          this._r.navigateByUrl('/welcome')
-        }
-      )
-    }
   }
 
   public goToCheckout() {
-    
+    this._carts.cartStatus = true
+    // sessionStorage.orderStatus = "order"
     // redirect to order page
-    this._r.navigateByUrl('/order')
+    this._r.navigateByUrl('order')
   }
 
   public deleteAllItems() {
@@ -90,7 +75,7 @@ export class CartComponent implements OnInit {
       },
       (err: ResponseInterface) => {
         console.log(err);
-        this._r.navigateByUrl('/welcome')
+        this._r.navigateByUrl('welcome/login')
       }
     )
   }
@@ -100,6 +85,8 @@ export class CartComponent implements OnInit {
   }
 
   public backToShop(){
-    this._r.navigateByUrl('/main')
+    // sessionStorage.orderStatus = "shopping"
+    this._carts.cartStatus = false
+    this._r.navigateByUrl('main/user')
   }
 }

@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.loginForm = this._fb.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(4)]],
@@ -42,11 +43,14 @@ export class LoginComponent implements OnInit {
         
         // move to welcome component for regular user
         if (this._user.user.role === 2){
+          // sessionStorage.activeComponent = "welcome"
           this._user.activeComponent="welcome"
+          this._r.navigateByUrl('welcome/welcome-msg')
         }else{
           // move to main page with admin product form component
+          // sessionStorage.activeComponent = "admin"
           this._user.activeComponent = "admin"
-          this._r.navigateByUrl('/main')
+          this._r.navigateByUrl("main/admin")
         }
 
       },
@@ -60,5 +64,6 @@ export class LoginComponent implements OnInit {
   public goToRegistration(){
     sessionStorage.activeComponent = "register1"
     this._user.activeComponent="register1"
+    this._r.navigateByUrl('welcome/register1')
   }
 }

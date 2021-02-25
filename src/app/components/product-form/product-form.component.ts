@@ -3,6 +3,7 @@ import { FormBuilder , FormGroupDirective, FormGroup, Validators } from '@angula
 import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { ProductsService } from 'src/app/services/products.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-product-form',
@@ -15,6 +16,7 @@ export class ProductFormComponent implements OnInit {
 
   constructor(
     public _products: ProductsService,
+    public _user: UserService,
     public _fb: FormBuilder, 
     public _r: Router
   ) { }
@@ -26,14 +28,15 @@ export class ProductFormComponent implements OnInit {
       price: [this._products.productPriceINP, [Validators.required]],
       image: [this._products.productImageINP, [Validators.required]]
     })
-
+    
     this._products.getCategories().subscribe(
       (res: ResponseInterface) => {
         this._products.productsCategoriesArr = res.categories 
       },
       (err: ResponseInterface) => {
         console.log(err);
-        this._r.navigateByUrl('/welcome')
+        this._user.activeComponent = ""
+        this._r.navigateByUrl('welcome/login')
       }
     )
   }

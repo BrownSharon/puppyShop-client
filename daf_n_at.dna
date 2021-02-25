@@ -87,7 +87,27 @@ list todo:
 
 2. gourdes -> by user role
 3. cart view min-max with slider
-4. deal with back btn 
+4. deal with back btn
 4. css!!!!!!!!
 
 6. got total -> to head ???
+
+GUARDS:
+            header 
+welcome page/comp =>    Login            ==> canActivateChild: notLogged
+                        Register_1       ==> canActivateChild: notLogged
+                        Register_2       ==> canActivateChild: notLogged
+                        welcome_user_msg ==> canActivateChild: logged, user
+                        about
+                        site_data
+main page/comp    =>    canActivate: logged 
+                        cart             ==> canActivateChild: user
+                        products         
+                        product_form     ==> canActivateChild: admin     
+        or --------------> after submit cart <---------------------------------------------
+order page/comp   =>    canActivate: logged, user
+                        cart             
+                        order_form       
+        or --------------> after submit order <--------------------------------------------
+success page/comp =>    canActivate: logged, user           
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,6 +15,7 @@ export class Register2Component implements OnInit {
 
   constructor(
     public _user: UserService,
+    public _r: Router,
     public _fb: FormBuilder
   ) { }
 
@@ -57,17 +59,13 @@ export class Register2Component implements OnInit {
         this._user.user = this._user.decodeToken(res.token as string)
         
         // move to welcome component
-        sessionStorage.removeItem("activeComponent")
         sessionStorage.removeItem("register1Data")
+        sessionStorage.removeItem("activeComponent")
         this._user.activeComponent="welcome"
+        this._r.navigateByUrl('welcome/welcome-msg')
       },
       (err: ResponseInterface) => {
       }
     )
   }
-
-
-
-
-
 }

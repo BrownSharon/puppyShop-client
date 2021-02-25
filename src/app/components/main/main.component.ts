@@ -18,31 +18,43 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (!this._user.user?.id){
+    if (!this._user.user?.id) {
       this._user.checkTokens().subscribe(
-        (res:ResponseInterface)=>{
+        (res: ResponseInterface) => {
           this._user.user = res.user
-          if (res.user.role ===2){
+          if (this._user.user.role === 2) {
             this._carts.getOpenCartByUser().subscribe(
-              (res:ResponseInterface)=>{
+              (res: ResponseInterface) => {
                 this._carts.openCart = res.openCart[0]
               },
-              (err: ResponseInterface)=>{
-                this._r.navigateByUrl('welcome')
+              (err: ResponseInterface) => {
+                this._r.navigateByUrl('welcome/login')
               }
             )
-          }else{
+          } else {
             this._user.activeComponent = "admin"
+            this._r.navigateByUrl('main/admin')
           }
-          
         },
-        (err: ResponseInterface)=>{
-          this._r.navigateByUrl('welcome')
-        }
-      )
+        (err: ResponseInterface) => {
+          this._r.navigateByUrl('welcome/login')
+        })
+      this._carts.cartStatus = false
+    } else {
+      if (this._user.user.role === 2) {
+      this._user.activeComponent = "user"
+        this._carts.getOpenCartByUser().subscribe(
+          (res: ResponseInterface) => {
+            this._carts.openCart = res.openCart[0]
+          },
+          (err: ResponseInterface) => {
+            this._r.navigateByUrl('welcome/login')
+          }
+        )
+      } else {
+        this._user.activeComponent = "admin"
+        this._r.navigateByUrl('main/admin')
+      }
     }
-
-    this._carts.cartStatus = false
   }
-
 }

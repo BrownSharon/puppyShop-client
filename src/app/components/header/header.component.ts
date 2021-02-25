@@ -34,18 +34,18 @@ export class HeaderComponent implements OnInit {
     const body = {}
     this._user.logout(body).subscribe(
       (res: ResponseInterface) => {
-        localStorage.removeItem("token")
-        localStorage.removeItem("refreshToken")
+        localStorage.token = ""
+        localStorage.refreshToken = ""
         this._user.user = {} as UserInterface
         this._carts.openCart = {} as CartInterface
         this._order.lastOrder= {} as OrderInterface
 
-        this._user.activeComponent = "login"
-        this._r.navigateByUrl('/welcome')
+        this._user.activeComponent = ""
+        this._r.navigateByUrl('welcome/login')
       },
       (err: ResponseInterface) => {
         console.log(err);
-        this._r.navigateByUrl('/welcome')
+        this._r.navigateByUrl('welcome/login')
       }
     )
   }

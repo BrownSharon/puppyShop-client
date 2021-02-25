@@ -8,8 +8,7 @@
                 search
             </span>
         </mat-form-field>
-        <button mat-button *ngFor="let category of _products.productsCategoriesArr"
-            (click)="getCategoryItems(category.id)">{{category.name}}</button>
+        <button mat-button *ngFor="let category of _products.productsCategoriesArr" (click)="getCategoryItems(category.id)" routerLinkActive="activebutton" routerLink="/main/{{roleName}}">{{category.name}}</button>
     </nav>
 
     <div class="productList" *ngIf="!emptySearchError">

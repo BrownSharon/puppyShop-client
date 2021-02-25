@@ -77,7 +77,8 @@ export class UserService {
   public goToLogin(){
     sessionStorage.removeItem("activeComponent")
     if (sessionStorage.register1Data) sessionStorage.removeItem("register1Data") 
-    this.activeComponent = "login"
+    this.activeComponent = ""
+    this._r.navigateByUrl('welcome/login')
   }
 
   public checkUser() {

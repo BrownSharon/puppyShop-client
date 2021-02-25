@@ -1,7 +1,7 @@
 
     <form [formGroup]="register2Form" (ngSubmit)="handleSubmit()">
         <h2>Sign-in - Step 2</h2>
-        <p>All ready a costumer? <button mat-button color="warn" (click)="_user.goToLogin()">Log in</button> </p>
+        <p>All ready a costumer? <a mat-button color="warn" href="http://localhost:4200/welcome/login" (click)="_user.goToLogin()">Log in</a> </p>
         <mat-form-field appearance="outline">
             <mat-label>Select City</mat-label>
             <mat-select formControlName="city">

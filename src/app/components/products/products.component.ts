@@ -14,7 +14,7 @@ export class ProductsComponent implements OnInit {
 
   public searchINP: string = ""
   public emptySearchError: boolean = false
-
+  public roleName: string
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
@@ -24,99 +24,62 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (!this._user.user?.id){
-      this._user.checkTokens().subscribe(
-        (res:ResponseInterface)=>{
-          this._user.user = res.user
+
+    this._user.user.role == 2 ? this.roleName = "user" : this.roleName = "admin"
+    this._products.getCategories().subscribe(
+      (res: ResponseInterface) => {
+        this._products.productsCategoriesArr = res.categories
+        if (this._user.user.role === 2) {
+          this._r.navigateByUrl('main/user')
           this._carts.getOpenCartByUser().subscribe(
-            (res:ResponseInterface)=>{
-              this._carts.openCart = res.openCart[0]
-              this._carts.getCartItems().subscribe(
-                (res: ResponseInterface) => {
-                  this._carts.cartItemsArr = res.cartItems
-                },
-                (err: ResponseInterface) => {
-                  this._r.navigateByUrl('/welcome')
-                }
-              )
-            },
-            (err: ResponseInterface)=>{
-              this._r.navigateByUrl('welcome')
-            }
-          )
-          this._products.getCategories().subscribe(
             (res: ResponseInterface) => {
-      
-              this._products.productsCategoriesArr = res.categories
-            
-              if (this._user.user.role === 2){
-                this._products.getAllProducts(this._carts.openCart.id).subscribe(
+              this._carts.openCart = res.openCart[0]
+              this._carts.totalPrice(this._carts.openCart.id).subscribe(
                 (res: ResponseInterface) => {
-                  this._products.productsItemsArr = res.products
-                  this._products.productsItemsFilteredArr = res.products
+                  this._carts.totalCartPrice = res.totalCartPrice
                 },
                 (err: ResponseInterface) => {
                   console.log(err);
-                  this._r.navigateByUrl('/welcome')
+                  this._user.activeComponent = ""
+                  this._r.navigateByUrl('welcome/login')
                 })
-              }else{
-                this._products.getAllProductsForAdmin().subscribe(
-                  (res: ResponseInterface) => {
-                    this._products.productsItemsArr = res.products
-                    this._products.productsItemsFilteredArr = res.products
-                  },
-                  (err: ResponseInterface) => {
-                    console.log(err);
-                    this._r.navigateByUrl('/welcome')
-                  })
-              } 
-            },
-            (err: ResponseInterface) => {
+              this._products.getAllProducts(this._carts.openCart.id).subscribe(
+                (res: ResponseInterface) => {
+                  this._products.productsItemsArr = res.products
+                  this._products.productsItemsFilteredArr = res.products
+                  this._r.navigateByUrl('main/user')
+                },
+                (err: ResponseInterface) => {
+                  console.log(err);
+                  this._r.navigateByUrl('welcome/login')
+                })
+            }, (err: ResponseInterface) => {
               console.log(err);
-              this._r.navigateByUrl('/welcome')
-            }
-          )
-          
-        },
-        (err: ResponseInterface)=>{
-          this._r.navigateByUrl('welcome')
-        }
-      )
-    }else{
-      this._products.getCategories().subscribe(
-        (res: ResponseInterface) => {
-  
-          this._products.productsCategoriesArr = res.categories
-        
-          if (this._user.user.role === 2){
-            this._products.getAllProducts(this._carts.openCart.id).subscribe(
+              this._user.activeComponent = ""
+              this._r.navigateByUrl('welcome/login')
+            })
+
+        } else {
+          this._r.navigateByUrl('main/admin')
+          this._products.getAllProductsForAdmin().subscribe(
             (res: ResponseInterface) => {
               this._products.productsItemsArr = res.products
               this._products.productsItemsFilteredArr = res.products
+              this._r.navigateByUrl('main/admin')
             },
             (err: ResponseInterface) => {
               console.log(err);
-              this._r.navigateByUrl('/welcome')
+              this._r.navigateByUrl('welcome/login')
             })
-          }else{
-            this._products.getAllProductsForAdmin().subscribe(
-              (res: ResponseInterface) => {
-                this._products.productsItemsArr = res.products
-                this._products.productsItemsFilteredArr = res.products
-              },
-              (err: ResponseInterface) => {
-                console.log(err);
-                this._r.navigateByUrl('/welcome')
-              })
-          } 
-        },
-        (err: ResponseInterface) => {
-          console.log(err);
-          this._r.navigateByUrl('/welcome')
         }
-      )
-    }
-    
+      },
+      (err: ResponseInterface) => {
+        console.log(err);
+        this._r.navigateByUrl('welcome/login')
+      }
+    )
+
+
   }
 
   public allProducts() {

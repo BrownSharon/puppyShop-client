@@ -1,24 +1,47 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CartComponent } from './components/cart/cart.component';
+import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { MsgWelcomeComponent } from './components/msg-welcome/msg-welcome.component';
 import { OrderComponent } from './components/order/order.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { Register1Component } from './components/register1/register1.component';
+import { Register2Component } from './components/register2/register2.component';
 import { SuccessComponent } from './components/success/success.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { AdminRoleGuard } from './guards/admin-role.guard';
 import { LoggedGuard } from './guards/logged.guard';
-import { LoggedUserGuard } from './guards/loggedUser.guard';
-import { UnLoggedGuard } from './guards/unLogged.guard';
+import { NotLoggedGuard } from './guards/not-logged.guard';
+import { UserRoleGuard } from './guards/user-role.guard';
+
 
 const routes: Routes = [
-      { path: 'welcome', component: WelcomeComponent, canActivate: [LoggedUserGuard, UnLoggedGuard ] },
-      { path: 'main', component: MainComponent, canActivate: [LoggedGuard] },
-      { path: 'order', component: OrderComponent, canActivate: [LoggedUserGuard] },
-      { path: 'success', component: SuccessComponent, canActivate: [LoggedUserGuard] },
+      { path: 'welcome', component: WelcomeComponent,
+      children: [
+        { path: 'register1', component: Register1Component, canActivateChild:[NotLoggedGuard]},
+        { path: 'register2', component: Register2Component, canActivateChild:[NotLoggedGuard]},
+        { path: 'login', component: LoginComponent, canActivateChild:[NotLoggedGuard]},
+        { path: 'welcome-msg', component: MsgWelcomeComponent, canActivateChild: [LoggedGuard, UserRoleGuard]}
+        ] },
+      { path: 'main', component: MainComponent,
+      children: [
+        { path: 'user', component: CartComponent, canActivateChild: [UserRoleGuard]},
+        { path: 'admin', component: ProductFormComponent ,canActivateChild: [AdminRoleGuard] }
+        ], 
+      },
+      { path: 'order', component: OrderComponent, canActivateChild: [LoggedGuard,UserRoleGuard], 
+      },
+      { path: 'success', component: SuccessComponent, canActivateChild: [LoggedGuard, UserRoleGuard], 
+      },
       { path: "", pathMatch: "full", redirectTo: "welcome" },
       { path: '**', component: WelcomeComponent }
     ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes
+    // ,{onSameUrlNavigation: 'reload'}
+    )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
