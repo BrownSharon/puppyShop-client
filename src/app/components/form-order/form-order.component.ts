@@ -127,10 +127,8 @@ export class FormOrderComponent implements OnInit {
   public occupiedDates = (d: any | null): boolean => {
     const date = (d || new Date())  
     
-    const condition = this.DatesToDisable?.findIndex(dataDate => new Date(dataDate.delivery_date).getDate() === date._d.getDate()) < 0
+    const condition = this.DatesToDisable?.findIndex(dataDate => new Date(dataDate.delivery_date).getMonth() === date._d.getMonth() && new Date(dataDate.delivery_date).getDate() ===  date._d.getDate()) < 0
     return condition;
   }
-
-  
 
 }

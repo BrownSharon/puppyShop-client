@@ -49,7 +49,6 @@ export class OrderComponent implements OnInit {
     } else {
       this._carts.getOpenCartByUser().subscribe(
         (res: ResponseInterface) => {
-          console.log(res.openCart);
           if (res.openCart.length > 0) {
             this._carts.openCart = res.openCart[0]
             this._carts.totalPrice(this._carts.openCart.id).subscribe(

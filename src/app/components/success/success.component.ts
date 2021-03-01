@@ -54,17 +54,31 @@ export class SuccessComponent implements OnInit {
           this._r.navigateByUrl('welcome/login')
         })
     }else{
-      this._r.navigateByUrl('welcome/login')
+      if (this._user.user.role === 2) {
+        this._orders.lastOrderByUser().subscribe(
+          (res: ResponseInterface) => {
+            this._orders.currentOrder = res.lastOrder[0]
+          },
+          (err: ResponseInterface) => {
+            this._r.navigateByUrl('welcome/login')
+          }
+        )
+      } else {
+        sessionStorage.activeComponent = "admin"
+        this._user.activeComponent = "admin"
+        this._r.navigateByUrl('main/admin')
+      }
     }
   }
     downloadFile() {
 
       this._orders.getReceipt(this._orders.currentOrder.id, `receipt${this._orders.currentOrder.id}.pdf`).subscribe(
         (res: any) => {
+          console.log(res);
           fileServer.saveAs(new Blob([res], { type: 'text/csv' }), `receipt${this._orders.currentOrder.id}.pdf`)
         },
         (err: ResponseInterface) => {
-          console.log(err);
+          this._r.navigateByUrl('welcome/login')
         }
       )
 

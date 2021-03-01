@@ -3,24 +3,26 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Select City</mat-label>
-        <mat-select formControlName="city" >
+        <mat-select formControlName="city">
             <mat-option selected disabled (dblclick)="fillCityValue()">--Select city--</mat-option>
             <mat-option *ngFor="let city of _user.citiesArr" [value]='city.name'>{{city.name}}</mat-option>
         </mat-select>
         <mat-hint>Enter your city address</mat-hint>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Street</mat-label>
-        <input matInput placeholder="Enter your street address" formControlName="street" required (dblclick)="fillStreetValue()" />
+        <mat-error *ngIf="orderForm.controls.city.errors?.required">City must be chosen</mat-error>
+
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Street</mat-label>
+        <input matInput placeholder="Enter your street address" formControlName="street" required
+            (dblclick)="fillStreetValue()" />
         <mat-hint>Enter your street address</mat-hint>
         <mat-error *ngIf="orderForm.controls.street.errors?.required">Street must be provided</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Shipping Date</mat-label>
-        <input matInput 
-        [min]="minDate"
-        [matDatepicker]="dp3" [matDatepickerFilter]="occupiedDates" formControlName="shipping_date" />
+        <input matInput [min]="minDate" [matDatepicker]="dp3" [matDatepickerFilter]="occupiedDates"
+            formControlName="shipping_date" />
         <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
         <mat-datepicker #dp3 disabled="false"></mat-datepicker>
     </mat-form-field>

@@ -53,7 +53,6 @@ export class CartComponent implements OnInit {
   }
 
   public goToCheckout() {
-    // redirect to order page
     this._r.navigateByUrl('order')
   }
 

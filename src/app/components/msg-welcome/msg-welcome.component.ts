@@ -21,11 +21,11 @@ export class MsgWelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (!this._user.user?.id){
+    if (!this._user.user?.id) {
       this._user.checkTokens().subscribe(
-        (res:ResponseInterface)=>{
+        (res: ResponseInterface) => {
           this._user.user = res.user
-          if (this._user.user.isLogin){
+          if (this._user.user.isLogin) {
             this._user.activeComponent = "welcome"
             this._carts.getOpenCartByUser().subscribe(
               (res: ResponseInterface) => {
@@ -59,51 +59,54 @@ export class MsgWelcomeComponent implements OnInit {
                 this._user.activeComponent = ""
                 this._r.navigateByUrl('welcome/login')
               })
-          }else{
+          } else {
             this._user.activeComponent = ""
             this._r.navigateByUrl('welcome/login')
-          }  
+          }
         },
-        (err: ResponseInterface)=>{
+        (err: ResponseInterface) => {
           this._user.activeComponent = ""
           this._r.navigateByUrl('welcome/login')
         }
       )
+    } else {
+      if (this._user.user.isLogin) {
+        this._user.activeComponent = "welcome"
+        this._carts.getOpenCartByUser().subscribe(
+          (res: ResponseInterface) => {
+            if (res.openCart.length > 0) {
+              this._carts.openCart = res.openCart[0]
+              this._carts.totalPrice(this._carts.openCart.id).subscribe(
+                (res: ResponseInterface) => {
+                  this._carts.totalCartPrice = res.totalCartPrice
+                },
+                (err: ResponseInterface) => {
+                  console.log("test1");
+                  this._user.activeComponent = ""
+                  this._r.navigateByUrl('welcome/login')
+                })
+            } else {
+              this._orders.lastOrderByUser().subscribe(
+                (res: ResponseInterface) => {
+                  if (res.lastOrder) {
+                    this._orders.lastOrder = res.lastOrder[0]
+                  }
+                },
+                (err: ResponseInterface) => {
+                  console.log("test2");
+                  this._user.activeComponent = ""
+                  this._r.navigateByUrl('welcome/login')
+                })
+            }
+          },
+          (err: ResponseInterface) => {
+            console.log("test3");
+            this._user.activeComponent = ""
+            this._r.navigateByUrl('welcome/login')
+          })
+      }
     }
-    this._carts.getOpenCartByUser().subscribe(
-      (res: ResponseInterface) => {
-        if (res.openCart.length > 0) {
-          this._carts.openCart = res.openCart[0]
-          this._carts.totalPrice(this._carts.openCart.id).subscribe(
-            (res: ResponseInterface) => {
-              this._carts.totalCartPrice = res.totalCartPrice
-            },
-            (err: ResponseInterface) => {
-              console.log(err);
-              this._user.activeComponent = ""
-              this._r.navigateByUrl('welcome/login')
-            })
-        } else {
-          this._orders.lastOrderByUser().subscribe(
-            (res: ResponseInterface) => {
-              if (res.lastOrder) {
-                this._orders.lastOrder = res.lastOrder[0]
-              }
-            },
-            (err: ResponseInterface) => {
-              console.log(err);
-              this._user.activeComponent = ""
-              this._r.navigateByUrl('welcome/login')
-            })
-        }
-      },
-      (err: ResponseInterface) => {
-        console.log(err);
-        this._user.activeComponent = ""
-        this._r.navigateByUrl('welcome/login')
-      })
   }
-
   public startShopping() {
     this._carts.getNewCart().subscribe(
       (res: ResponseInterface) => {

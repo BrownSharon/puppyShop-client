@@ -64,7 +64,7 @@ export class WelcomeComponent implements OnInit {
       } else if (this._user.activeComponent === "register2") {
         this._r.navigateByUrl('welcome/register2')
       } else {
-        this._r.navigateByUrl('welcome/login')
+        // this._user.user.isLogin? this._r.navigateByUrl('welcome/login'): this._r.navigateByUrl('welcome/welcome-msg')
       }
     }
   }
