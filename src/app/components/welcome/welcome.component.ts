@@ -22,7 +22,12 @@ export class WelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (sessionStorage.activeComponent) this._user.activeComponent = sessionStorage.activeComponent
+    // if (this._r.url == '/welcome/welcome-msg') this._user.activeComponent = 'welcome'
+    // if (this._r.url == '/welcome/register1') this._user.activeComponent = 'register1'
+    // if (this._r.url == '/welcome/register2') this._user.activeComponent = 'register2'
+    // if (this._r.url == '/welcome/login') this._user.activeComponent = ''
+
+    // if (sessionStorage.activeComponent) this._user.activeComponent = sessionStorage.activeComponent
     if (!this._user.user?.id) {
       this._user.checkTokens().subscribe(
         (res: ResponseInterface) => {
@@ -67,6 +72,13 @@ export class WelcomeComponent implements OnInit {
         // this._user.user.isLogin? this._r.navigateByUrl('welcome/login'): this._r.navigateByUrl('welcome/welcome-msg')
       }
     }
+  }
+
+  ngDoCheck() {
+    if (this._r.url == '/welcome/welcome-msg') this._user.activeComponent = 'welcome'
+    if (this._r.url == '/welcome/register1') this._user.activeComponent = 'register1'
+    if (this._r.url == '/welcome/register2') this._user.activeComponent = 'register2'
+    if (this._r.url == '/welcome/login') this._user.activeComponent = ''
   }
 
 }

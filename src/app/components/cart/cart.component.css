@@ -8,7 +8,7 @@
 }
 
 .searchContainer{
-   height: 12.5%;
+    height: 10vh;
     width: 100%;
     background-color: rgb(241, 234, 128);
     display: flex;
@@ -19,16 +19,21 @@
 
 h3{
     font-size: xx-large;
+    font-weight: 500;
+    margin: 6% 5%;
 }
 
 
 .cartItems{
-    height: 70%;
-    overflow-y: auto;
-    overflow-x:hidden;
+    height: 65vh;
+    width: 100%;
+    overflow-y:auto;
+    overflow-x: hidden;
+    
 }
 
 .action{
+    
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -50,4 +55,9 @@ h3{
 p{
     font-size: large;
     font-weight: 500;
+}
+
+app-search{
+    height: 9vh;
+    margin-top: 2%;
 }

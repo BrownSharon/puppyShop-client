@@ -81,43 +81,43 @@ export class UserService {
     this._r.navigateByUrl('welcome/login')
   }
 
-  public checkUser() {
-    if (localStorage.token) {
-      this.checkTokens().subscribe(
-        (res: ResponseInterface) => {
-          if (!res.err) {
-            this.user = res.user
-            if (this.user.isLogin)
-            // move to welcome component for regular user
-            if (this.user.role === 2) {
-              this.activeComponent = "welcome"
-              localStorage.activeComponent = "welcome"
-            } else {
-              // move to main page with admin product form component
-              this.activeComponent = "admin"
-              localStorage.activeComponent = "admin"
-              this._r.navigateByUrl('/main')
-            }
-          }
-        },
-        (err: ResponseInterface) => {
-          if (localStorage.activeComponent && localStorage.activeComponent !== "welcome" || "admin") {
-            this.activeComponent = localStorage.activeComponent
-          } else {
-            this.activeComponent = "login"
-            localStorage.activeComponent = "login"
-          }
-        }
-      )
-    } else {
-      if (localStorage.activeComponent && localStorage.activeComponent !== "welcome" || "admin") {
-        this.activeComponent = localStorage.activeComponent
-      } else {
-        this.activeComponent = "login"
-        localStorage.activeComponent = "login"
-      }
-    }
-  }
+  // public checkUser() {
+  //   if (localStorage.token) {
+  //     this.checkTokens().subscribe(
+  //       (res: ResponseInterface) => {
+  //         if (!res.err) {
+  //           this.user = res.user
+  //           if (this.user.isLogin)
+  //           // move to welcome component for regular user
+  //           if (this.user.role === 2) {
+  //             this.activeComponent = "welcome"
+  //             // localStorage.activeComponent = "welcome"
+  //           } else {
+  //             // move to main page with admin product form component
+  //             this.activeComponent = "admin"
+  //             // localStorage.activeComponent = "admin"
+  //             this._r.navigateByUrl('/main')
+  //           }
+  //         }
+  //       },
+  //       (err: ResponseInterface) => {
+  //         if (localStorage.activeComponent && localStorage.activeComponent !== "welcome" || "admin") {
+  //           this.activeComponent = localStorage.activeComponent
+  //         } else {
+  //           this.activeComponent = "login"
+  //           // localStorage.activeComponent = "login"
+  //         }
+  //       }
+  //     )
+  //   } else {
+  //     if (localStorage.activeComponent && localStorage.activeComponent !== "welcome" || "admin") {
+  //       this.activeComponent = localStorage.activeComponent
+  //     } else {
+  //       this.activeComponent = "login"
+  //       localStorage.activeComponent = "login"
+  //     }
+  //   }
+  // }
 }
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
@@ -15,13 +16,23 @@ export class ProductsComponent implements OnInit {
   public searchINP: string = ""
   public emptySearchError: boolean = false
   public roleName: string
+  public options: FormGroup
+  public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));  
+  public cartViewStatus: boolean = false
+  
+  
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
     public _user: UserService,
-    public _r: Router
-
-  ) { }
+    public _r: Router,
+    public fb: FormBuilder
+  ) {
+    this.options = this.fb.group({
+      fixed: false,
+      top: 0
+    });
+   }
 
   ngOnInit(): void {
 
@@ -106,4 +117,5 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+ 
 }

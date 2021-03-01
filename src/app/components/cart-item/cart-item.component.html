@@ -1,5 +1,4 @@
-
-<mat-card >
+<mat-card>
   <mat-card-header>
     <mat-card-title [innerHTML]="item.name | highlightSearch: _carts.Search"></mat-card-title>
   </mat-card-header>
@@ -8,9 +7,15 @@
     <mat-card-actions *ngIf="!_carts.cartStatus">
       <p>Quantity:</p>
       <div class="action">
-        <button mat-button (click)="increase()">+</button>
+        <button mat-button (click)="decrease()">
+          <mat-icon>remove_circle_outline
+          </mat-icon>
+        </button>
         <p>{{item.product_amount}}</p>
-        <button mat-button (click)="decrease()">-</button>
+        <button mat-button (click)="increase()">
+          <mat-icon>add_circle_outline
+          </mat-icon>
+        </button>
       </div>
       <button mat-stroked-button color="warn" (click)="editItemAmount()" [disabled]="!updateBTN">Update</button>
     </mat-card-actions>
@@ -20,6 +25,9 @@
   </mat-card-content>
   <img mat-card-image src="{{item.image}}" alt="{{item.name}}">
   <mat-card-actions>
-    <button mat-button (click)="deleteItem()">X</button>
+    <button *ngIf="!_carts.cartStatus" mat-button (click)="deleteItem()">
+      <mat-icon class="delete">delete_forever
+      </mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>

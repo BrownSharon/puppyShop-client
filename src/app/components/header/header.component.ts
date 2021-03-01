@@ -29,6 +29,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //  ngDoCheck(): void{
+  //   if (this._r.url === '/welcome/login') this._user.user.first_name = ""
+  // }
+
   public logOutUser() {
      
     const body = {}

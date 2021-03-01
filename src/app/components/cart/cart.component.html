@@ -1,7 +1,7 @@
 <div class="cart">
     <div class="searchContainer">
         <h3 *ngIf="!_carts.cartStatus">My Cart</h3>
-        <app-search (searched)="OnSearched($event)"></app-search>
+        <app-search *ngIf="_carts.cartStatus" (searched)="OnSearched($event)"></app-search>
     </div>
     <div class="cartItems">
         <app-cart-item *ngFor="let item of _carts.cartItemsArr" [item]="item"></app-cart-item>
@@ -12,7 +12,8 @@
             <button mat-stroked-button color="primary" *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0"
                 (click)="goToCheckout()">Checkout</button>
             <button mat-stroked-button color="warn" *ngIf="!_carts.cartStatus && _carts.cartItemsArr?.length > 0"
-                (click)="deleteAllItems()">Delete All Items</button>
+                (click)="deleteAllItems()">Delete All <mat-icon class="deleteAll">delete_sweep
+                </mat-icon></button>
 
             <button mat-stroked-button color="primary" *ngIf="_carts.cartStatus" (click)="backToShop()">Back to
                 shop</button>

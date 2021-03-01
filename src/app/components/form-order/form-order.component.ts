@@ -89,7 +89,6 @@ export class FormOrderComponent implements OnInit {
         this._carts.Search = ""
         this._products.productsItemsFilteredArr = []
         this._products.productsItemsArr = []
-        sessionStorage.orderStatus = "finish"
         this._r.navigateByUrl('success')
       },
       (err: ResponseInterface) => {
@@ -107,7 +106,6 @@ export class FormOrderComponent implements OnInit {
 
       },
       (err: ResponseInterface) => {
-        console.log(err);
         this._r.navigateByUrl('welcome/login')
 
       }

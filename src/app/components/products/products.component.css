@@ -10,10 +10,11 @@ nav{
     background-color: rgb(241, 234, 128);
     margin: 0%;
     padding: 0%;
+    height: 10vh;
 }
 
 .search{
-    margin-top: 1.5%;
+    margin-top: 1%;
     padding-left: 4%;
     width: auto;
     background-color: rgb(241, 234, 128);
@@ -68,3 +69,48 @@ p, a{
     text-align: center;
 
 }
+
+.example-container {
+    position: absolute;
+    top: 13vh;    
+    left: 0;
+    right: 0;
+    margin: 0%;
+    padding: 0%;
+  }
+  
+  .example-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%; 
+    margin: 0;
+    padding: 0;  
+  }
+
+  app-cart{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+mat-icon{
+    font-size: 35px;
+}
+
+.productList{
+    height: 75vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+app-product-item{
+    margin: 1%;
+    width: 15vw;
+    max-width: 300px;
+}
+  

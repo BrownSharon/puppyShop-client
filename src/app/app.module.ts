@@ -24,7 +24,7 @@ import { OrderComponent } from './components/order/order.component';
 import { SuccessComponent } from './components/success/success.component';
 import { FormOrderComponent } from './components/form-order/form-order.component';
 import { SearchPipe } from './pipes/searchPipe.pipe';
-
+import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button';
@@ -35,6 +35,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import {MatIconModule} from '@angular/material/icon';
 import { SearchComponent } from './components/search/search.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 
@@ -79,7 +80,8 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     MatNativeDateModule,
     MatMomentDateModule,
     MatTabsModule,
-    
+    MatSidenavModule,
+    MatIconModule
     
   ],
   providers: [

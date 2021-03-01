@@ -23,6 +23,8 @@ export class Register2Component implements OnInit {
     if (!this._user.register1Data){
       this._user.register1Data = JSON.parse(sessionStorage.register1Data)
     }
+    if (this._r.url == '/welcome/register2') this._user.activeComponent = 'register2'
+
     this.register2Form = this._fb.group({
       city: ["", [Validators.required]],
       street: ["", [Validators.required]],
@@ -60,7 +62,7 @@ export class Register2Component implements OnInit {
         
         // move to welcome component
         sessionStorage.removeItem("register1Data")
-        sessionStorage.removeItem("activeComponent")
+        // sessionStorage.removeItem("activeComponent")
         this._user.activeComponent="welcome"
         this._r.navigateByUrl('welcome/welcome-msg')
       },

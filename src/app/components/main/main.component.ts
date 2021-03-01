@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
@@ -11,11 +12,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MainComponent implements OnInit {
 
+  
+  
   constructor(
     public _carts: CartsService,
     public _user: UserService,
     public _r: Router,
-  ) { }
+    
+  ) {
+    
+   }
 
   ngOnInit(): void {
     if (!this._user.user?.id) {
@@ -57,4 +63,6 @@ export class MainComponent implements OnInit {
       }
     }
   }
+
+  
 }

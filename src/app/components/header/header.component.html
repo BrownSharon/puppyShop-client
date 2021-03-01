@@ -1,14 +1,18 @@
-<div class="logo">
+<div class="left">
     <div class="logoIMG"></div>
     <div class="title">
         <p class="shopName">Puppy Shop</p>
         <p class="welcome">Hello {{_user.user.first_name || "Guest"}}</p>
-        <button mat-button color="primary" *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</button>
+        
     </div>
+   
 </div>
-
-<div class="contactUS">
-    <h4><span>Contact Us:</span></h4>
-    <p><span>Phone:</span> *1234</p>
-    <p><span>email:</span> puppyShop@gmail.com</p>
+<div class="right">
+    <button mat-button color="primary" *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</button>
+    <div class="contactUS">
+        <h4><span>Contact Us:</span></h4>
+        <p><span>Phone:</span> *1234</p>
+        <p><span>email:</span> puppyShop@gmail.com</p>
+    </div>
+    
 </div>

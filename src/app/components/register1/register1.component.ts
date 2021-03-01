@@ -24,7 +24,8 @@ export class Register1Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._user.activeComponent= sessionStorage.activeComponent
+    // this._user.activeComponent= sessionStorage.activeComponent
+    if (this._r.url == '/welcome/register1') this._user.activeComponent = 'register1'
     
     this.register1Form = this._fb.group({
       israeliID: ["", [Validators.required, Validators.minLength(9), Validators.maxLength(9), israeliIdValidator]],
@@ -60,7 +61,7 @@ export class Register1Component implements OnInit {
         if (!res?.exists) {
           this._user.register1Data = { israeliID, email, password }
           sessionStorage.register1Data = JSON.stringify(this._user.register1Data)
-          sessionStorage.activeComponent = "register2"
+          // sessionStorage.activeComponent = "register2"
           this._user.activeComponent = "register2"
           this._r.navigateByUrl('welcome/register2')
         }

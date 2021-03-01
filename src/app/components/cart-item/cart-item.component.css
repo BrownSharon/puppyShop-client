@@ -34,6 +34,7 @@ mat-card-actions{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15%;
 }
 
 img{
@@ -45,4 +46,14 @@ img{
 mark {
     background-color: #ecee82;
     font-weight: bold;
+  }
+
+  p{
+      text-align: center;
+      font-size: larger;
+      font-weight: 500;
+  }
+
+  .delete{
+      font-size: xx-large;
   }

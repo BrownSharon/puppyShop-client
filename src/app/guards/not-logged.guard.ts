@@ -32,13 +32,13 @@ export class NotLoggedGuard implements CanActivateChild {
           }
         },
         (err: ResponseInterface) => {
-          if (this._user.user.isLogin === false) {
+          if (!this._user.user.isLogin) {
             return true
           }
         }
       )
     } else {
-      if (this._user.user.isLogin == false) {
+      if (!this._user.user.isLogin) {
         return true
       } else {
         this._user.activeComponent = "welcome"

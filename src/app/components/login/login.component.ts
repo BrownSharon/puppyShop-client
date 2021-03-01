@@ -21,12 +21,17 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this._r.url == '/welcome/login') this._user.activeComponent = ''
+    if (this._user.user.isLogin) this._r.navigateByUrl('welcome/welcome-mgs')
+
     
     this.loginForm = this._fb.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(4)]],
     })
   }
+
+ 
 
   public handleSubmit() {
 
@@ -62,7 +67,7 @@ export class LoginComponent implements OnInit {
   }
 
   public goToRegistration(){
-    sessionStorage.activeComponent = "register1"
+    // sessionStorage.activeComponent = "register1"
     this._user.activeComponent="register1"
     this._r.navigateByUrl('welcome/register1')
   }

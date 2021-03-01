@@ -1,5 +1,5 @@
 mat-card{
-    height: 300px;
+    height: 28vh;
     width: 100%;
     max-width: 20vw;
     display: flex;
@@ -9,7 +9,7 @@ mat-card{
 }
 
 img.mat-card-image{
-    height: 50%;
+    height: 40%;
     width: 75%;
   
 }
@@ -17,4 +17,10 @@ mat-card-actions{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+p{
+    text-align: center;
+    font-size: larger;
+    font-weight: 500;
 }

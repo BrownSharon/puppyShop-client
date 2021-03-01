@@ -1,5 +1,9 @@
+
 <form [formGroup]="orderForm" (ngSubmit)="handleSubmit()">
-    <h2>Shipping Details</h2>
+    <div class="headerContainer">
+        <h2>My order</h2>   
+    </div>
+    <h3>Shipping Details</h3>
 
     <mat-form-field appearance="outline">
         <mat-label>Select City</mat-label>
@@ -27,7 +31,7 @@
         <mat-datepicker #dp3 disabled="false"></mat-datepicker>
     </mat-form-field>
 
-    <h2>Payments</h2>
+    <h3>Payments</h3>
     <mat-form-field appearance="outline">
         <mat-label>Credit Card</mat-label>
         <input matInput type="text" placeholder="Enter your last name" formControlName="credit_card" required />
