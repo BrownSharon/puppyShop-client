@@ -26,6 +26,7 @@ export class WelcomeComponent implements OnInit {
     // if (this._r.url == '/welcome/register1') this._user.activeComponent = 'register1'
     // if (this._r.url == '/welcome/register2') this._user.activeComponent = 'register2'
     // if (this._r.url == '/welcome/login') this._user.activeComponent = ''
+    console.log(this._user.activeComponent);
 
     // if (sessionStorage.activeComponent) this._user.activeComponent = sessionStorage.activeComponent
     if (!this._user.user?.id) {

@@ -32,8 +32,6 @@ const routes: Routes = [
       },
       { path: 'order', component: OrderComponent, canActivateChild: [LoggedGuard,UserRoleGuard], 
       },
-      { path: 'success', component: SuccessComponent, canActivateChild: [LoggedGuard, UserRoleGuard], 
-      },
       { path: "", pathMatch: "full", redirectTo: "welcome" },
       { path: '**', component: WelcomeComponent }
     ];

@@ -1,35 +1,38 @@
 <form [formGroup]="_products.productForm"  #formDirective="ngForm" (ngSubmit)="handleSubmit(_products.productForm, formDirective)">
-    <h2>{{_products.formStatus == "add"? "Add": "Edit"}} Product</h2>
+    <div class="titleContainer">
+        <h2>{{_products.formStatus == "add"? "Add": "Edit"}} Product</h2>
+    </div>
+    <div class="formContainer">
+        <mat-form-field appearance="outline">
+            <mat-label>Product name</mat-label>
+            <input matInput placeholder="Enter product name" formControlName="productName" required/>
+            <mat-hint>Enter product name</mat-hint>
+            <mat-error *ngIf="_products.productForm.controls.productName.errors?.required">Product name must be provided</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Product name</mat-label>
-        <input matInput placeholder="Enter product name" formControlName="productName" required/>
-        <mat-hint>Enter product name</mat-hint>
-        <mat-error *ngIf="_products.productForm.controls.productName.errors?.required">Product name must be provided</mat-error>
-    </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Product category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option selected disabled>--Select Category--</mat-option>
+                <mat-option *ngFor="let cat of _products.productsCategoriesArr" [value]='cat.id'>{{cat.name}}</mat-option>
+            </mat-select>
+            <mat-hint>Enter category of product</mat-hint>
+        </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Product category</mat-label>
-        <mat-select formControlName="category">
-            <mat-option selected disabled>--Select Category--</mat-option>
-            <mat-option *ngFor="let cat of _products.productsCategoriesArr" [value]='cat.id'>{{cat.name}}</mat-option>
-        </mat-select>
-        <mat-hint>Enter category of product</mat-hint>
-    </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Product price</mat-label>
+            <input matInput type="number" placeholder="Enter product price" formControlName="price" required />
+            <mat-hint>Enter price for product</mat-hint>
+            <mat-error *ngIf="_products.productForm.controls.price.errors?.required">Product price must be provided</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Product price</mat-label>
-        <input matInput type="number" placeholder="Enter product price" formControlName="price" required />
-        <mat-hint>Enter price for product</mat-hint>
-        <mat-error *ngIf="_products.productForm.controls.price.errors?.required">Product price must be provided</mat-error>
-    </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Product image</mat-label>
+            <input matInput placeholder="Enter product image" formControlName="image" required/>
+            <mat-hint>Enter product image reference</mat-hint>
+            <mat-error *ngIf="_products.productForm.controls.image.errors?.required">Product image must be provided</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Product image</mat-label>
-        <input matInput placeholder="Enter product image" formControlName="image" required/>
-        <mat-hint>Enter product image reference</mat-hint>
-        <mat-error *ngIf="_products.productForm.controls.image.errors?.required">Product image must be provided</mat-error>
-    </mat-form-field>
-
-    <button mat-stroked-button color="primary" type="submit" [disabled]="!_products.productForm.valid">{{_products.formStatus == "add"? "Submit": "Save changes"}}</button>
+        <button mat-stroked-button color="primary" type="submit" [disabled]="!_products.productForm.valid">{{_products.formStatus == "add"? "Submit": "Save changes"}}</button>
+    </div>
 </form>

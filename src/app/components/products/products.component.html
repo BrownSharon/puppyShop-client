@@ -11,7 +11,7 @@
     
         <mat-sidenav-content [formGroup]="options">
             <nav>
-                <p><button mat-button (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus">
+                <p *ngIf='_user.user.role === 2'><button mat-button (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus">
                     <mat-icon *ngIf='!cartViewStatus'>keyboard_arrow_left</mat-icon> 
                     <mat-icon >shopping_cart</mat-icon> 
                     <mat-icon *ngIf='cartViewStatus'>keyboard_arrow_right</mat-icon>  

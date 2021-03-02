@@ -81,7 +81,6 @@ export class MsgWelcomeComponent implements OnInit {
                   this._carts.totalCartPrice = res.totalCartPrice
                 },
                 (err: ResponseInterface) => {
-                  console.log("test1");
                   this._user.activeComponent = ""
                   this._r.navigateByUrl('welcome/login')
                 })
@@ -93,14 +92,12 @@ export class MsgWelcomeComponent implements OnInit {
                   }
                 },
                 (err: ResponseInterface) => {
-                  console.log("test2");
                   this._user.activeComponent = ""
                   this._r.navigateByUrl('welcome/login')
                 })
             }
           },
           (err: ResponseInterface) => {
-            console.log("test3");
             this._user.activeComponent = ""
             this._r.navigateByUrl('welcome/login')
           })

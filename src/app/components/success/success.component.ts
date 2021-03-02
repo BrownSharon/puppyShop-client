@@ -23,6 +23,7 @@ export class SuccessComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     if (!this._user.user?.id) {
       this._user.checkTokens().subscribe(
         (res: ResponseInterface) => {
@@ -40,8 +41,8 @@ export class SuccessComponent implements OnInit {
                   }
                 )
               } else {
-                sessionStorage.activeComponent = "admin"
-                this._user.activeComponent = "admin"
+                // sessionStorage.activeComponent = "admin"
+                // this._user.activeComponent = "admin"
                 this._r.navigateByUrl('main/admin')
               }
             },
@@ -85,7 +86,6 @@ export class SuccessComponent implements OnInit {
     }
 
   public goToWelcome() {
-    sessionStorage.removeItem('orderStatus')
     this._r.navigateByUrl('welcome/welcome-msg')
   }
 

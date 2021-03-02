@@ -89,7 +89,7 @@ export class FormOrderComponent implements OnInit {
         this._carts.Search = ""
         this._products.productsItemsFilteredArr = []
         this._products.productsItemsArr = []
-        this._r.navigateByUrl('success')
+        this._user.activeComponent='success'
       },
       (err: ResponseInterface) => {
         console.log(err);
