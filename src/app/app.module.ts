@@ -42,7 +42,6 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     Register1Component,
     Register2Component,
     AboutComponent,
@@ -61,6 +60,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     SearchPipe,
     SearchComponent,
     ProductFormComponent,
+    LoginComponent
     
   ],
   imports: [

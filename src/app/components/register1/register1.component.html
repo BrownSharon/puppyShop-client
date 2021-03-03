@@ -6,7 +6,7 @@
         <mat-form-field appearance="outline">
             <mat-label>ID</mat-label>
             <input matInput placeholder="Enter your ID" formControlName="israeliID" required />
-            <mat-hint>Enter valid id - 9 digits zero padded...</mat-hint>
+            <mat-hint>Enter valid id - 9 digits</mat-hint>
             <mat-error *ngIf="register1Form.controls.israeliID.dirty && register1Form.controls.israeliID.errors?.required">ID must be provided</mat-error>
             <mat-error *ngIf="register1Form.controls.israeliID.dirty && register1Form.controls.israeliID.errors?.minlength">Too short...</mat-error>
             <mat-error *ngIf="register1Form.controls.israeliID.dirty && register1Form.controls.israeliID.errors?.maxlength">Too longe...</mat-error>
@@ -26,9 +26,9 @@
             <input matInput type="password" placeholder="Enter your password" formControlName="password"
             (change)="onPasswordInput()"
              required />
-            <mat-hint>Enter password with at least 4 characters</mat-hint>
+            <mat-hint>Chose password 4 character or more</mat-hint>
             <mat-error *ngIf="register1Form.controls.password.errors?.required">Password must be provided</mat-error>
-            <mat-error *ngIf="register1Form.controls.password.errors?.minlength">Password must at least 4 characters
+            <mat-error *ngIf="register1Form.controls.password.errors?.minlength">Password be at least 4 characters
             </mat-error>
         </mat-form-field>
 
@@ -37,7 +37,7 @@
             <input matInput type="password" placeholder="Enter your password" formControlName="passwordConfirm"
             (change)="onPasswordInput()"
                 required />
-            <mat-hint>Enter the same password again to confirm it</mat-hint>
+            <mat-hint>Enter the same password again...</mat-hint>
             <mat-error *ngIf="register1Form.controls.passwordConfirm.errors?.required">Password confirm must be provided</mat-error>
             <mat-error *ngIf="passwordConfirm.invalid && !passwordConfirm.hasError('required')">Confirm password doesn't match the password, try again
             </mat-error>

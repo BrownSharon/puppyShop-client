@@ -76,3 +76,8 @@ span{
     font-weight: 500;
 }
 
+button{
+    text-decoration: underline;
+    font-size: large;
+}
+

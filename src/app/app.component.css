@@ -1,8 +1,6 @@
 app-header{
     width: 100vw;
     height: 15vh;
-    min-height: 90px;
-    max-height: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,5 +16,3 @@ p, a{
 span{
     font-weight: 600;
 }
-
-

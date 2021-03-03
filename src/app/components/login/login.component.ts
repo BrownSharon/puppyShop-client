@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  public loginForm: FormGroup
+  public login_Form: FormGroup
 
 
   constructor(
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     if (this._user.user.isLogin) this._r.navigateByUrl('welcome/welcome-mgs')
 
     
-    this.loginForm = this._fb.group({
+    this.login_Form = this._fb.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(4)]],
     })
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   public handleSubmit() {
 
-    this._user.login(this.loginForm.value).subscribe(
+    this._user.login(this.login_Form.value).subscribe(
       (res: ResponseInterface) => {
 
         // set the token in the local storage

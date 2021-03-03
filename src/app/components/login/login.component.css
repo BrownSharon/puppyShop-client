@@ -1,20 +1,34 @@
 form{
     width: 100%;
-    height: 60%;
+    height: 100%;
     display:flex;
     flex-direction: column;
     align-items:center;
-    justify-content: space-evenly;
-    border: 4px solid rgba(248, 240, 166, 0.609);
-    border-radius: 5%;
+    justify-content: center; 
     background-color: rgba(248, 240, 166, 0.609);
     padding: 5%;
+    margin-bottom: 2%;
 }
 
-p, a{
+p, button{
     font-size: large;
     text-align: center;
-
 }
 
+h2{
+    font-size: x-large;
+    text-align: center;
+}
 
+button{
+    margin-top: 7%;
+}
+
+mat-form-field{
+    width: 70%;
+    
+}
+
+input:-internal-autofill-selected {
+    background-color: rgba(248, 240, 166, 0.609) !important;
+}
