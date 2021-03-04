@@ -9,7 +9,7 @@ form{
 }
 
 .occupied {
-    background: orange;
+    background: rgb(17, 102, 6);
     border-radius: 100%;
     
   }
@@ -34,4 +34,13 @@ h3{
     font-size: x-large;
     font-weight: 400;
    
+}
+
+button{
+    margin-bottom: 3%;
+}
+
+input:-webkit-autofill
+{
+    transition: 4000s; 
 }

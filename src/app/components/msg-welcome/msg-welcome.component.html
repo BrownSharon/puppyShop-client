@@ -3,17 +3,17 @@
             <p><span>You have open cart</span></p>
             <p><span>From date:</span> {{_carts.openCart.create_date | date: 'dd/MM/yyyy'}}</p>
             <p><span>Total price:</span> {{_carts.totalCartPrice || 0}}$</p>
-            <button mat-button color="warn" (click)="continueShopping()">Continue shopping</button>
+            <button mat-button color="accent" (click)="continueShopping()">Continue shopping</button>
         </div>
         <div class="msg" *ngIf="_orders.lastOrder?.id  && !_carts.openCart?.id">
             <p><span>Your last order:</span></p>
             <p><span>From:</span> {{_orders.lastOrder.closing_date | date: 'dd/MM/yyyy HH:mm'}}</p>
             <p><span>Total price:</span> {{_orders.lastOrder.order_total_price || 0}}$</p>
-            <button mat-button color="warn" (click)="startShopping()">Start shopping</button>
+            <button mat-button color="accent" (click)="startShopping()">Start shopping</button>
         </div>
         <div class="msg" *ngIf="!_carts.openCart?.id && !_orders.lastOrder?.id">
             <p><span>Welcome to Puppy Shop</span></p>
-            <button mat-button color="warn" (click)="startShopping()">Start shopping</button>
+            <button mat-button color="accent" (click)="startShopping()">Start shopping</button>
         </div>
 
 </div>

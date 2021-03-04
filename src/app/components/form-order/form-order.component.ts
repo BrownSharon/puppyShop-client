@@ -110,11 +110,10 @@ export class FormOrderComponent implements OnInit {
 
       }
     )
-
+    
   }
 
   public fillCityValue() {
-    console.log(this._user.user.city);
     this.orderForm.patchValue({ city: this._user.user.city })
   }
 

@@ -5,6 +5,7 @@ import { CartsService } from 'src/app/services/carts.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UserService } from 'src/app/services/user.service';
 import *  as fileServer from 'file-saver'
+import CartInterface from 'src/app/interfaces/cart.interface';
 
 @Component({
   selector: 'app-success',
@@ -86,6 +87,7 @@ export class SuccessComponent implements OnInit {
     }
 
   public goToWelcome() {
+    
     this._r.navigateByUrl('welcome/welcome-msg')
   }
 

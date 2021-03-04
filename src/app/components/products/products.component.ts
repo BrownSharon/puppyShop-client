@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +20,6 @@ export class ProductsComponent implements OnInit {
   public options: FormGroup
   public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));  
   public cartViewStatus: boolean = false
-  
   
   constructor(
     public _products: ProductsService,
@@ -103,9 +103,13 @@ export class ProductsComponent implements OnInit {
 
   public getCategoryItems(id: number) {
     this.emptySearchError = false
+    this._products.productsItemsArr.map(p => document.getElementById(`btn${p.category_id}`).style.color="")
     this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p => p.category_id === id)
     if (this._products.productsItemsFilteredArr.length === 0) {
       this.emptySearchError = true
+    }else{
+      
+      document.getElementById(`btn${id}`).style.color="#d35806"
     }
   }
 

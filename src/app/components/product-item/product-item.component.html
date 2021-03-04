@@ -18,7 +18,7 @@
       <mat-icon>add_circle_outline
       </mat-icon>
     </button>
-    <button mat-stroked-button color="warn" [disabled]="!btnStatus"
+    <button mat-stroked-button color="accent" [disabled]="!btnStatus"
       (click)="addProductToCart()">{{(_carts.cartItemsArr.length === 0 || _carts.deletedItemFromCart?.id === product.id)
       ? "Add": btnName}}</button>
   </mat-card-actions>

@@ -7,9 +7,8 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Select City</mat-label>
-        <mat-select formControlName="city">
-            <mat-option selected disabled (dblclick)="fillCityValue()">--Select city--</mat-option>
-            <mat-option *ngFor="let city of _user.citiesArr" [value]='city.name'>{{city.name}}</mat-option>
+        <mat-select formControlName="city" required>
+            <mat-option *ngFor="let city of _user.citiesArr" [value]='city.name' (dblclick)="fillCityValue()">{{city.name}}</mat-option>
         </mat-select>
         <mat-hint>Enter your city address</mat-hint>
         <mat-error *ngIf="orderForm.controls.city.errors?.required">City must be chosen</mat-error>
@@ -26,9 +25,11 @@
     <mat-form-field appearance="outline">
         <mat-label>Shipping Date</mat-label>
         <input matInput [min]="minDate" [matDatepicker]="dp3" [matDatepickerFilter]="occupiedDates"
-            formControlName="shipping_date" />
+            formControlName="shipping_date" required disabled />
         <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
         <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        <mat-hint>Chose date for delivery</mat-hint>
+    
     </mat-form-field>
 
     <h3>Payments</h3>
@@ -42,5 +43,5 @@
         <mat-error *ngIf="orderForm.controls.credit_card.errors?.pattern">Only digits please</mat-error>
     </mat-form-field>
 
-    <button mat-stroked-button color="warn" type="submit" [disabled]="!orderForm.valid">Finish</button>
+    <button mat-stroked-button color="primary" type="submit" [disabled]="!orderForm.valid">Finish</button>
 </form>

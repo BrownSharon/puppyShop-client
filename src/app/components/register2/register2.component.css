@@ -34,3 +34,8 @@ h2{
 mat-form-field{
     width: 70%;
 }
+
+input:-webkit-autofill
+{
+    transition: 4000s; 
+}

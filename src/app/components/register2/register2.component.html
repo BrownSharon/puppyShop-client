@@ -3,7 +3,7 @@
         <p>All ready a costumer? <a mat-button color="warn" href="http://localhost:4200/welcome/login" (click)="_user.goToLogin()">Log in</a> </p>
         <mat-form-field appearance="outline">
             <mat-label>Select City</mat-label>
-            <mat-select formControlName="city">
+            <mat-select formControlName="city" required>
                 <mat-option selected disabled>--Select city--</mat-option>
                 <mat-option *ngFor="let city of _user.citiesArr" [value]='city.name'>{{city.name}}</mat-option>
             </mat-select>
@@ -33,7 +33,7 @@
             <mat-error *ngIf="register2Form.controls.last_name.errors?.required">Last name must be provided</mat-error>
         </mat-form-field>
 
-        <button mat-stroked-button color="warn" type="submit" [disabled]="!register2Form.valid">Finish</button>
+        <button mat-stroked-button color="primary" type="submit" [disabled]="!register2Form.valid">Finish</button>
     </form>
 
 
