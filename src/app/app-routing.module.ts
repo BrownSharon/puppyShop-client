@@ -8,7 +8,6 @@ import { OrderComponent } from './components/order/order.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { Register1Component } from './components/register1/register1.component';
 import { Register2Component } from './components/register2/register2.component';
-import { SuccessComponent } from './components/success/success.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
 import { LoggedGuard } from './guards/logged.guard';
@@ -37,9 +36,7 @@ const routes: Routes = [
     ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes
-    // ,{onSameUrlNavigation: 'reload'}
-    )],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

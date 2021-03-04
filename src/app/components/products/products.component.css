@@ -15,6 +15,7 @@ nav{
 
 .search{
     margin-top: 1%;
+    height: 75%;
     padding-left: 4%;
     width: auto;
     background-color: rgb(241, 234, 128);
@@ -64,7 +65,7 @@ h3, h4{
     color: rgb(235, 55, 23);
 }
 
-p, a{
+p, a, button{
     font-size: large;
     text-align: center;
 

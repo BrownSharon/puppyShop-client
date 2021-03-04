@@ -29,6 +29,19 @@ mat-form-field{
     
 }
 
-input:-internal-autofill-selected {
-    background-color: rgba(248, 240, 166, 0.609) !important;
+input:-webkit-autofill
+{
+    -webkit-box-shadow: 0 0 0 30px rgba(248, 240, 166, 0.609) inset !important;
+    transition: 4000s; 
 }
+
+
+
+
+
+
+
+
+  
+
+ 
