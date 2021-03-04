@@ -1,49 +1,52 @@
-<div class="products">
-    <mat-sidenav-container class="example-container">
-        <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
-                     [fixedInViewport]="options.value.fixed" 
-                     >
-                     <div class="main" [ngSwitch]="_user.activeComponent">
-                        <app-product-form *ngSwitchCase="'admin'"></app-product-form>
-                        <app-cart *ngSwitchDefault></app-cart>
-                    </div>
-        </mat-sidenav>
-    
-        <mat-sidenav-content [formGroup]="options">
-            <nav>
-                <p *ngIf='_user.user.role === 2'><button mat-button (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus">
-                    <mat-icon *ngIf='!cartViewStatus'>keyboard_arrow_left</mat-icon> 
-                    <mat-icon >shopping_cart</mat-icon> 
-                    <mat-icon *ngIf='cartViewStatus'>keyboard_arrow_right</mat-icon>  
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" closed [fixedInViewport]="options.value.fixed">
+        <div class="main" [ngSwitch]="_user.activeComponent">
+            <app-product-form *ngSwitchCase="'admin'"></app-product-form>
+            <app-cart *ngSwitchDefault></app-cart>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content [formGroup]="options">
+        <nav>
+            <p *ngIf='_user.user.role === 2'><button mat-button
+                    (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus">
+                    <mat-icon *ngIf='!cartViewStatus'>keyboard_arrow_left</mat-icon>
+                    <mat-icon>shopping_cart</mat-icon>
+                    <mat-icon *ngIf='cartViewStatus'>keyboard_arrow_right</mat-icon>
 
                 </button></p>
-                <mat-form-field appearance="outline" class="search">
-                    <mat-label>Search</mat-label>
-                    <input matInput type="search" placeholder="Enter product name"
-                        (input)="searchForProduct($event.target.value)" />
-                    <span class="material-icons" matSuffix>
-                        search
-                    </span>
-                </mat-form-field>
-                <button mat-button *ngFor="let category of _products.productsCategoriesArr" id="btn{{category.id}}" (click)="getCategoryItems(category.id)" routerLinkActive="activebutton" routerLink="/main/{{roleName}}">{{category.name}}</button>
-            </nav>
-        
-            <div class="productList" *ngIf="!emptySearchError">
-                <app-product-item *ngFor="let product of _products.productsItemsFilteredArr" [product]="product">
-                </app-product-item>
-            </div>
-            <div class="emptyProduct" *ngIf="emptySearchError">
-                    <h3>
-                        We haven't got product that matching your search
-                    </h3>
-                    <h4>
-                        Try something else
-                    </h4>
-            </div>
-            
-        </mat-sidenav-content>
-        
-      </mat-sidenav-container>
-    
-    
-</div>
+
+            <p *ngIf='_user.user.role === 1'><button mat-button
+                    (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus">
+                    <mat-icon *ngIf='cartViewStatus'>keyboard_arrow_left</mat-icon>
+                    <mat-icon *ngIf='!cartViewStatus'>add</mat-icon>
+                    
+                </button></p>
+            <mat-form-field appearance="outline" class="search">
+                <mat-label>Search</mat-label>
+                <input matInput type="search" placeholder="Enter product name"
+                    (input)="searchForProduct($event.target.value)" />
+                <span class="material-icons" matSuffix>
+                    search
+                </span>
+            </mat-form-field>
+            <button mat-button *ngFor="let category of _products.productsCategoriesArr" id="btn{{category.id}}"
+                (click)="getCategoryItems(category.id)">{{category.name}}</button>
+        </nav>
+
+        <div class="productList" *ngIf="!emptySearchError">
+            <app-product-item *ngFor="let product of _products.productsItemsFilteredArr" [product]="product">
+            </app-product-item>
+        </div>
+        <div class="emptyProduct" *ngIf="emptySearchError">
+            <h3>
+                We haven't got product that matching your search
+            </h3>
+            <h4>
+                Try something else
+            </h4>
+        </div>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

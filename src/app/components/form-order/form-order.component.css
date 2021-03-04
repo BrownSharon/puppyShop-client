@@ -5,6 +5,7 @@ form{
     align-items: center;
     height: 85vh;
     width: 100%;
+    
 
 }
 
@@ -43,4 +44,9 @@ button{
 input:-webkit-autofill
 {
     transition: 4000s; 
+}
+
+mat-form-field{
+    width: 20%;
+    
 }

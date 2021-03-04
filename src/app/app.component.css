@@ -16,3 +16,11 @@ p, a{
 span{
     font-weight: 600;
 }
+
+app-main app-order app-welcome{
+    width: 100vw;
+    height: 85vh;
+    position: fixed;
+    top: 15vh;
+    left: 0;
+}
