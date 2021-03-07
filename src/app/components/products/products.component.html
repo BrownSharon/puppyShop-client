@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" closed [fixedInViewport]="options.value.fixed">
+    <mat-sidenav #sidenav mode="side" opened [fixedInViewport]="options.value.fixed">
         <div class="main" [ngSwitch]="_user.activeComponent">
             <app-product-form *ngSwitchCase="'admin'"></app-product-form>
             <app-cart *ngSwitchDefault></app-cart>
@@ -16,12 +16,12 @@
 
                 </button></p>
 
-            <p *ngIf='_user.user.role === 1'><button mat-button
+            <!-- <p *ngIf='_user.user.role === 1'><button mat-button
                     (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus">
                     <mat-icon *ngIf='cartViewStatus'>keyboard_arrow_left</mat-icon>
                     <mat-icon *ngIf='!cartViewStatus'>add</mat-icon>
                     
-                </button></p>
+                </button></p> -->
             <mat-form-field appearance="outline" class="search">
                 <mat-label>Search</mat-label>
                 <input matInput type="search" placeholder="Enter product name"

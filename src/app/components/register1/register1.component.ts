@@ -67,6 +67,8 @@ export class Register1Component implements OnInit {
         }
       },
       (err: ResponseInterface) => {
+        console.log(err);
+        
         this.serverError = err.error
       }
     )
