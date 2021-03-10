@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { now } from 'moment';
 import CartInterface from 'src/app/interfaces/cart.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { UserService } from 'src/app/services/user.service';
+import creditCardValidator from 'src/app/validators/creditCard.validator';
 
 @Component({
   selector: 'app-form-order',
@@ -17,11 +16,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class FormOrderComponent implements OnInit {
 
+
   public orderForm: FormGroup
 
   public DatesToDisable: any[] = []
   public minDate: Date = new Date
-  
+  public card_type :string = ""
   constructor(
     public _user: UserService,
     public _carts: CartsService,
@@ -39,7 +39,7 @@ export class FormOrderComponent implements OnInit {
       city: ["", [Validators.required]],
       street: ["", [Validators.required]],
       shipping_date: ["", [Validators.required]],
-      credit_card: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]\d*$/)]],
+      credit_card: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(19), creditCardValidator]],
     })
 
     this._user.getCities().subscribe(
@@ -74,6 +74,7 @@ export class FormOrderComponent implements OnInit {
     const closing_date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
     const dd = new Date(this.orderForm.value.shipping_date)
     const delivery_date = `${dd.getFullYear()}-${dd.getMonth()+1}-${dd.getDate()}`
+    const credit_card = this.orderForm.value.credit_card.slice(12,16)
     
     const orderBody = {
       user_id: this._user.user.id,
@@ -83,7 +84,7 @@ export class FormOrderComponent implements OnInit {
       street: this.orderForm.value.street,
       delivery_date: delivery_date,
       closing_date: closing_date,
-      credit_card: this.orderForm.value.credit_card
+      credit_card: credit_card
     }
 
     this._orders.addOrder(orderBody).subscribe(

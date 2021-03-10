@@ -35,13 +35,13 @@
     <h3>Payments</h3>
     <mat-form-field appearance="outline">
         <mat-label>Credit Card</mat-label>
-        <input matInput type="text" placeholder="Enter your last name" formControlName="credit_card" required />
-        <mat-hint>Enter last 4 digits of credit card number</mat-hint>
+        <input matInput type="tel"  #ccNumber placeholder="Enter your last name" formControlName="credit_card" required />
+        <mat-hint>Enter 16 digits of Visa/Mastercard credit card</mat-hint>
+        
         <mat-error *ngIf="orderForm.controls.credit_card.errors?.minlength">Too short...</mat-error>
         <mat-error *ngIf="orderForm.controls.credit_card.errors?.maxlength">Too longe...</mat-error>
         <mat-error *ngIf="orderForm.controls.credit_card.errors?.required">Credit card must be provided</mat-error>
-        <mat-error *ngIf="orderForm.controls.credit_card.errors?.pattern">Only digits please</mat-error>
+        <mat-error *ngIf="orderForm.controls.credit_card.errors?.ccValidation">This is not a valid Visa/Mastercard number</mat-error>
     </mat-form-field>
-
     <button mat-stroked-button color="primary" type="submit" [disabled]="!orderForm.valid">Finish</button>
 </form>

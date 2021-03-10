@@ -17,7 +17,8 @@ export class OrdersService {
   public date: Date
   public DatesToDisable: any
 
-
+  public credit_card_type: string = ""
+  public credit_card_valid: boolean
   constructor(
     private http: HttpClient,
     public _r: Router
@@ -80,4 +81,5 @@ export class OrdersService {
     })
   }
 
+  
 }
