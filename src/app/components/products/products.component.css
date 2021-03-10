@@ -105,3 +105,16 @@ mat-icon{
     font-size: 35px;
 }
   
+.cartToggle{
+    width: 10vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    text-align: center;
+
+}
+
+.numberCartItems{
+    margin-left: 5%;
+}
