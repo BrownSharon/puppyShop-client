@@ -42,3 +42,15 @@ p{
     margin-right: 3%; 
 }
 
+.openApiLink{
+    font-size: large;
+    margin-top: 1%;
+    margin-left:35%;
+   
+}
+a{
+    font-size: large;
+    margin-top: 1%;
+    text-decoration: underline;  
+}
+

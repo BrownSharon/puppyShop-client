@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
-import { Observable } from 'rxjs';
 import CityInterface from '../interfaces/city.interface';
-import ResponseInterface from '../interfaces/response.interface';
 import UserInterface from '../interfaces/user.interface';
 
 @Injectable({
@@ -13,7 +11,8 @@ import UserInterface from '../interfaces/user.interface';
 
 export class UserService {
 
-  // state
+  public path:string = 'http://localhost:10778/'
+  
   public user: UserInterface = { isLogin: false }
   public username: string = "Guest"
   public activeComponent: string = "login";
@@ -28,19 +27,19 @@ export class UserService {
   ) { }
 
   public register(body: object) {
-    return this.http.post('http://localhost:10778/users', body, {
+    return this.http.post(`${this.path}users`, body, {
       headers: { 'Content-Type': 'application/json' }
     })
   }
 
   public login(body: object) {
-    return this.http.post('http://localhost:10778/users/login', body, {
+    return this.http.post(`${this.path}users/login`, body, {
       headers: { 'Content-Type': 'application/json' }
     })
   }
 
   public checkTokens() {
-    return this.http.get('http://localhost:10778/users/check', {
+    return this.http.get(`${this.path}users/check`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -50,7 +49,7 @@ export class UserService {
   }
 
   public logout(body: object) {
-    return this.http.put('http://localhost:10778/users/logout', body, {
+    return this.http.put(`${this.path}users/logout`, body, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -59,6 +58,11 @@ export class UserService {
     })
   }
 
+  public getCities() {
+    return this.http.get(`${this.path}users/cities`)
+  }
+  
+  // front end functions
   public decodeToken(token: string): any {
     try {
       return jwt_decode(token);
@@ -66,10 +70,6 @@ export class UserService {
     catch (err) {
       return null;
     }
-  }
-
-  public getCities() {
-    return this.http.get(`http://localhost:10778/users/cities`)
   }
 
   public goToLogin(){
@@ -84,43 +84,7 @@ export class UserService {
     this.serverErrorMsg = ""
   }
 
-  // public checkUser() {
-  //   if (localStorage.token) {
-  //     this.checkTokens().subscribe(
-  //       (res: ResponseInterface) => {
-  //         if (!res.err) {
-  //           this.user = res.user
-  //           if (this.user.isLogin)
-  //           // move to welcome component for regular user
-  //           if (this.user.role === 2) {
-  //             this.activeComponent = "welcome"
-  //             // localStorage.activeComponent = "welcome"
-  //           } else {
-  //             // move to main page with admin product form component
-  //             this.activeComponent = "admin"
-  //             // localStorage.activeComponent = "admin"
-  //             this._r.navigateByUrl('/main')
-  //           }
-  //         }
-  //       },
-  //       (err: ResponseInterface) => {
-  //         if (localStorage.activeComponent && localStorage.activeComponent !== "welcome" || "admin") {
-  //           this.activeComponent = localStorage.activeComponent
-  //         } else {
-  //           this.activeComponent = "login"
-  //           // localStorage.activeComponent = "login"
-  //         }
-  //       }
-  //     )
-  //   } else {
-  //     if (localStorage.activeComponent && localStorage.activeComponent !== "welcome" || "admin") {
-  //       this.activeComponent = localStorage.activeComponent
-  //     } else {
-  //       this.activeComponent = "login"
-  //       localStorage.activeComponent = "login"
-  //     }
-  //   }
-  // }
+
 }
 
 

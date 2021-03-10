@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 import CategoryInterface from '../interfaces/category.interface';
 import ProductInterface from '../interfaces/product.interface';
 import { UserService } from './user.service';
@@ -10,6 +9,8 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class ProductsService {
+
+  public path:string = 'http://localhost:10778/'
 
   public productsItemsArr: ProductInterface[] = []
   public productsItemsFilteredArr: ProductInterface[] = []
@@ -31,11 +32,11 @@ export class ProductsService {
   ) { }
 
   public totalProductsCount() {
-    return this.http.get('http://localhost:10778/products/count')
+    return this.http.get(`${this.path}products/count`)
   }
 
   public getCategories() {
-    return this.http.get('http://localhost:10778/products/category', {
+    return this.http.get(`${this.path}products/category`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -45,7 +46,7 @@ export class ProductsService {
   }
 
   public getAllProducts(cart_id: number) {
-    return this.http.get(`http://localhost:10778/products/?cart_id=${cart_id}`, {
+    return this.http.get(`${this.path}products/?cart_id=${cart_id}`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -56,7 +57,7 @@ export class ProductsService {
   }
 
 public getAllProductsForAdmin(){
-  return this.http.get(`http://localhost:10778/products`, {
+  return this.http.get(`${this.path}products`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -67,7 +68,7 @@ public getAllProductsForAdmin(){
 
   // admin only 
   public addProduct(body: any) {
-    return this.http.post('http://localhost:10778/products', body, {
+    return this.http.post(`${this.path}products`, body, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -78,7 +79,7 @@ public getAllProductsForAdmin(){
 
   // admin only
   public editProduct(id: number, body: any) {
-    return this.http.put(`http://localhost:10778/products/${id}`, body, {
+    return this.http.put(`${this.path}products/${id}`, body, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,

@@ -53,7 +53,6 @@ ROUTES:
         main page ==> cart - client
                       products handle - admin    
         order - client
-        success msg - client
 ---------------TODO---------------
 STEPS:
 1. ng n proj-name
@@ -79,10 +78,6 @@ STEPS:
 ______________________________________________________________________________________________________
 
 list todo:
-
-1. api documentation:
-        https://www.npmjs.com/package/swagger-ui
-        https://www.npmjs.com/package/express-swagger-generator
 
 2. clean code and notes
 3. gourdes -> check use

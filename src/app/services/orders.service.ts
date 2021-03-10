@@ -9,6 +9,8 @@ import OrderInterface from '../interfaces/order.interface';
 })
 export class OrdersService {
 
+  public path:string = 'http://localhost:10778/'
+
   public lastOrder: OrderInterface
   public currentOrder: OrderInterface
   public ordersCounter: number = 0
@@ -17,15 +19,13 @@ export class OrdersService {
   public date: Date
   public DatesToDisable: any
 
-  public credit_card_type: string = ""
-  public credit_card_valid: boolean
   constructor(
     private http: HttpClient,
     public _r: Router
   ) { }
 
   public addOrder(body: any) {
-    return this.http.post('http://localhost:10778/orders', body, {
+    return this.http.post(`${this.path}orders`, body, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -35,7 +35,7 @@ export class OrdersService {
   }
 
   public getCountOrders() {
-    return this.http.get('http://localhost:10778/orders/count', {
+    return this.http.get(`${this.path}orders/count`, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -43,7 +43,7 @@ export class OrdersService {
   }
 
   public lastOrderByUser() {
-    return this.http.get('http://localhost:10778/orders', {
+    return this.http.get(`${this.path}orders`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -57,7 +57,7 @@ export class OrdersService {
     const options = {
       params: param
     }
-    return this.http.get(`http://localhost:10778/orders/${id}/receipt`, {
+    return this.http.get(`${this.path}orders/${id}/receipt`, {
       headers: {
         'Content-Type': 'application/pdf',
         'token': localStorage.token,
@@ -71,8 +71,7 @@ export class OrdersService {
   }
 
   public getDatesToDisable() {
-    
-    return this.http.get(`http://localhost:10778/orders/dates`, {
+    return this.http.get(`${this.path}orders/dates`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,

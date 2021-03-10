@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'client';
-
+  
   constructor(
     public _r: Router,
     public _location: Location
