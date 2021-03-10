@@ -74,7 +74,9 @@ export class FormOrderComponent implements OnInit {
     const closing_date = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
     const dd = new Date(this.orderForm.value.shipping_date)
     const delivery_date = `${dd.getFullYear()}-${dd.getMonth()+1}-${dd.getDate()}`
-    const credit_card = this.orderForm.value.credit_card.slice(12,16)
+    let credit_card = this.orderForm.value.credit_card.replace(/[ -]/g, '')
+    credit_card = credit_card.slice(-4)
+    
     
     const orderBody = {
       user_id: this._user.user.id,
