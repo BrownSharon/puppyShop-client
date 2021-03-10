@@ -34,7 +34,7 @@ export class OrdersService {
   }
 
   public getCountOrders() {
-    return this.http.get('http://localhost:10778/orders/number', {
+    return this.http.get('http://localhost:10778/orders/count', {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -42,7 +42,7 @@ export class OrdersService {
   }
 
   public lastOrderByUser() {
-    return this.http.get('http://localhost:10778/orders/last', {
+    return this.http.get('http://localhost:10778/orders', {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -56,7 +56,7 @@ export class OrdersService {
     const options = {
       params: param
     }
-    return this.http.get(`http://localhost:10778/orders/receipt/${id}`, {
+    return this.http.get(`http://localhost:10778/orders/${id}/receipt`, {
       headers: {
         'Content-Type': 'application/pdf',
         'token': localStorage.token,
@@ -77,22 +77,6 @@ export class OrdersService {
         'token': localStorage.token,
         'refreshToken': localStorage.refreshToken
       }
-    })
-  }
-
-  public downloadReceipt(x: string) {
-    const param = new HttpParams().set('filename', x);
-    const options = {
-      params: param
-    }
-    return this.http.get(`http://localhost:10778/orders/download/receipt`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'token': localStorage.token,
-        'refreshToken': localStorage.refreshToken
-      },
-      ...options,
-      responseType: 'blob'
     })
   }
 

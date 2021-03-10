@@ -33,21 +33,28 @@ export class CartComponent implements OnInit {
     
       this._carts.getOpenCartByUser().subscribe(
         (res:ResponseInterface)=>{
-          if (res.openCart.length >0){
-            this._carts.openCart = res.openCart[0]
+          if (res.cart){
+            this._carts.openCart = res.cart
             this._carts.getCartItems().subscribe(
               (res: ResponseInterface) => {
+                if (res.cartItems) {
                 this._carts.cartItemsArr = res.cartItems
+                }
               },
               (err: ResponseInterface) => {
-                this._r.navigateByUrl('welcome/login')
+                console.log(err.error.msg);
+                console.log("test");
               }
             )
           }else{
+            
+            console.log("test");
             this._r.navigateByUrl('welcome/login')
           }
         },
         (err: ResponseInterface)=>{
+          console.log(err.error.msg);
+          console.log("test");
           this._r.navigateByUrl('welcome/login')
         }
       )
@@ -75,7 +82,7 @@ export class CartComponent implements OnInit {
       },
       (err: ResponseInterface) => {
         console.log(err);
-        this._r.navigateByUrl('welcome/login')
+        
       }
     )
   }

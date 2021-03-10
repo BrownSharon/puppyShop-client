@@ -15,8 +15,7 @@ import passwordMatchValidator from 'src/app/validators/matchPassword.validator';
 export class Register1Component implements OnInit {
 
   public register1Form: FormGroup
-  public serverError: string = ""
-
+  
   constructor(
     public _user: UserService,
     public _r: Router,
@@ -51,25 +50,22 @@ export class Register1Component implements OnInit {
       this.passwordConfirm.setErrors(null);
   }
 
-
   public handleSubmit() {
-    this.serverError = ""
+    
     const { israeliID, email, password } = this.register1Form.value
-
-    this._user.registerStep1(israeliID, email).subscribe(
+    const body = {israeliID, email, dryRun:true}
+    this._user.register(body).subscribe(
       (res: ResponseInterface) => {
         if (!res?.exists) {
           this._user.register1Data = { israeliID, email, password }
           sessionStorage.register1Data = JSON.stringify(this._user.register1Data)
-          // sessionStorage.activeComponent = "register2"
           this._user.activeComponent = "register2"
           this._r.navigateByUrl('welcome/register2')
         }
       },
       (err: ResponseInterface) => {
-        console.log(err);
-        
-        this.serverError = err.error
+        this._user.isServerError = true
+        this._user.serverErrorMsg = err.error.msg
       }
     )
   }

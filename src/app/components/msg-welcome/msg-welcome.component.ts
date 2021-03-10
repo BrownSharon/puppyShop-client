@@ -29,33 +29,28 @@ export class MsgWelcomeComponent implements OnInit {
             this._user.activeComponent = "welcome"
             this._carts.getOpenCartByUser().subscribe(
               (res: ResponseInterface) => {
-                if (res.openCart.length > 0) {
-                  this._carts.openCart = res.openCart[0]
+                if (res.cart) {
+                  this._carts.openCart = res.cart
                   this._carts.totalPrice(this._carts.openCart.id).subscribe(
                     (res: ResponseInterface) => {
                       this._carts.totalCartPrice = res.totalCartPrice
                     },
                     (err: ResponseInterface) => {
-                      console.log(err);
                       this._user.activeComponent = ""
                       this._r.navigateByUrl('welcome/login')
                     })
                 } else {
                   this._orders.lastOrderByUser().subscribe(
                     (res: ResponseInterface) => {
-                      if (res.lastOrder) {
-                        this._orders.lastOrder = res.lastOrder[0]
+                      if (res.order) {
+                        this._orders.lastOrder = res.order
                       }
                     },
                     (err: ResponseInterface) => {
-                      console.log(err);
-                      this._user.activeComponent = ""
-                      this._r.navigateByUrl('welcome/login')
                     })
                 }
               },
               (err: ResponseInterface) => {
-                console.log(err);
                 this._user.activeComponent = ""
                 this._r.navigateByUrl('welcome/login')
               })
@@ -74,8 +69,8 @@ export class MsgWelcomeComponent implements OnInit {
         this._user.activeComponent = "welcome"
         this._carts.getOpenCartByUser().subscribe(
           (res: ResponseInterface) => {
-            if (res.openCart.length > 0) {
-              this._carts.openCart = res.openCart[0]
+            if (res.cart) {
+              this._carts.openCart = res.cart
               this._carts.totalPrice(this._carts.openCart.id).subscribe(
                 (res: ResponseInterface) => {
                   this._carts.totalCartPrice = res.totalCartPrice
@@ -87,13 +82,11 @@ export class MsgWelcomeComponent implements OnInit {
             } else {
               this._orders.lastOrderByUser().subscribe(
                 (res: ResponseInterface) => {
-                  if (res.lastOrder) {
-                    this._orders.lastOrder = res.lastOrder[0]
+                  if (res.order) {
+                    this._orders.lastOrder = res.order
                   }
                 },
                 (err: ResponseInterface) => {
-                  this._user.activeComponent = ""
-                  this._r.navigateByUrl('welcome/login')
                 })
             }
           },
@@ -103,13 +96,14 @@ export class MsgWelcomeComponent implements OnInit {
           })
       }
     }
+    
   }
   public startShopping() {
     this._carts.getNewCart().subscribe(
       (res: ResponseInterface) => {
         this._user.activeComponent = ""
         sessionStorage.removeItem('activeComponent')
-        this._carts.openCart = res.cart[0]
+        this._carts.openCart = res.cart
         this._r.navigateByUrl('main/user')
       },
       (err: ResponseInterface) => {

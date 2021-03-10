@@ -48,11 +48,9 @@ export class CartItemComponent implements OnInit {
 
     const body = {
       product_amount: this.item.product_amount,
-      id: this.item.cartItem_id,
-      cart_id: this.item.cart_id,
       total_price: (this.item.product_amount * this.item.price)
     }
-    this._carts.editCartItem(body).subscribe(
+    this._carts.editCartItem(body, this.item.cart_id, this.item.cartItem_id).subscribe(
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
 
@@ -88,6 +86,7 @@ export class CartItemComponent implements OnInit {
 
     this._carts.deleteItemFromCart(id, cart_id).subscribe(
       (res: ResponseInterface) => {
+        
         this._carts.cartItemsArr = res.cartItems
         this._carts.totalCartPrice -= this.item.product_total_price
       },

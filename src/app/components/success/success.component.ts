@@ -35,7 +35,7 @@ export class SuccessComponent implements OnInit {
               if (this._user.user.role === 2) {
                 this._orders.lastOrderByUser().subscribe(
                   (res: ResponseInterface) => {
-                    this._orders.currentOrder = res.lastOrder[0]
+                    this._orders.currentOrder = res.order
                   },
                   (err: ResponseInterface) => {
                     this._r.navigateByUrl('welcome/login')
@@ -59,7 +59,7 @@ export class SuccessComponent implements OnInit {
       if (this._user.user.role === 2) {
         this._orders.lastOrderByUser().subscribe(
           (res: ResponseInterface) => {
-            this._orders.currentOrder = res.lastOrder[0]
+            this._orders.currentOrder = res.order
           },
           (err: ResponseInterface) => {
             this._r.navigateByUrl('welcome/login')
@@ -76,7 +76,6 @@ export class SuccessComponent implements OnInit {
 
       this._orders.getReceipt(this._orders.currentOrder.id, `receipt${this._orders.currentOrder.id}.pdf`).subscribe(
         (res: any) => {
-          console.log(res);
           fileServer.saveAs(new Blob([res], { type: 'text/csv' }), `receipt${this._orders.currentOrder.id}.pdf`)
         },
         (err: ResponseInterface) => {

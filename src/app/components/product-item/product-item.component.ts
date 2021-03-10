@@ -28,6 +28,7 @@ export class ProductItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     if (this._carts.totalCartPrice === 0) {
       this.product.product_amount = 0
     }else{
@@ -57,10 +58,9 @@ export class ProductItemComponent implements OnInit {
       product_id: this.product.id,
       product_amount: this.product.product_amount,
       product_total_price: this.product.product_amount * this.product.price,
-      cart_id: this._carts.openCart.id
     }
 
-    this._carts.addToCart(body).subscribe(
+    this._carts.addToCart(body, this._carts.openCart.id).subscribe(
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
         this.productItemInCart = this._carts.cartItemsArr.find(item => item.product_id === this.product.id)
@@ -73,7 +73,7 @@ export class ProductItemComponent implements OnInit {
         this._carts.deletedItemFromCart = {} as ProductInterface
       },
       (err: ResponseInterface) => {
-        console.log(err);
+        console.log(err.error);
         this._r.navigateByUrl('/welcome')
       },
     )

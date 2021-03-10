@@ -3,6 +3,7 @@ import CartInterface from "./cart.interface";
 import CartItemInterface from "./cartItem.interface";
 import CategoryInterface from "./category.interface";
 import CityInterface from "./city.interface";
+import ErrorInterface from "./error.interface";
 import OrderInterface from "./order.interface";
 import ProductInterface from "./product.interface";
 import TokenInterface from "./token.interface";
@@ -21,16 +22,14 @@ export default interface ResponseInterface{
     products?: ProductInterface[]
     productsCount?: number
     productItem?: ProductInterface
-    openCart?: CartInterface[]
     cartItems?: CartItemInterface[]
     totalCartPrice?: any
     newCart?: CartInterface
     cart?: CartInterface
     numberOfOrders?: number
-    lastOrder?: OrderInterface
-    newOrder?: OrderInterface
+    order?: OrderInterface
     cities?: CityInterface[]
-    error?: string
+    error?: ErrorInterface
     filteredDates?: any
     filename?: string
     data?: any

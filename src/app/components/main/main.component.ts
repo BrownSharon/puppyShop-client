@@ -31,9 +31,11 @@ export class MainComponent implements OnInit {
           if (this._user.user.role === 2) {
             this._carts.getOpenCartByUser().subscribe(
               (res: ResponseInterface) => {
-                this._carts.openCart = res.openCart[0]
+                this._carts.openCart = res.cart
               },
               (err: ResponseInterface) => {
+                console.log(err.error);
+                console.log("test");
                 this._r.navigateByUrl('welcome/login')
               }
             )
@@ -43,6 +45,8 @@ export class MainComponent implements OnInit {
           }
         },
         (err: ResponseInterface) => {
+          console.log(err.error);
+          console.log("test");
           this._r.navigateByUrl('welcome/login')
         })
       this._carts.cartStatus = false
@@ -51,9 +55,11 @@ export class MainComponent implements OnInit {
       this._user.activeComponent = "user"
         this._carts.getOpenCartByUser().subscribe(
           (res: ResponseInterface) => {
-            this._carts.openCart = res.openCart[0]
+            this._carts.openCart = res.cart
           },
           (err: ResponseInterface) => {
+            console.log(err.error);
+            console.log("test");
             this._r.navigateByUrl('welcome/login')
           }
         )

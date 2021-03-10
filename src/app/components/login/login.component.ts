@@ -60,8 +60,10 @@ export class LoginComponent implements OnInit {
 
       },
       (err: ResponseInterface) => {
+        this._user.isServerError = true
+        this._user.serverErrorMsg = err.error.msg
         console.log(err);
-
+        
       }
     )
   }

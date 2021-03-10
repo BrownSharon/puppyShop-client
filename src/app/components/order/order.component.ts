@@ -26,8 +26,8 @@ export class OrderComponent implements OnInit {
           this._user.user = res.user
           this._carts.getOpenCartByUser().subscribe(
             (res: ResponseInterface) => {
-              this._carts.openCart = res.openCart[0]
-              this._carts.totalPrice(this._carts.openCart.id).subscribe(
+              this._carts.openCart = res.cart
+              this._carts.totalPrice(this._carts.openCart?.id).subscribe(
                 (res: ResponseInterface) => {
                   this._carts.totalCartPrice = res.totalCartPrice
                   this._carts.cartStatus = true
@@ -49,8 +49,8 @@ export class OrderComponent implements OnInit {
     } else {
       this._carts.getOpenCartByUser().subscribe(
         (res: ResponseInterface) => {
-          if (res.openCart.length > 0) {
-            this._carts.openCart = res.openCart[0]
+          if (res.cart) {
+            this._carts.openCart = res.cart
             this._carts.totalPrice(this._carts.openCart.id).subscribe(
               (res: ResponseInterface) => {
                 this._carts.totalCartPrice = res.totalCartPrice

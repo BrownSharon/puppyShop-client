@@ -5,7 +5,7 @@
     
     <mat-form-field  appearance="outline">
         <mat-label>Email</mat-label>
-        <input class="input" matInput placeholder="Enter your email" formControlName="email" required />
+        <input class="input" matInput placeholder="Enter your email" formControlName="email" (input)="_user.inputHasChanged()" required />
         <mat-hint>For Login, enter your email from registration</mat-hint>
         <mat-error *ngIf="login_Form.controls.email.errors?.email">Not a valid email</mat-error>
         <mat-error *ngIf="login_Form.controls.email.errors?.required">Email must be provided</mat-error>
@@ -13,11 +13,13 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Enter your password" formControlName="password" required />
+        <input matInput type="password" placeholder="Enter your password" formControlName="password" (input)="_user.inputHasChanged()" required />
         <mat-hint>For Login, enter your password from registration</mat-hint>
         <mat-error *ngIf="login_Form.controls.email.errors?.email">Password must be provided</mat-error>
         <mat-error *ngIf="login_Form.controls.email.errors?.required">Password must at least 4 characters</mat-error>
     </mat-form-field>
-
     <button mat-stroked-button color="primary" type="submit" [disabled]="login_Form.invalid">Login</button>
+    <div class="errors">
+        <p class="errors">{{_user.serverErrorMsg}}</p>
+    </div>
 </form>

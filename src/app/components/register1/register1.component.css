@@ -1,12 +1,11 @@
 form{
     width: 100%;
-    height: 57vh;
+    height: 60vh;
     display:flex;
     flex-direction: column;
     align-items:center;
-    justify-content: center; 
+    justify-content: flex-start; 
     background-color: rgba(248, 240, 166, 0.609);
-    padding-bottom: 2%;
     margin: 0%;
 }
 
@@ -22,14 +21,15 @@ p{
 }
 
 button{
-    margin-top: 7%;
-    margin-bottom: 7%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 
 }
 
 h2{
     font-size: x-large;
     text-align: center;
+    margin-top: 4%;
 }
 
 mat-form-field{
@@ -39,5 +39,9 @@ mat-form-field{
 input:-webkit-autofill
 {
     transition: 4000s; 
+}
+
+.errors{
+    color: #fa570c
 }
 

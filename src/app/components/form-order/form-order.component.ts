@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { Router } from '@angular/router';
+import { now } from 'moment';
 import CartInterface from 'src/app/interfaces/cart.interface';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
@@ -19,7 +21,7 @@ export class FormOrderComponent implements OnInit {
 
   public DatesToDisable: any[] = []
   public minDate: Date = new Date
-
+  
   constructor(
     public _user: UserService,
     public _carts: CartsService,
@@ -58,8 +60,11 @@ export class FormOrderComponent implements OnInit {
         this._r.navigateByUrl('welcome/login')
       }
     )
-    
+  }
 
+  public change(){
+    console.log(this.orderForm.value.shipping_date);
+    
   }
 
   public handleSubmit() {
@@ -83,7 +88,7 @@ export class FormOrderComponent implements OnInit {
 
     this._orders.addOrder(orderBody).subscribe(
       (res: ResponseInterface) => {
-        this._orders.currentOrder = res.newOrder[0]
+        this._orders.currentOrder = res.order
         this._carts.totalCartPrice = 0
         this._carts.cartItemsArr = []
         this._carts.Search = ""
@@ -92,15 +97,14 @@ export class FormOrderComponent implements OnInit {
         this._user.activeComponent='success'
       },
       (err: ResponseInterface) => {
-        console.log(err);
-        this._r.navigateByUrl('welcome/login')
+        console.log(err.error.msg);
+
 
       }
     )
 
     // close the current cart
-    const cartBody = { id: this._carts.openCart.id }
-    this._carts.changeStatusCart(cartBody).subscribe(
+    this._carts.changeStatusCart(this._carts.openCart.id).subscribe(
       (res: ResponseInterface) => {
         this._carts.openCart = {} as CartInterface
 

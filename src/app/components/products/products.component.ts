@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit {
           this._r.navigateByUrl('main/user')
           this._carts.getOpenCartByUser().subscribe(
             (res: ResponseInterface) => {
-              this._carts.openCart = res.openCart[0]
+              this._carts.openCart = res.cart
               this._carts.totalPrice(this._carts.openCart.id).subscribe(
                 (res: ResponseInterface) => {
                   this._carts.totalCartPrice = res.totalCartPrice

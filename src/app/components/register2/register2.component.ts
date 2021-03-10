@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class Register2Component implements OnInit {
 
   public register2Form: FormGroup
-
+  
   constructor(
     public _user: UserService,
     public _r: Router,
@@ -48,9 +48,9 @@ export class Register2Component implements OnInit {
     const { city, street, first_name, last_name } = this.register2Form.value
     
     const { israeliID, email, password } = this._user.register1Data
-    const body = { israeliID, email, password, city, street, first_name, last_name }
+    const body = { dryRun: false ,israeliID, email, password, city, street, first_name, last_name }
 
-    this._user.registerStep2(body).subscribe(
+    this._user.register(body).subscribe(
       (res: ResponseInterface) => {
 
         // set the token in the local storage
@@ -67,6 +67,8 @@ export class Register2Component implements OnInit {
         this._r.navigateByUrl('welcome/welcome-msg')
       },
       (err: ResponseInterface) => {
+        this._user.isServerError = true
+        this._user.serverErrorMsg = err.error.msg
       }
     )
   }

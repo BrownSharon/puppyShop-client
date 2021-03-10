@@ -19,17 +19,15 @@ export class UserService {
   public activeComponent: string = "login";
   public register1Data: any
   public citiesArr: CityInterface[] = []
+  public serverErrorMsg: string
+  public isServerError: boolean = false
 
   constructor(
     private http: HttpClient,
     public _r: Router
   ) { }
 
-  public registerStep1(id: number, email: string) {
-    return this.http.get(`http://localhost:10778/users/${id}/${email}`)
-  }
-
-  public registerStep2(body: object) {
+  public register(body: object) {
     return this.http.post('http://localhost:10778/users', body, {
       headers: { 'Content-Type': 'application/json' }
     })
@@ -71,7 +69,7 @@ export class UserService {
   }
 
   public getCities() {
-    return this.http.get(`http://localhost:10778/users`)
+    return this.http.get(`http://localhost:10778/users/cities`)
   }
 
   public goToLogin(){
@@ -79,6 +77,11 @@ export class UserService {
     if (sessionStorage.register1Data) sessionStorage.removeItem("register1Data") 
     this.activeComponent = ""
     this._r.navigateByUrl('welcome/login')
+  }
+
+  public inputHasChanged(){
+    this.isServerError = false
+    this.serverErrorMsg = ""
   }
 
   // public checkUser() {

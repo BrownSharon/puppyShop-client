@@ -24,8 +24,8 @@ export class CartsService {
     private _r: Router
   ) { }
 
-  public addToCart(body: any) {
-    return this.http.post('http://localhost:10778/itemsCart/', body, {
+  public addToCart(body: any, cart_id: number) {
+    return this.http.post(`http://localhost:10778/carts/${cart_id}/items`, body, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -35,7 +35,7 @@ export class CartsService {
   }
 
   public deleteItemFromCart(id: number, cart_id: number) {
-    return this.http.delete(`http://localhost:10778/itemsCart/${id}/${cart_id}`, {
+    return this.http.delete(`http://localhost:10778/carts/${cart_id}/items/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -45,7 +45,7 @@ export class CartsService {
   }
 
   public deleteAllFromCart(id: number) {
-    return this.http.delete(`http://localhost:10778/carts/${id}`, {
+    return this.http.delete(`http://localhost:10778/carts/${id}/items`, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -55,6 +55,7 @@ export class CartsService {
   }
 
   public totalPrice(id: number) {
+    
     return this.http.get(`http://localhost:10778/carts/${id}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -65,8 +66,9 @@ export class CartsService {
   }
 
   public getCartItems() {
+    
     if (this.openCart?.id) {
-      return this.http.get(`http://localhost:10778/itemsCart?cart_id=${this.openCart.id}`, {
+      return this.http.get(`http://localhost:10778/carts/${this.openCart.id}/items`, {
         headers: {
           'Content-Type': 'application/json',
           'token': localStorage.token,
@@ -99,8 +101,8 @@ export class CartsService {
     })
   }
 
-  public changeStatusCart(body: any) {
-    return this.http.put(`http://localhost:10778/carts/`, body, {
+  public changeStatusCart(cart_id: number) {
+    return this.http.put(`http://localhost:10778/carts/${cart_id}`, {}, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,
@@ -109,8 +111,9 @@ export class CartsService {
     })
   }
 
-  public editCartItem(body:object){
-    return this.http.put(`http://localhost:10778/itemsCart/`, body, {
+  public editCartItem(body:object, cart_id: number, item_id: number){
+    
+    return this.http.put(`http://localhost:10778/carts/${cart_id}/items/${item_id}`, body, {
       headers: {
         'Content-Type': 'application/json',
         'token': localStorage.token,

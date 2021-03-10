@@ -66,6 +66,8 @@ export class LoggedGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (this._user.user.isLogin) {
+      console.log(this._user.user);
+      
       return true
     } else {
       this._r.navigateByUrl('welcome/login')
