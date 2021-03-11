@@ -21,55 +21,24 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this._user.user?.id) {
-      this._user.checkTokens().subscribe(
-        (res: ResponseInterface) => {
-          this._user.user = res.user
-          this._carts.getOpenCartByUser().subscribe(
-            (res: ResponseInterface) => {
-              this._carts.openCart = res.cart
-              this._carts.totalPrice(this._carts.openCart?.id).subscribe(
-                (res: ResponseInterface) => {
-                  this._carts.totalCartPrice = res.totalCartPrice
-                  this._carts.cartStatus = true
-                },
-                (err: ResponseInterface) => {
-                  console.log(err);
-                  this._r.navigateByUrl('welcome/login')
-                })
-            },
-            (err: ResponseInterface) => {
-              console.log(err);
-              this._r.navigateByUrl('welcome/login')
-            })
-        },
-        (err: ResponseInterface) => {
-          this._user.activeComponent = ""
-          this._r.navigateByUrl('welcome/login')
-        })
-    } else {
-      this._carts.getOpenCartByUser().subscribe(
-        (res: ResponseInterface) => {
-          if (res.cart) {
-            this._carts.openCart = res.cart
-            this._carts.totalPrice(this._carts.openCart.id).subscribe(
-              (res: ResponseInterface) => {
-                this._carts.totalCartPrice = res.totalCartPrice
-                this._carts.cartStatus = true
-              },
-              (err: ResponseInterface) => {
-                console.log(err);
-                this._r.navigateByUrl('welcome/login')
-              })
-          } else {
-            this._r.navigateByUrl('welcome/login')
-          }
-
-        },
-        (err: ResponseInterface) => {
-          console.log(err);
-          this._r.navigateByUrl('welcome/login')
-        })
+      this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
+    this._carts.getOpenCartByUser().subscribe(
+      (res: ResponseInterface) => {
+        this._carts.openCart = res.cart
+        this._carts.totalPrice(this._carts.openCart?.id).subscribe(
+          (res: ResponseInterface) => {
+            this._carts.totalCartPrice = res.totalCartPrice
+            this._carts.cartStatus = true
+          },
+          (err: ResponseInterface) => {
+            err.status === 401 ? this._r.navigateByUrl('main/admin') : this._r.navigateByUrl('welcome/login')
+
+          })
+      },
+      (err: ResponseInterface) => {
+        err.status === 401 ? this._r.navigateByUrl('main/admin') : this._r.navigateByUrl('welcome/login')
+      })
   }
 }
 

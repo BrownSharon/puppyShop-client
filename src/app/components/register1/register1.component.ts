@@ -23,7 +23,7 @@ export class Register1Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this._user.activeComponent= sessionStorage.activeComponent
+    
     if (this._r.url == '/welcome/register1') this._user.activeComponent = 'register1'
     
     this.register1Form = this._fb.group({

@@ -66,8 +66,7 @@ export class CartItemComponent implements OnInit {
         this.updateBTN = false
       },
       (err: ResponseInterface) => {
-        console.log(err);
-        this._r.navigateByUrl('/welcome')
+        this._r.navigateByUrl('/welcome/login')
       }
     )
   }
@@ -91,8 +90,7 @@ export class CartItemComponent implements OnInit {
         this._carts.totalCartPrice -= this.item.product_total_price
       },
       (err: ResponseInterface) => {
-        console.log(err);
-        this._r.navigateByUrl('/welcome')
+        this._r.navigateByUrl('/welcome/login')
       }
     )
   }

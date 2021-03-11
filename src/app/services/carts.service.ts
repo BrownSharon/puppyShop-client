@@ -68,7 +68,7 @@ export class CartsService {
 
   public getCartItems() {
     if (this.openCart?.id) {
-      return this.http.get(`${this.path}${this.openCart.id}/items`, {
+      return this.http.get(`${this.path}carts/${this.openCart.id}/items`, {
         headers: {
           'Content-Type': 'application/json',
           'token': localStorage.token,

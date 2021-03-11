@@ -16,24 +16,26 @@ import { UserRoleGuard } from './guards/user-role.guard';
 
 
 const routes: Routes = [
-      { path: 'welcome', component: WelcomeComponent,
-      children: [
-        { path: 'register1', component: Register1Component, canActivateChild:[NotLoggedGuard]},
-        { path: 'register2', component: Register2Component, canActivateChild:[NotLoggedGuard]},
-        { path: 'login', component: LoginComponent, canActivateChild:[NotLoggedGuard]},
-        { path: 'welcome-msg', component: MsgWelcomeComponent, canActivateChild: [LoggedGuard, UserRoleGuard]}
-        ] },
-      { path: 'main', component: MainComponent,
-      children: [
-        { path: 'user', component: CartComponent, canActivateChild: [UserRoleGuard]},
-        { path: 'admin', component: ProductFormComponent ,canActivateChild: [AdminRoleGuard] }
-        ], 
-      },
-      { path: 'order', component: OrderComponent, canActivateChild: [LoggedGuard,UserRoleGuard], 
-      },
-      { path: "", pathMatch: "full", redirectTo: "welcome" },
-      { path: '**', component: WelcomeComponent }
-    ];
+  {
+    path: 'welcome', component: WelcomeComponent,
+    children: [
+      { path: 'register1', component: Register1Component, canActivateChild: [NotLoggedGuard] },
+      { path: 'register2', component: Register2Component, canActivateChild: [NotLoggedGuard] },
+      { path: 'login', component: LoginComponent, canActivateChild: [NotLoggedGuard] },
+      { path: 'welcome-msg', component: MsgWelcomeComponent, canActivateChild: [LoggedGuard, UserRoleGuard] }
+    ]
+  },
+  {
+    path: 'main', component: MainComponent,
+    children: [
+      { path: 'admin', component: ProductFormComponent, canActivateChild: [LoggedGuard, AdminRoleGuard] },
+      { path: 'cart', component: CartComponent, canActivateChild: [LoggedGuard, UserRoleGuard] }
+    ]
+  },
+  { path: 'order', component: OrderComponent, canActivateChild: [LoggedGuard, UserRoleGuard] },
+  { path: "", pathMatch: "full", redirectTo: "welcome" },
+  { path: '**', component: WelcomeComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

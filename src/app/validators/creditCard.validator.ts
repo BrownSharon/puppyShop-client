@@ -6,7 +6,6 @@ export default function creditCardValidator(control:AbstractControl): { [key: st
     
     
     let ccnNumber = control.value
-    console.log(ccnNumber);
     // Strip spaces and dashes
     ccnNumber = ccnNumber.replace(/[ -]/g, '');
     

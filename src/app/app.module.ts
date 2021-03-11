@@ -39,6 +39,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { SearchComponent } from './components/search/search.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +82,8 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     MatMomentDateModule,
     MatTabsModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
     
   ],
   providers: [

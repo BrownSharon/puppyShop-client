@@ -21,52 +21,8 @@ export class MsgWelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (!this._user.user?.id) {
-      this._user.checkTokens().subscribe(
-        (res: ResponseInterface) => {
-          this._user.user = res.user
-          if (this._user.user.isLogin) {
-            this._user.activeComponent = "welcome"
-            this._carts.getOpenCartByUser().subscribe(
-              (res: ResponseInterface) => {
-                if (res.cart) {
-                  this._carts.openCart = res.cart
-                  this._carts.totalPrice(this._carts.openCart.id).subscribe(
-                    (res: ResponseInterface) => {
-                      this._carts.totalCartPrice = res.totalCartPrice
-                    },
-                    (err: ResponseInterface) => {
-                      this._user.activeComponent = ""
-                      this._r.navigateByUrl('welcome/login')
-                    })
-                } else {
-                  this._orders.lastOrderByUser().subscribe(
-                    (res: ResponseInterface) => {
-                      if (res.order) {
-                        this._orders.lastOrder = res.order
-                      }
-                    },
-                    (err: ResponseInterface) => {
-                    })
-                }
-              },
-              (err: ResponseInterface) => {
-                this._user.activeComponent = ""
-                this._r.navigateByUrl('welcome/login')
-              })
-          } else {
-            this._user.activeComponent = ""
-            this._r.navigateByUrl('welcome/login')
-          }
-        },
-        (err: ResponseInterface) => {
-          this._user.activeComponent = ""
-          this._r.navigateByUrl('welcome/login')
-        }
-      )
-    } else {
-      if (this._user.user.isLogin) {
-        this._user.activeComponent = "welcome"
+    if (this._user.user?.isLogin) {
+      if (this._user.user?.role === 2) {
         this._carts.getOpenCartByUser().subscribe(
           (res: ResponseInterface) => {
             if (res.cart) {
@@ -94,9 +50,12 @@ export class MsgWelcomeComponent implements OnInit {
             this._user.activeComponent = ""
             this._r.navigateByUrl('welcome/login')
           })
+      } else {
+        this._r.navigateByUrl('main/admin')
       }
+    }else{
+      this._r.navigateByUrl('welcome/login')
     }
-    
   }
   public startShopping() {
     this._carts.getNewCart().subscribe(
@@ -104,7 +63,7 @@ export class MsgWelcomeComponent implements OnInit {
         this._user.activeComponent = ""
         sessionStorage.removeItem('activeComponent')
         this._carts.openCart = res.cart
-        this._r.navigateByUrl('main/user')
+        this._r.navigateByUrl('main/cart')
       },
       (err: ResponseInterface) => {
         console.log(err);
@@ -116,7 +75,7 @@ export class MsgWelcomeComponent implements OnInit {
   public continueShopping() {
     this._user.activeComponent = ""
     sessionStorage.removeItem('activeComponent')
-    this._r.navigateByUrl('main/user')
+    this._r.navigateByUrl('main/cart')
   }
 
 }

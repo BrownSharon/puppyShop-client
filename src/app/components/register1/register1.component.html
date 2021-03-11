@@ -2,7 +2,7 @@
     
     <form [formGroup]="register1Form" (ngSubmit)="handleSubmit()">
         <h2>Sign-in - Step 1</h2>
-        <p>All ready a costumer? <a mat-button color="warn" href="http://localhost:4200/welcome/login" (click)="_user.goToLogin()">Log in</a> </p>
+        <p>All ready a costumer? <button mat-button color="warn" (click)="_user.goToLogin()">Log in</button> </p>
         <mat-form-field appearance="outline">
             <mat-label>ID</mat-label>
             <input matInput placeholder="Enter your ID" formControlName="israeliID"  (input)="_user.inputHasChanged()" required />

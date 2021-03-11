@@ -34,7 +34,7 @@ export class FormOrderComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
+    
     this.orderForm = this._fb.group({
       city: ["", [Validators.required]],
       street: ["", [Validators.required]],
@@ -42,6 +42,10 @@ export class FormOrderComponent implements OnInit {
       credit_card: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(19), creditCardValidator]],
     })
 
+    if (!this._user.user?.isLogin) {
+      this._user.activeComponent = ""
+      this._r.navigateByUrl('welcome/login')
+    }
     this._user.getCities().subscribe(
       (res: ResponseInterface) => {
         this._user.citiesArr = res.cities
@@ -50,21 +54,16 @@ export class FormOrderComponent implements OnInit {
             this.DatesToDisable = res.filteredDates
           },
           (err: ResponseInterface) => {
-            console.log(err);
-            this._r.navigateByUrl('welcome/login')
+            err.status === 401? this._r.navigateByUrl('main/admin'):this._r.navigateByUrl('welcome/login')
+
           }
         )
       },
       (err: ResponseInterface) => {
-        console.log(err);
-        this._r.navigateByUrl('welcome/login')
+        err.status === 401? this._r.navigateByUrl('main/admin'):this._r.navigateByUrl('welcome/login')
+
       }
     )
-  }
-
-  public change(){
-    console.log(this.orderForm.value.shipping_date);
-    
   }
 
   public handleSubmit() {
@@ -100,8 +99,6 @@ export class FormOrderComponent implements OnInit {
         this._user.activeComponent='success'
       },
       (err: ResponseInterface) => {
-        console.log(err.error.msg);
-
 
       }
     )

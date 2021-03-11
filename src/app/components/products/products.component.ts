@@ -18,9 +18,9 @@ export class ProductsComponent implements OnInit {
   public emptySearchError: boolean = false
   public roleName: string
   public options: FormGroup
-  public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));  
+  public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   public cartViewStatus: boolean = false
-  
+
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
@@ -32,16 +32,23 @@ export class ProductsComponent implements OnInit {
       fixed: false,
       top: 0
     });
-   }
+  }
 
   ngOnInit(): void {
-
-    this._user.user.role == 2 ? this.roleName = "user" : this.roleName = "admin"
+    if (!this._user.user?.id) {
+      this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
+    }
+    if (this._user.user?.isLogin) {
+      this._user.user.role == 2 ? this.roleName = "user" : this.roleName = "admin"
+    } else {
+      this._user.activeComponent = ""
+      this._r.navigateByUrl('welcome/login')
+    }
     this._products.getCategories().subscribe(
       (res: ResponseInterface) => {
         this._products.productsCategoriesArr = res.categories
-        if (this._user.user.role === 2) {
-          this._r.navigateByUrl('main/user')
+        if (this._user.user?.role === 2) {
+          this._r.navigateByUrl('main/cart')
           this._carts.getOpenCartByUser().subscribe(
             (res: ResponseInterface) => {
               this._carts.openCart = res.cart
@@ -50,26 +57,19 @@ export class ProductsComponent implements OnInit {
                   this._carts.totalCartPrice = res.totalCartPrice
                 },
                 (err: ResponseInterface) => {
-                  console.log(err);
-                  this._user.activeComponent = ""
-                  this._r.navigateByUrl('welcome/login')
+                  if (err.status === 406) this._r.navigateByUrl('welcome/login')
                 })
               this._products.getAllProducts(this._carts.openCart.id).subscribe(
                 (res: ResponseInterface) => {
                   this._products.productsItemsArr = res.products
                   this._products.productsItemsFilteredArr = res.products
-                  this._r.navigateByUrl('main/user')
+                  this._r.navigateByUrl('main/cart')
                 },
                 (err: ResponseInterface) => {
-                  console.log(err);
                   this._r.navigateByUrl('welcome/login')
                 })
             }, (err: ResponseInterface) => {
-              console.log(err);
-              this._user.activeComponent = ""
-              this._r.navigateByUrl('welcome/login')
             })
-
         } else {
           this._r.navigateByUrl('main/admin')
           this._products.getAllProductsForAdmin().subscribe(
@@ -79,18 +79,14 @@ export class ProductsComponent implements OnInit {
               this._r.navigateByUrl('main/admin')
             },
             (err: ResponseInterface) => {
-              console.log(err);
               this._r.navigateByUrl('welcome/login')
             })
         }
       },
       (err: ResponseInterface) => {
-        console.log(err);
         this._r.navigateByUrl('welcome/login')
       }
     )
-
-
   }
 
   public allProducts() {
@@ -103,13 +99,13 @@ export class ProductsComponent implements OnInit {
 
   public getCategoryItems(id: number) {
     this.emptySearchError = false
-    this._products.productsItemsArr.map(p => document.getElementById(`btn${p.category_id}`).style.color="")
+    this._products.productsItemsArr.map(p => document.getElementById(`btn${p.category_id}`).style.color = "")
     this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p => p.category_id === id)
     if (this._products.productsItemsFilteredArr.length === 0) {
       this.emptySearchError = true
-    }else{
-      
-      document.getElementById(`btn${id}`).style.color="#d35806"
+    } else {
+
+      document.getElementById(`btn${id}`).style.color = "#d35806"
     }
   }
 
@@ -121,5 +117,5 @@ export class ProductsComponent implements OnInit {
     }
   }
 
- 
+
 }

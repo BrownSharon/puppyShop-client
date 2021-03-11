@@ -73,7 +73,7 @@ export class ProductItemComponent implements OnInit {
         this._carts.deletedItemFromCart = {} as ProductInterface
       },
       (err: ResponseInterface) => {
-        this._r.navigateByUrl('/welcome')
+        this._r.navigateByUrl('/welcome/login')
       },
     )
   }

@@ -2,12 +2,12 @@
     <div class="logoIMG"></div>
     <div class="title">
         <p class="shopName">Puppy Shop</p>
-        <p class="welcome">Hello {{_user.user.first_name || "Guest"}}</p>
+        <p class="welcome">Hello {{_user.user?.first_name || "Guest"}}</p>
         
     </div>   
 </div>
 <div class="right">
-    <button mat-button *ngIf="_user.user.isLogin"(click)="logOutUser()">Logout</button>
+    <button mat-button *ngIf="_user.user?.isLogin"(click)="logOutUser()">Logout</button>
     <div class="contactUS">
         <h4><span>Contact Us:</span></h4>
         <p><span>Phone:</span> *1234</p>

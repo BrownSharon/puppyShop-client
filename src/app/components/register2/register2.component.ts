@@ -20,10 +20,10 @@ export class Register2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (!this._user.register1Data){
+    if (this._r.url == '/welcome/register2') this._user.activeComponent = 'register2'
+    if (!this._user.register1Data && sessionStorage.register1Data){
       this._user.register1Data = JSON.parse(sessionStorage.register1Data)
     }
-    if (this._r.url == '/welcome/register2') this._user.activeComponent = 'register2'
 
     this.register2Form = this._fb.group({
       city: ["", [Validators.required]],
@@ -37,7 +37,7 @@ export class Register2Component implements OnInit {
         this._user.citiesArr = res.cities
       },
       (err: ResponseInterface) => {
-        console.log(err);
+        console.log(err.error.err);
         
       }
     )
@@ -58,7 +58,7 @@ export class Register2Component implements OnInit {
         localStorage.refreshToken = res.refreshToken
         
         // set the loggedUser object in the user service
-        this._user.user = this._user.decodeToken(res.token as string)
+        this._user.user = this._user.decodeToken(res.token as string, res.refreshToken as string)
         
         // move to welcome component
         sessionStorage.removeItem("register1Data")

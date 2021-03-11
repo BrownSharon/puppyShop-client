@@ -24,69 +24,39 @@ export class SuccessComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    if (!this._user.user?.id) {
-      this._user.checkTokens().subscribe(
-        (res: ResponseInterface) => {
-          this._user.user = res.user
-          this._user.checkTokens().subscribe(
-            (res: ResponseInterface) => {
-              this._user.user = res.user
-              if (this._user.user.role === 2) {
-                this._orders.lastOrderByUser().subscribe(
-                  (res: ResponseInterface) => {
-                    this._orders.currentOrder = res.order
-                  },
-                  (err: ResponseInterface) => {
-                    this._r.navigateByUrl('welcome/login')
-                  }
-                )
-              } else {
-                // sessionStorage.activeComponent = "admin"
-                // this._user.activeComponent = "admin"
-                this._r.navigateByUrl('main/admin')
-              }
-            },
-            (err: ResponseInterface) => {
-              this._r.navigateByUrl('welcome/login')
-            }
-          )
-        },
-        (err: ResponseInterface) => {
-          this._r.navigateByUrl('welcome/login')
-        })
-    }else{
-      if (this._user.user.role === 2) {
-        this._orders.lastOrderByUser().subscribe(
-          (res: ResponseInterface) => {
-            this._orders.currentOrder = res.order
-          },
-          (err: ResponseInterface) => {
-            this._r.navigateByUrl('welcome/login')
-          }
-        )
-      } else {
-        sessionStorage.activeComponent = "admin"
-        this._user.activeComponent = "admin"
-        this._r.navigateByUrl('main/admin')
-      }
-    }
-  }
-    downloadFile() {
 
-      this._orders.getReceipt(this._orders.currentOrder.id, `receipt${this._orders.currentOrder.id}.pdf`).subscribe(
-        (res: any) => {
-          fileServer.saveAs(new Blob([res], { type: 'text/csv' }), `receipt${this._orders.currentOrder.id}.pdf`)
+
+    if (!this._user.user?.id) {
+      this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
+    }
+    if (this._user.user.role === 2) {
+      this._orders.lastOrderByUser().subscribe(
+        (res: ResponseInterface) => {
+          this._orders.currentOrder = res.order
         },
         (err: ResponseInterface) => {
           this._r.navigateByUrl('welcome/login')
         }
       )
-
+    } else {
+      this._r.navigateByUrl('main/admin')
     }
+  }
+
+  downloadFile() {
+
+    this._orders.getReceipt(this._orders.currentOrder.id, `receipt${this._orders.currentOrder.id}.pdf`).subscribe(
+      (res: any) => {
+        fileServer.saveAs(new Blob([res], { type: 'text/csv' }), `receipt${this._orders.currentOrder.id}.pdf`)
+      },
+      (err: ResponseInterface) => {
+        this._r.navigateByUrl('welcome/login')
+      }
+    )
+
+  }
 
   public goToWelcome() {
-    
     this._r.navigateByUrl('welcome/welcome-msg')
   }
 
