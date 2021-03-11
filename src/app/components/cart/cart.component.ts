@@ -34,7 +34,6 @@ export class CartComponent implements OnInit {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
     if (!this._user.user?.isLogin) {
-      this._user.activeComponent = ""
       this._r.navigateByUrl('welcome/login')
     }
     if (this._user.user.role === 2){

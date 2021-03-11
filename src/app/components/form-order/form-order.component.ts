@@ -43,7 +43,6 @@ export class FormOrderComponent implements OnInit {
     })
 
     if (!this._user.user?.isLogin) {
-      this._user.activeComponent = ""
       this._r.navigateByUrl('welcome/login')
     }
     this._user.getCities().subscribe(

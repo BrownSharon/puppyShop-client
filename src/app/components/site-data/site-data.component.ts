@@ -26,7 +26,6 @@ export class SiteDataComponent implements OnInit {
         
       }
     )
-
     this._products.totalProductsCount().subscribe(
       (res:ResponseInterface)=>{
         this._products.productsCounter = res.productsCount
@@ -36,5 +35,4 @@ export class SiteDataComponent implements OnInit {
       }
     )
   }
-
 }

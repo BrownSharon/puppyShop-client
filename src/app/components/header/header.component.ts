@@ -39,8 +39,6 @@ export class HeaderComponent implements OnInit {
         this._user.user = {} as UserInterface
         this._carts.openCart = {} as CartInterface
         this._order.lastOrder= {} as OrderInterface
-
-        this._user.activeComponent = ""
         this._r.navigateByUrl('welcome/login')
       },
       (err: ResponseInterface) => {

@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class Register2Component implements OnInit {
 
   public register2Form: FormGroup
-  
+
   constructor(
     public _user: UserService,
     public _r: Router,
@@ -20,10 +20,12 @@ export class Register2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this._r.url == '/welcome/register2') this._user.activeComponent = 'register2'
-    if (!this._user.register1Data && sessionStorage.register1Data){
+
+    if (!this._user.register1Data && sessionStorage.register1Data) {
       this._user.register1Data = JSON.parse(sessionStorage.register1Data)
+      sessionStorage.activeComponent = "register2"
     }
+    if (!this._user.user.isLogin && !sessionStorage.activeComponent) this._r.navigateByUrl('welcome/register1')
 
     this.register2Form = this._fb.group({
       city: ["", [Validators.required]],
@@ -38,7 +40,7 @@ export class Register2Component implements OnInit {
       },
       (err: ResponseInterface) => {
         console.log(err.error.err);
-        
+
       }
     )
   }
@@ -46,24 +48,22 @@ export class Register2Component implements OnInit {
   public handleSubmit() {
 
     const { city, street, first_name, last_name } = this.register2Form.value
-    
+
     const { israeliID, email, password } = this._user.register1Data
-    const body = { dryRun: false ,israeliID, email, password, city, street, first_name, last_name }
+    const body = { dryRun: false, israeliID, email, password, city, street, first_name, last_name }
 
     this._user.register(body).subscribe(
       (res: ResponseInterface) => {
 
         // set the token in the local storage
-        localStorage.token = res.token 
+        localStorage.token = res.token
         localStorage.refreshToken = res.refreshToken
-        
+
         // set the loggedUser object in the user service
         this._user.user = this._user.decodeToken(res.token as string, res.refreshToken as string)
-        
+
         // move to welcome component
-        sessionStorage.removeItem("register1Data")
-        // sessionStorage.removeItem("activeComponent")
-        this._user.activeComponent="welcome"
+        sessionStorage.clear()
         this._r.navigateByUrl('welcome/welcome-msg')
       },
       (err: ResponseInterface) => {

@@ -35,7 +35,6 @@ export class ProductFormComponent implements OnInit {
       },
       (err: ResponseInterface) => {
         console.log(err);
-        this._user.activeComponent = ""
         this._r.navigateByUrl('welcome/login')
       }
     )

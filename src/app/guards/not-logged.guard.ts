@@ -24,10 +24,8 @@ export class NotLoggedGuard implements CanActivateChild {
       return true
     } else {
       if (this._user.user?.role === 2) {
-        this._user.activeComponent = "welcome"
         this._r.navigateByUrl('welcome/welcome-msg')
       } else {
-        this._user.activeComponent = "admin"
         this._r.navigateByUrl('main/admin')
       }
       return false

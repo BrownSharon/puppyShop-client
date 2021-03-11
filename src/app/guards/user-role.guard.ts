@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import ResponseInterface from '../interfaces/response.interface';
 import { CartsService } from '../services/carts.service';
 import { UserService } from '../services/user.service';
 
@@ -25,7 +24,6 @@ export class UserRoleGuard implements CanActivateChild {
     if (this._user.user?.role === 2) {
       return true
     } else {
-      this._user.activeComponent = "admin"
       this._r.navigateByUrl('main/admin')
       return false
     }

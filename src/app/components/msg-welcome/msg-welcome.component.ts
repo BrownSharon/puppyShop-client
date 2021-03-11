@@ -32,7 +32,6 @@ export class MsgWelcomeComponent implements OnInit {
                   this._carts.totalCartPrice = res.totalCartPrice
                 },
                 (err: ResponseInterface) => {
-                  this._user.activeComponent = ""
                   this._r.navigateByUrl('welcome/login')
                 })
             } else {
@@ -47,7 +46,6 @@ export class MsgWelcomeComponent implements OnInit {
             }
           },
           (err: ResponseInterface) => {
-            this._user.activeComponent = ""
             this._r.navigateByUrl('welcome/login')
           })
       } else {
@@ -60,7 +58,6 @@ export class MsgWelcomeComponent implements OnInit {
   public startShopping() {
     this._carts.getNewCart().subscribe(
       (res: ResponseInterface) => {
-        this._user.activeComponent = ""
         sessionStorage.removeItem('activeComponent')
         this._carts.openCart = res.cart
         this._r.navigateByUrl('main/cart')
@@ -73,8 +70,6 @@ export class MsgWelcomeComponent implements OnInit {
   }
 
   public continueShopping() {
-    this._user.activeComponent = ""
-    sessionStorage.removeItem('activeComponent')
     this._r.navigateByUrl('main/cart')
   }
 

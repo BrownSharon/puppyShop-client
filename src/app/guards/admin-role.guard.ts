@@ -19,7 +19,6 @@ export class AdminRoleGuard implements CanActivateChild {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
     if (this._user.user?.role === 2) {
-      this._user.activeComponent = "welcome"
       this._r.navigateByUrl('welcome/welcome-msg')
       return false;
     } else {

@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
   }
 
   public goToRegistration(){
-    this._user.activeComponent="register1"
+    // this._user.activeComponent="register1"
+    sessionStorage.activeComponent="register1"
     this._r.navigateByUrl('welcome/register1')
   }
 }

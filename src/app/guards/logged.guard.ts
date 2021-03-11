@@ -24,7 +24,6 @@ export class LoggedGuard implements CanActivateChild {
     if (this._user.user?.isLogin) {
       return true
     } else {
-      this._user.activeComponent = ""
       this._r.navigateByUrl('welcome/login')
       return false
     }

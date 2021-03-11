@@ -22,27 +22,28 @@ export class WelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     if (!this._user.user?.id) {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
+    
     if (this._user.user?.isLogin) {
       // move to welcome component for regular user
       if (this._user.user.role === 2) {
-        this._user.activeComponent = "welcome"
         this._r.navigateByUrl('welcome/welcome-msg')
       } else {
         // move to main page with admin product form component
-        this._user.activeComponent = "admin"
         this._r.navigateByUrl('main/admin')
       }
-    } else {
-      this._user.activeComponent = ""
-      this._r.navigateByUrl('welcome/login')
+    }else{
+      this._user.activeComponent = sessionStorage.activeComponent
+      if (this._user.activeComponent==='register1') this._r.navigateByUrl('welcome/register1')
+      if (this._user.activeComponent==='register2') this._r.navigateByUrl('welcome/register2')
     }
-
+    
   }
 
-  ngDoCheck() {
+  ngDoCheck(){
     if (this._r.url == '/welcome/welcome-msg') this._user.activeComponent = 'welcome'
     if (this._r.url == '/welcome/register1') this._user.activeComponent = 'register1'
     if (this._r.url == '/welcome/register2') this._user.activeComponent = 'register2'

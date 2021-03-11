@@ -23,19 +23,15 @@ export class Register1Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    if (this._r.url == '/welcome/register1') this._user.activeComponent = 'register1'
-    
+    if (!this._user.user.isLogin && !sessionStorage.activeComponent) sessionStorage.activeComponent = "register1"    
     this.register1Form = this._fb.group({
       israeliID: ["", [Validators.required, Validators.minLength(9), Validators.maxLength(9), israeliIdValidator]],
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(4)]],
-      passwordConfirm: ["", [Validators.required]],
+      passwordConfirm: ["", [Validators.required]]
     }, {
       validator: passwordMatchValidator
-    })
-    
-    
+    })  
   }
 
   /* Shorthands for form controls (used from within template) */
@@ -59,7 +55,7 @@ export class Register1Component implements OnInit {
         if (!res?.exists) {
           this._user.register1Data = { israeliID, email, password }
           sessionStorage.register1Data = JSON.stringify(this._user.register1Data)
-          this._user.activeComponent = "register2"
+          sessionStorage.activeComponent = "register2"
           this._r.navigateByUrl('welcome/register2')
         }
       },

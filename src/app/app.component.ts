@@ -21,8 +21,4 @@ export class AppComponent {
       this._r.navigate([decodeURI(this._location.path())])
     })
   }
-
- 
-
-
 }
