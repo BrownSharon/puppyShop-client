@@ -29,13 +29,18 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // set the visibility of the component cart or order
     this._r.url === '/order' ? this._carts.cartStatus = true : this._carts.cartStatus = false
+    
+    // restore user data after refresh
     if (!this._user.user?.id) {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
+
     if (!this._user.user?.isLogin) {
       this._r.navigateByUrl('welcome/login')
     }
+
     if (this._user.user.role === 2){
     this._carts.getOpenCartByUser().subscribe(
       (res: ResponseInterface) => {
@@ -61,12 +66,9 @@ export class CartComponent implements OnInit {
     }
   }
 
-  public goToCheckout() {
-    this._r.navigateByUrl('/order')
-  }
-
+  
   public deleteAllItems() {
-    // zero the amount in the products comp
+    // zero the amount in the products component
     this._carts.cartItemsArr.map(cartItem => {
       this._products.productsItemsArr.map(p => {
         if (p.id === cartItem.product_id) {
@@ -88,11 +90,16 @@ export class CartComponent implements OnInit {
     )
   }
 
+  // handle search filed in order page
   public OnSearched(searchTerm: string) {
     this._carts.Search = searchTerm;
   }
 
   public backToShop() {
     this._r.navigateByUrl('main/cart')
+  }
+
+  public goToCheckout() {
+    this._r.navigateByUrl('/order')
   }
 }

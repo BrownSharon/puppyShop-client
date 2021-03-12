@@ -42,9 +42,9 @@ export class FormOrderComponent implements OnInit {
       credit_card: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(19), creditCardValidator]],
     })
 
-    if (!this._user.user?.isLogin) {
-      this._r.navigateByUrl('welcome/login')
-    }
+    // if (!this._user.user?.isLogin) {
+    //   this._r.navigateByUrl('welcome/login')
+    // }
     this._user.getCities().subscribe(
       (res: ResponseInterface) => {
         this._user.citiesArr = res.cities

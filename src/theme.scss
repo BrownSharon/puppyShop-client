@@ -1,0 +1,16 @@
+@import '../node_modules/@angular/material/theming';
+@include mat-core();
+
+$puppy-shop-primary: mat-palette($mat-green, 800);
+$puppy-shop-accent:  mat-palette($mat-orange, 900);
+$puppy-shop-warn:  mat-palette($mat-red, 800);
+
+$puppy-shop-theme: mat-light-theme((
+  color: (
+    primary: $puppy-shop-primary,
+    accent: $puppy-shop-accent,
+    warn: $puppy-shop-warn,  
+  )
+));
+
+@include angular-material-theme($puppy-shop-theme);

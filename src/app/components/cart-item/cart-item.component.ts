@@ -50,6 +50,7 @@ export class CartItemComponent implements OnInit {
       product_amount: this.item.product_amount,
       total_price: (this.item.product_amount * this.item.price)
     }
+    
     this._carts.editCartItem(body, this.item.cart_id, this.item.cartItem_id).subscribe(
       (res: ResponseInterface) => {
         this._carts.cartItemsArr = res.cartItems
