@@ -2,11 +2,12 @@ app-header{
     width: 100vw;
     height: 15vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin: 0%;
     padding: 0%;
     background-color: rgba(245, 190, 118, 0.774);
+    position: sticky;
 }
 
 p, a{
@@ -23,4 +24,17 @@ app-main app-order app-welcome{
     position: fixed;
     top: 15vh;
     left: 0;
+    
+}
+
+@media screen and (max-width: 450px) {
+    app-main app-order app-welcome{
+        width: 100vw;
+        height: 300vh;
+        position: absolute;
+        top: 15vh;
+        left: 0;
+        overflow-y: auto;
+        
+    }
 }

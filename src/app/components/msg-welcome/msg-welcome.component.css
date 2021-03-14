@@ -6,9 +6,12 @@
     align-items:center;
     justify-content: center; 
     background-color: rgba(248, 240, 166, 0.609);
-    padding-top: 2%;
-    padding-bottom: 2%;
+    /* padding-top: 2%;
+    padding-bottom: 2%; */
     margin: 0%;
+    /* padding: 2.5%; */
+    
+
 }
 
 .msg{

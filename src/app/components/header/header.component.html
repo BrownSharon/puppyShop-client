@@ -1,17 +1,21 @@
-<div class="left" (click)="goToWelcomePage()">
-    <div class="logoIMG"></div>
-    <div class="title">
-        <p class="shopName">Puppy Shop</p>
-        <p class="welcome">Hello {{_user.user?.first_name || "Guest"}}</p>
+<div class="header">
+
+    <div class="left" (click)="goToWelcomePage()">
+        <div class="logoIMG"><img src="/assets/public/clipart385031.png" alt="Logo"></div>
+        <div class="title">
+            <p class="shopName">Puppy Shop</p>
+            <p class="welcome">Hello {{_user.user?.first_name || "Guest"}}</p>
+            
+        </div>   
+    </div>
+    <div class="right">
+        <button mat-button *ngIf="_user.user?.isLogin"(click)="logOutUser()">Logout</button>
+        <div class="contactUS">
+            <h4><span>Contact Us:</span></h4>
+            <p><span>Phone:</span> *1234</p>
+            <p><span>email:</span> puppyShop@gmail.com</p>
+        </div>
         
-    </div>   
-</div>
-<div class="right">
-    <button mat-button *ngIf="_user.user?.isLogin"(click)="logOutUser()">Logout</button>
-    <div class="contactUS">
-        <h4><span>Contact Us:</span></h4>
-        <p><span>Phone:</span> *1234</p>
-        <p><span>email:</span> puppyShop@gmail.com</p>
     </div>
     
 </div>

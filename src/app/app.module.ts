@@ -38,8 +38,8 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_F
 import {MatIconModule} from '@angular/material/icon';
 import { SearchComponent } from './components/search/search.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
-
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [
     AppComponent,

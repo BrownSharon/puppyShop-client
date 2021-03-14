@@ -6,7 +6,7 @@ form{
     align-items:center;
     justify-content: center; 
     background-color: rgba(248, 240, 166, 0.609);
-    padding: 5%;
+    /* padding: 5%; */
     margin:0%
 }
 
@@ -33,6 +33,7 @@ mat-form-field{
 
 input:-webkit-autofill
 {
+    box-shadow:none;
     box-shadow: 0 0 0 30px rgba(248, 240, 166, 0.8) inset;
     ;
 }
