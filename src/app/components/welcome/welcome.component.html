@@ -1,11 +1,12 @@
 <div class="welcome">
-    <app-site-data></app-site-data>    
-    <div class="welcomeContainer" [ngSwitch]="_user.activeComponent" >
+    <div class="row">
+        <app-site-data></app-site-data>
+        <app-about></app-about>
+    </div>
+    <div class="welcomeContainer" [ngSwitch]="_user.activeComponent">
         <app-register1 *ngSwitchCase="'register1'"></app-register1>
         <app-register2 *ngSwitchCase="'register2'"></app-register2>
         <app-msg-welcome *ngSwitchCase="'welcome'"></app-msg-welcome>
         <app-login *ngSwitchDefault></app-login>
     </div>
-    <app-about></app-about>
-    
 </div>

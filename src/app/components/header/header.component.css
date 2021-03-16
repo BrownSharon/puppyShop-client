@@ -1,20 +1,21 @@
 .header{
     height: 100%;
-    width: 100%;
+    width: 100vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0%;
+    padding: 0%;
 }
 
 .left{
     height: 100%;
-    /* width: 50vh; */
     display: flex;
     justify-content: flex-start;
     align-items: center; 
     background-color: initial;
     text-decoration: none;
-    margin-left: 2vw;
+    padding-left: 1% ;
 }
 
 .left:hover{
@@ -75,7 +76,7 @@ img{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-right: 1%;
+    padding-right: 1%;
       
 }
 

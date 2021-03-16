@@ -2,7 +2,7 @@ mat-card{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 95%;
     margin: 1%;
 }
 mat-card-header{
@@ -57,3 +57,6 @@ mark {
   .delete{
       font-size: xx-large;
   }
+
+
+  

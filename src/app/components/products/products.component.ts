@@ -1,11 +1,12 @@
-import { style } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import ResponseInterface from 'src/app/interfaces/response.interface';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { ResponsiveSiteService } from 'src/app/services/responsive-site.service';
 import { UserService } from 'src/app/services/user.service';
+import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-products',
@@ -20,21 +21,36 @@ export class ProductsComponent implements OnInit {
   public options: FormGroup
   public shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   public cartViewStatus: boolean = false
+  public categoryChosen: number
+  public isMobile: Boolean;
+  public navbarStatus: Boolean = false
 
   constructor(
     public _products: ProductsService,
     public _carts: CartsService,
     public _user: UserService,
     public _r: Router,
-    public fb: FormBuilder
+    public _fb: FormBuilder,
+    private _responsive:ResponsiveSiteService,
+    public changeDetectorRef: ChangeDetectorRef,
+    public media: MediaMatcher
   ) {
-    this.options = this.fb.group({
+    this.options = this._fb.group({
       fixed: false,
       top: 0
     });
+
   }
 
+  
+
   ngOnInit(): void {
+    
+    this.onResize();
+    this._responsive.checkWidth();
+    
+    
+
     if (!this._user.user?.id) {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
@@ -98,14 +114,15 @@ export class ProductsComponent implements OnInit {
   }
 
   public getCategoryItems(id: number) {
+    
     this.emptySearchError = false
-    this._products.productsItemsArr.map(p => document.getElementById(`btn${p.category_id}`).style.color = "")
+    if (!this.isMobile) this._products.productsItemsArr.map(p => document.getElementById(`btn${p.category_id}`).style.color = "")
     this._products.productsItemsFilteredArr = this._products.productsItemsArr.filter(p => p.category_id === id)
     if (this._products.productsItemsFilteredArr.length === 0) {
       this.emptySearchError = true
     } else {
 
-      document.getElementById(`btn${id}`).style.color = "#d35806"
+      if (!this.isMobile) document.getElementById(`btn${id}`).style.color = "#d35806"
     }
   }
 
@@ -117,5 +134,15 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  public onOpenedChange(e: boolean){
+    this.navbarStatus = e
+  }
 
+  onResize() {
+    this._responsive.getMobileStatus().subscribe(status => {
+      console.log(status);
+      
+      this.isMobile = status;
+    })   
+  }
 }

@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResponsiveSiteService } from './services/responsive-site.service';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class AppComponent {
   
   constructor(
     public _r: Router,
-    public _location: Location
+    public _location: Location,
+    private _responsive:ResponsiveSiteService
   ) { }
 
   refresh(): void{
@@ -22,4 +24,15 @@ export class AppComponent {
       this._r.navigate([decodeURI(this._location.path())])
     })
   }
+
+  ngOnInit(){
+    
+    this.onResize();    
+  }
+
+  onResize(){
+    this._responsive.checkWidth();
+    this._responsive.screenWidth === 'sm' ||  this._responsive.screenWidth === 'md'? this._responsive.isMobileRes = true : this._responsive.isMobileRes = false
+  }
+
 }

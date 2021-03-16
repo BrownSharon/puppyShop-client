@@ -1,14 +1,11 @@
 form{
     width: 100%;
-    height: 60vh;
+    height: 100%;
     display:flex;
     flex-direction: column;
     align-items:center;
-    justify-content: flex-start; 
-    background-color: rgba(248, 240, 166, 0.609);
     margin: 0%;
-    /* padding: 5%; */
-
+    margin-top: 10%;
 }
 
 a, button{
@@ -31,7 +28,7 @@ button{
 h2{
     font-size: x-large;
     text-align: center;
-    margin-top: 4%;
+  
 }
 
 mat-form-field{
@@ -47,15 +44,14 @@ input:-webkit-autofill
     color: #fa570c
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 640px) {
     form{
         width: 100%;
-        height: 60vh;
+        height: 100%;
         display:flex;
         flex-direction: column;
         align-items:center;
         justify-content: center; 
-        background-color: rgba(248, 240, 166, 0.609);
         margin: 0%;
     }
 

@@ -1,26 +1,29 @@
-<mat-card>
+<mat-card class="productItem">
   <mat-card-header>
     <mat-card-title>{{product.name}}</mat-card-title>
   </mat-card-header>
-  <img mat-card-image src="{{product.image}}" alt="{{product.name}}">
   <mat-card-content>
+    <img mat-card-image src="{{product.image}}" alt="{{product.name}}">
     <p>
       Price: {{product.price}}$
     </p>
   </mat-card-content>
   <mat-card-actions *ngIf="_user.user.role===2">
-    <button mat-button (click)="decrease()">
-      <mat-icon>remove_circle_outline
-      </mat-icon>
-    </button>
-    <p>{{product.product_amount || 0}}</p>
-    <button mat-button (click)="increase()">
-      <mat-icon>add_circle_outline
-      </mat-icon>
-    </button>
+    <div class="quantityBtn">
+      <button mat-button (click)="decrease()">
+        <mat-icon>remove_circle_outline
+        </mat-icon>
+      </button>
+      <p>{{product.product_amount || 0}}</p>
+      <button mat-button (click)="increase()">
+        <mat-icon>add_circle_outline
+        </mat-icon>
+      </button>
+    </div>
     <button mat-stroked-button color="accent" [disabled]="!btnStatus"
       (click)="addProductToCart()">{{(_carts.cartItemsArr.length === 0 || _carts.deletedItemFromCart?.id === product.id)
       ? "Add": btnName}}</button>
+
   </mat-card-actions>
   <mat-card-actions *ngIf="_user.user.role===1">
     <button mat-stroked-button color="primary" (click)="goToEditProduct()">Edit</button>

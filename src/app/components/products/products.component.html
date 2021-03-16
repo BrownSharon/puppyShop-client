@@ -1,24 +1,31 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" opened [fixedInViewport]="options.value.fixed">
+    <!-- cart / admin form section -->
+    <mat-sidenav #sidenav mode="side" closed [fixedInViewport]="options.value.fixed" (openedChange)="onOpenedChange($event)">
         <div class="main" [ngSwitch]="_user.activeComponent">
             <app-product-form *ngSwitchCase="'admin'"></app-product-form>
             <app-cart *ngSwitchDefault></app-cart>
         </div>
     </mat-sidenav>
 
+    <!-- product section -->
     <mat-sidenav-content [formGroup]="options">
         <nav>
+            <!-- toggle open/close cart in user page -->
             <p *ngIf='_user.user.role === 2'><button mat-button
-                    (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus">
+                    (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus;">
                     <div class="cartToggle">
-                        <p class="numberCartItems" *ngIf='cartViewStatus && _carts.cartItemsArr.length > 0 '>{{_carts.cartItemsArr.length}}</p>
+                        <p class="numberCartItems" *ngIf='cartViewStatus && _carts.cartItemsArr.length > 0 '>
+                            {{_carts.cartItemsArr.length}}</p>
                         <mat-icon *ngIf='!cartViewStatus'>keyboard_arrow_left</mat-icon>
                         <mat-icon>shopping_cart</mat-icon>
                         <mat-icon *ngIf='cartViewStatus'>keyboard_arrow_right</mat-icon>
-                        <p class="numberCartItems" *ngIf='!cartViewStatus && _carts.cartItemsArr.length > 0'>{{_carts.cartItemsArr.length}}</p>
+                        <p class="numberCartItems" *ngIf='!cartViewStatus && _carts.cartItemsArr.length > 0'>
+                            {{_carts.cartItemsArr.length}}</p>
                     </div>
-                </button></p>
-            <mat-form-field appearance="outline" class="search">
+                </button>
+            </p>
+            <!-- search filed -->
+            <mat-form-field appearance="outline" class="search" *ngIf="!isMobile || (isMobile && !navbarStatus)">
                 <mat-label>Search</mat-label>
                 <input matInput type="search" placeholder="Enter product name"
                     (input)="searchForProduct($event.target.value)" />
@@ -26,15 +33,29 @@
                     search
                 </span>
             </mat-form-field>
-            <button mat-button *ngFor="let category of _products.productsCategoriesArr" id="btn{{category.id}}"
-                (click)="getCategoryItems(category.id)">{{category.name}}</button>
+            <!-- categories section -->
+            <div class="screenSizeDesktopCat" *ngIf="!isMobile">
+                <button mat-button *ngFor="let category of _products.productsCategoriesArr" id="btn{{category.id}}"
+                    (click)="getCategoryItems(category.id)">{{category.name}}</button>
+            </div>
+
+            <mat-form-field appearance="outline" class="screenSizeMobileCat" *ngIf="isMobile && !navbarStatus">
+                <mat-label>Categories</mat-label>
+                <mat-select [ngModel]="this.categoryChosen" (ngModelChange)="getCategoryItems($event)"
+                    [ngModelOptions]="{standalone: true}" required>
+                    <mat-option *ngFor="let category of _products.productsCategoriesArr" [value]='category.id'>
+                        {{category.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
         </nav>
 
-        <div class="productList" *ngIf="!emptySearchError">
+        <!-- product section -->
+        <div class="productList" *ngIf="!emptySearchError && (isMobile && !navbarStatus)">
             <app-product-item *ngFor="let product of _products.productsItemsFilteredArr" [product]="product">
             </app-product-item>
         </div>
-        <div class="emptyProduct" *ngIf="emptySearchError">
+        <div class="emptyProduct" *ngIf="emptySearchError && (isMobile && !navbarStatus)">
             <h3>
                 We haven't got product that matching your search
             </h3>
