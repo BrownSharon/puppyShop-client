@@ -49,22 +49,20 @@ export class ProductsComponent implements OnInit {
     this.onResize();
     this._responsive.checkWidth();
     
-    
-
     if (!this._user.user?.id) {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
+    console.log(this._user.user);
+    
     if (this._user.user?.isLogin) {
       this._user.user.role == 2 ? this.roleName = "user" : this.roleName = "admin"
     } else {
-      this._user.activeComponent = ""
       this._r.navigateByUrl('welcome/login')
     }
     this._products.getCategories().subscribe(
       (res: ResponseInterface) => {
         this._products.productsCategoriesArr = res.categories
         if (this._user.user?.role === 2) {
-          this._r.navigateByUrl('main/cart')
           this._carts.getOpenCartByUser().subscribe(
             (res: ResponseInterface) => {
               this._carts.openCart = res.cart
@@ -87,7 +85,6 @@ export class ProductsComponent implements OnInit {
             }, (err: ResponseInterface) => {
             })
         } else {
-          this._r.navigateByUrl('main/admin')
           this._products.getAllProductsForAdmin().subscribe(
             (res: ResponseInterface) => {
               this._products.productsItemsArr = res.products
@@ -95,12 +92,14 @@ export class ProductsComponent implements OnInit {
               this._r.navigateByUrl('main/admin')
             },
             (err: ResponseInterface) => {
+              console.log(err);
+              
               this._r.navigateByUrl('welcome/login')
             })
         }
       },
       (err: ResponseInterface) => {
-        this._r.navigateByUrl('welcome/login')
+        if (err.status === 406) this._r.navigateByUrl('welcome/login')
       }
     )
   }
@@ -141,8 +140,6 @@ export class ProductsComponent implements OnInit {
 
   onResize() {
     this._responsive.getMobileStatus().subscribe(status => {
-      console.log(status);
-      
       this.isMobile = status;
     })   
   }

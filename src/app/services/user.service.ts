@@ -61,15 +61,18 @@ export class UserService {
       const decodedRefresh: any = jwt_decode(refreshToken)
       if (Date.now() / 1000 < decoded.exp) {
         return decoded;
-      }
-      if (Date.now() / 1000 < decodedRefresh.exp) {
+      } else if (Date.now() / 1000 < decodedRefresh.exp) {
         return decodedRefresh
+      } else {
+        this.activeComponent = ""
+      this.user = { isLogin: false }
+      return { isLogin: false }
       }
+
     }
     catch (err) {    
       this.activeComponent = ""
       this.user = { isLogin: false }
-      this._r.navigateByUrl('welcome/login')
       return { isLogin: false }
     }
   }

@@ -20,7 +20,7 @@ mat-sidenav {
 
 nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: rgb(241, 234, 128);
   margin: 0%;
@@ -83,20 +83,24 @@ a,
 button {
   font-size: large;
   text-align: center;
+  margin: 1%;
 }
 
 mat-icon {
   font-size: 35px;
 }
 
-.cartToggle {
-  width: 10vw;
+.cartToggle, .adminToggle {
+  width: 5vw;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: large;
   text-align: center;
 }
+
+
 
 .numberCartItems {
   margin-left: 6%;
@@ -199,6 +203,7 @@ mat-icon {
     
       .cartToggle {
         width: 10vw;
+        height: 10vh;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -27,6 +27,7 @@ export class MainComponent implements OnInit {
     if (!this._user.user?.id) {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
+
     if (this._user.user === 2) {
       this._carts.getOpenCartByUser().subscribe(
         (res: ResponseInterface) => {
@@ -38,7 +39,10 @@ export class MainComponent implements OnInit {
       )
       this._carts.cartStatus = false
     }
+
+
   }
+
 
   ngDoCheck() {
     if (this._r.url == '/main/admin') this._user.activeComponent = 'admin'

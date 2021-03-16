@@ -34,7 +34,6 @@ export class ProductFormComponent implements OnInit {
         this._products.productsCategoriesArr = res.categories 
       },
       (err: ResponseInterface) => {
-        console.log(err);
         this._r.navigateByUrl('welcome/login')
       }
     )
