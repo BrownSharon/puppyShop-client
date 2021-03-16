@@ -23,3 +23,37 @@ app-form-order{
     justify-content: center;
     align-items: center;
 }
+
+
+@media screen and (max-width: 640px) {
+    .order{
+        width: 100vw;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        position: absolute;
+        top: 15vh;
+        overflow-y: auto;
+    }
+    
+    app-cart{
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    
+    app-form-order{
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

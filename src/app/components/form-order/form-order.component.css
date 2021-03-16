@@ -5,7 +5,6 @@ form{
     align-items: center;
     height: 85vh;
     width: 100%;
-    
 
 }
 
@@ -49,4 +48,14 @@ input:-webkit-autofill
 mat-form-field{
     width: 20%;
     
+}
+
+@media screen and (max-width: 1007px) {
+    mat-form-field{
+        width: 50%;    
+    }
+
+    button{
+        margin: 3%;
+    }
 }
