@@ -132,6 +132,7 @@ export class ProductsComponent implements OnInit {
     if (this._products.productsItemsFilteredArr.length === 0) {
       this.emptySearchError = true
     }
+    if (!this.isMobile) this._products.productsItemsArr.map(p => document.getElementById(`btn${p.category_id}`).style.color = "")
   }
 
   public onOpenedChange(e: boolean){

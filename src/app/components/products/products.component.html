@@ -1,6 +1,6 @@
 <mat-sidenav-container>
     <!-- cart / admin form section -->
-    <mat-sidenav #sidenav mode="side" closed [fixedInViewport]="options.value.fixed" (openedChange)="onOpenedChange($event)">
+    <mat-sidenav #sidenav mode="side" opened [fixedInViewport]="options.value.fixed" (openedChange)="onOpenedChange($event)">
         <div class="main" [ngSwitch]="_user.activeComponent">
             <app-product-form *ngSwitchCase="'admin'"></app-product-form>
             <app-cart *ngSwitchDefault></app-cart>
@@ -51,11 +51,11 @@
         </nav>
 
         <!-- product section -->
-        <div class="productList" *ngIf="!emptySearchError && (isMobile && !navbarStatus)">
+        <div class="productList" *ngIf="!emptySearchError && ((isMobile && !navbarStatus) || (!isMobile))">
             <app-product-item *ngFor="let product of _products.productsItemsFilteredArr" [product]="product">
             </app-product-item>
         </div>
-        <div class="emptyProduct" *ngIf="emptySearchError && (isMobile && !navbarStatus)">
+        <div class="emptyProduct" *ngIf="emptySearchError && ((isMobile && !navbarStatus) || (!isMobile))">
             <h3>
                 We haven't got product that matching your search
             </h3>
