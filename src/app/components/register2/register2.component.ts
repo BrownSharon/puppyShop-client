@@ -39,8 +39,6 @@ export class Register2Component implements OnInit {
         this._user.citiesArr = res.cities
       },
       (err: ResponseInterface) => {
-        console.log(err.error.err);
-
       }
     )
   }

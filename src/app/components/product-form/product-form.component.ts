@@ -53,8 +53,7 @@ export class ProductFormComponent implements OnInit {
           this._products.productsItemsArr = res.products
         },
         (err:ResponseInterface)=>{
-          console.log(err);
-          this._r.navigateByUrl('/welcome')
+          this._r.navigateByUrl('/welcome/login')
         }
       )
     }else{
@@ -68,8 +67,7 @@ export class ProductFormComponent implements OnInit {
           productToEdit.image = res.productItem[0].image
         },
         (err:ResponseInterface)=>{
-          console.log(err);
-          this._r.navigateByUrl('/welcome')
+          this._r.navigateByUrl('/welcome/login')
         }
       )
     }

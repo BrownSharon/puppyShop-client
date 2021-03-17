@@ -52,7 +52,6 @@ export class ProductsComponent implements OnInit {
     if (!this._user.user?.id) {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
-    console.log(this._user.user);
     
     if (this._user.user?.isLogin) {
       this._user.user.role == 2 ? this.roleName = "user" : this.roleName = "admin"
@@ -92,8 +91,6 @@ export class ProductsComponent implements OnInit {
               this._r.navigateByUrl('main/admin')
             },
             (err: ResponseInterface) => {
-              console.log(err);
-              
               this._r.navigateByUrl('welcome/login')
             })
         }

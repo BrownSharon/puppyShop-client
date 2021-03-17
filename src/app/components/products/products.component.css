@@ -17,10 +17,9 @@ mat-sidenav {
   height: fit-content;
 }
 
-
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   background-color: rgb(241, 234, 128);
   margin: 0%;
@@ -29,9 +28,11 @@ nav {
   padding-right: 2%;
 }
 
-.search,
+.search.mat-form-field-wrapper,
 .screenSizeDesktopCat {
   margin: 0%;
+  padding: 0%;
+  height: auto;
   width: auto;
   background-color: rgb(241, 234, 128);
   display: flex;
@@ -90,133 +91,23 @@ mat-icon {
   font-size: 35px;
 }
 
-.cartToggle, .adminToggle {
+.cartToggle,
+.adminToggle {
   width: 5vw;
   height: 90%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   font-size: large;
   text-align: center;
 }
 
-
-
 .numberCartItems {
+  width: auto;
   margin-left: 6%;
 }
 
 @media screen and (max-width: 1007px) {
-    mat-sidenav-container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        margin: 0%;
-        padding: 0%;
-        height: 85vh;
-      }
-    
-      mat-sidenav {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 80%;
-        margin: 0;
-        padding: 0;
-        height: fit-content;
-      }
-    
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(241, 234, 128);
-        margin: 0%;
-        padding: 0%;
-        height: fit-content;
-        padding-right: 2%;
-      }
-    
-      .search,
-      .screenSizeMobileCat {
-        margin: 0%;
-        width: auto;
-        background-color: rgb(241, 234, 128);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    
-      .productList {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        align-items: center;
-        width: 100%;
-        height: fit-content;
-        overflow: hidden;
-      }
-    
-      app-product-item {
-        height: 50vh;
-        width: 35vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0%;
-        margin: 2%;
-        margin-bottom: 4%;
-        
-      }
-    
-      .emptyProduct {
-        height: 45vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-    
-      h3,
-      h4 {
-        font-size: x-large;
-        font-weight: bold;
-        color: rgb(235, 55, 23);
-        text-overflow: ellipsis;
-        text-align: center;
-      }
-    
-      p,
-      a,
-      button {
-        font-size: large;
-        text-align: center;
-      }
-    
-      mat-icon {
-        font-size: 35px;
-      }
-    
-      .cartToggle {
-        width: 10vw;
-        height: 10vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: large;
-        text-align: center;
-      }
-    
-      .numberCartItems {
-        margin-left: 6%;
-      }
-}
-
-@media screen and (max-width: 640px) {
   mat-sidenav-container {
     width: 100%;
     display: flex;
@@ -246,13 +137,125 @@ mat-icon {
     margin: 0%;
     padding: 0%;
     height: fit-content;
-    
+    padding-right: 2%;
   }
 
   .search,
   .screenSizeMobileCat {
     margin: 0%;
     width: auto;
+    background-color: rgb(241, 234, 128);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .productList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    overflow: hidden;
+  }
+
+  app-product-item {
+    height: 50vh;
+    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0%;
+    margin: 2%;
+    margin-bottom: 4%;
+  }
+
+  .emptyProduct {
+    height: 45vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h3,
+  h4 {
+    font-size: x-large;
+    font-weight: bold;
+    color: rgb(235, 55, 23);
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+
+  p,
+  a,
+  button {
+    font-size: large;
+    text-align: center;
+  }
+
+  mat-icon {
+    font-size: 35px;
+    width: auto;
+  }
+
+  .cartToggle {
+    width: auto;
+    height: 10vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: large;
+    text-align: center;
+  }
+
+  .numberCartItems {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  mat-sidenav-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin: 0%;
+    padding: 0%;
+    height: 85vh;
+  }
+
+  mat-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    margin: 0;
+    padding: 0;
+    height: fit-content;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(241, 234, 128);
+    margin: 0%;
+    padding: 0%;
+    height: fit-content;
+  }
+
+  .search,
+  .screenSizeMobileCat {
+    margin: 0%;
+    width: 40vw;
     background-color: rgb(241, 234, 128);
     display: flex;
     justify-content: center;
@@ -307,18 +310,26 @@ mat-icon {
 
   mat-icon {
     font-size: 35px;
+    margin: 0%;
+    padding: 0%;
+    width: auto;
   }
 
   .cartToggle {
-    width: 10vw;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: large;
     text-align: center;
+    margin: 0%;
+    padding: 0%;
   }
 
   .numberCartItems {
-    margin-left: 6%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -21,13 +21,30 @@
     width: 40vw;
     height: 30vh;
     border: 4px solid rgba(248, 240, 166, 0.609);
-    /* border-radius: 5%; */
     background-color: rgba(248, 240, 166);
-    /* z-index: 2; */
     opacity: 1;
 }
 
 h1, h2, button{
     font-size: xx-large;
     text-align: center;
+}
+
+@media screen and (max-width: 640px) {
+    h1, h2, button{
+        font-size: large;
+        text-align: center;
+    }
+
+    .successMSG{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60vw;
+        height: 50vh;
+        border: 4px solid rgba(248, 240, 166, 0.609);
+        background-color: rgba(248, 240, 166);
+        opacity: 1;
+    }
 }

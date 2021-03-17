@@ -1,3 +1,12 @@
+user admin details:
+        * user: admin@gmail.com
+        * password: q123
+
+regular user details:
+        * user: benben@gmail.com
+        * password: q123
+
+____________________________________________________________________________________________
 COMPONENTS:
 header => LOGO, logout(), "contact us", hello gest/user
 welcome =>  handle_user =>  Login
@@ -77,12 +86,6 @@ STEPS:
 10. ensure to role based auth - router guards
 ______________________________________________________________________________________________________
 
-list todo:
-
-2. clean code and notes
-3. gourdes -> check use
-4. css --> pdf, welcome page...
-4. deal with back btn
 
 GUARDS:
             header 
@@ -93,26 +96,14 @@ welcome page/comp =>    Login            ==> canActivateChild: notLogged
                         about
                         site_data
 main page/comp    =>    canActivate: logged 
-                        cart             ==> canActivateChild: user
+                        cart             ==> canActivateChild: logged, user
                         products         
-                        product_form     ==> canActivateChild: admin     
+                        product_form     ==> canActivateChild: logged,admin     
         or --------------> after submit cart <---------------------------------------------
-order page/comp   =>    canActivate: logged, user
+order page/comp   =>    canActivateChild: logged, user
                         cart             
                         order_form       
-        or --------------> after submit order <--------------------------------------------
-success page/comp =>    canActivate: logged, user           
 
-___________________________________________________________________________________________________
-
-about the site:
-
-The Best for You and Your Puppy
-
-PuppyShop offers a full range of pet supplies for you and your puppy. With expertise in pet food and pet accessories, you can expect top brands and quality products at amazing low prices.
-
-It is our goal to make your life easier with simple online ordering and convenient home delivery. We work hard to make sure your parcel is on its way to you as quickly as possible. With the best technology and a dedicated staff, your parcel is carefully packed and double checked for quality.
-We've been making pets and their owners happy - almost a year now. After all, our customers love their pets!
 
 
 

@@ -26,7 +26,6 @@ export class WelcomeComponent implements OnInit {
     if (!this._user.user?.id) {
       this._user.user = this._user.decodeToken(localStorage.token, localStorage.refreshToken)
     }
-    console.log(this._user.user);
     
     if (this._user.user?.isLogin) {
       // move to welcome component for regular user

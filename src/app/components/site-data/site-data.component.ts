@@ -22,8 +22,6 @@ export class SiteDataComponent implements OnInit {
         this._orders.ordersCounter = res.numberOfOrders
       },
       (err:ResponseInterface)=>{
-        console.log(err);
-        
       }
     )
     this._products.totalProductsCount().subscribe(
@@ -31,7 +29,6 @@ export class SiteDataComponent implements OnInit {
         this._products.productsCounter = res.productsCount
       },
       (err:ResponseInterface)=>{
-        console.log(err);
       }
     )
   }

@@ -63,7 +63,6 @@ export class MsgWelcomeComponent implements OnInit {
         this._r.navigateByUrl('main/cart')
       },
       (err: ResponseInterface) => {
-        console.log(err);
         this._r.navigateByUrl('welcome/login')
       }
     )

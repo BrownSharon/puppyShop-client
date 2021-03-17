@@ -1,6 +1,6 @@
 <mat-sidenav-container>
     <!-- cart / admin form section -->
-    <mat-sidenav #sidenav mode="side" opened [fixedInViewport]="options.value.fixed"
+    <mat-sidenav #sidenav mode="side" closed [fixedInViewport]="options.value.fixed"
         (openedChange)="onOpenedChange($event)">
         <div class="main" [ngSwitch]="_user.activeComponent">
             <app-product-form *ngSwitchCase="'admin'"></app-product-form>
@@ -12,16 +12,16 @@
     <mat-sidenav-content [formGroup]="options">
         <nav>
             <!-- toggle open/close cart in user page -->
-            <p *ngIf='_user.user.role === 2'><button mat-button
+            <p *ngIf='_user.user.role === 2'><button mat-button class="cartToggle"
                     (click)="sidenav.toggle(); cartViewStatus=!cartViewStatus;">
                     <div class="cartToggle">
+                        <mat-icon *ngIf='cartViewStatus'>keyboard_arrow_left</mat-icon>
                         <p class="numberCartItems" *ngIf='cartViewStatus && _carts.cartItemsArr.length > 0 '>
                             {{_carts.cartItemsArr.length}}</p>
-                        <mat-icon *ngIf='!cartViewStatus'>keyboard_arrow_left</mat-icon>
                         <mat-icon>shopping_cart</mat-icon>
-                        <mat-icon *ngIf='cartViewStatus'>keyboard_arrow_right</mat-icon>
                         <p class="numberCartItems" *ngIf='!cartViewStatus && _carts.cartItemsArr.length > 0'>
                             {{_carts.cartItemsArr.length}}</p>
+                        <mat-icon *ngIf='!cartViewStatus'>keyboard_arrow_right</mat-icon>
                     </div>
                 </button>
             </p>
